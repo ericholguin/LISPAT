@@ -1,28 +1,11 @@
-const webpack = require('webpack');
-const path = require('path');
+const webpackMerge = require('webpack-merge');
+const common = require('./webpack/webpack.common');
 
-module.exports = {
-    entry: path.resolve(__dirname, 'js') + '/index.jsx',
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js',
-    },
-    resolve: {
-        extensions: ['.js', '.jsx']
-    },
-    module: {
-        rules: [
-            {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader',
-            query: {
-                presets: ['es2015','react']
-            }
-        },
-    ],
-},
-plugins: [
-    new webpack.NamedModulesPlugin(),
-]
+const envs = {
+  development: 'dev',
+  production: 'prod',
 };
+/* eslint-disable global-require,import/no-dynamic-require */
+const env = envs[process.env.NODE_ENV || 'development'];
+const envConfig = require(`./webpack/webpack.${env}.js`);
+module.exports = webpackMerge(common, envConfig);
