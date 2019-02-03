@@ -1,13 +1,13 @@
 const webpack = require('webpack');
-
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const commonPaths = require('./paths');
 
 module.exports = {
   mode: 'development',
   output: {
-    filename: '[name].js',
+    filename: `${commonPaths.jsFolder}/[name].[hash].js`,
     path: commonPaths.outputPath,
-    chunkFilename: '[name].js',
+    chunkFilename: '[name].[chunkhash].js',
   },
   module: {
     rules: [
@@ -21,7 +21,7 @@ module.exports = {
               sourceMap: true,
               modules: true,
               camelCase: true,
-              localIdentName: '[local]___[hash:base64:5]',
+              localIdentName: '[local]',
             },
           },
           'sass-loader',
@@ -34,5 +34,8 @@ module.exports = {
     compress: true,
     hot: true,
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new CleanWebpackPlugin(['build']),
+  ],
 };
