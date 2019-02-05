@@ -13,6 +13,8 @@ _log = Logger("Flask App")
 app = Flask(__name__, static_folder="../static/build/bundle",
             template_folder="../static/build")
 
+CORS(app, expose_headers='Authorization')
+
 UPLOAD_FOLDER = os.path.abspath("../static/uploads/")
 ALLOWED_EXTENSIONS = set(['pdf', 'doc', 'docx'])
 
