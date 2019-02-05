@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import './file-upload.css';
 
@@ -10,9 +11,8 @@ const FileUpload = class extends PureComponent {
 
   render() {
     return (
-      <div className="ml-auto format">
+      <Form>
         <label className="btn btn-primary btn-file upload">
-          {' '}
           Upload
           <input
             type="file"
@@ -22,7 +22,7 @@ const FileUpload = class extends PureComponent {
             onChange={this.handleFile}
           />
         </label>
-      </div>
+      </Form>
     );
   }
 };

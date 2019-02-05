@@ -1,0 +1,18 @@
+.input {
+  display: none;
+}
+.upload {
+  /* Upload: */
+  font-family: AvenirNext-Bold, serif;
+  font-size: 14px;
+  color: white;
+  letter-spacing: 0;
+  padding: 0 20px 0 20px;
+  background-color: #546E7A;
+  border: none !important;
+}
+.font-home {
+  font-family: Consolas, serif, sans-serif;
+  font-size: 24px;
+  color: #ffffff;
+}

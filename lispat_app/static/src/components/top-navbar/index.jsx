@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import style from './navbar.css';
-import image from '../../../images/github-icon.png';
 
 class TopNav extends Component {
   render() {
@@ -25,11 +24,7 @@ class TopNav extends Component {
               </Nav.Link>
               <Nav.Link href="#link">
                 <span className={style['font-right']}>
-                  <img
-                    src={image}
-                    alt="github"
-                    className="img-responsive image-github"
-                  />
+                  <i className="fab fa-github" />
                 </span>
               </Nav.Link>
             </Nav>

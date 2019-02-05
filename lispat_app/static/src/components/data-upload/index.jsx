@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Col, Container, Row, Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import FileUpload from './upload';
 import './home-upload.css';
 
-const endpoint = 'http://localhost:5000/upload';
+const endpoint = 'http://localhost:5000/data-upload';
 
-class HomeUpload extends Component {
+class DataUpload extends Component {
   constructor(props) {
     super(props);
     this.state = {
       file1: null,
       file2: null,
       loaded: 0,
+      statusCode: 0,
     };
   }
 
@@ -30,9 +32,8 @@ class HomeUpload extends Component {
 
   handleUpload = () => {
     const { file1, file2 } = this.state;
+    const { stateChange } = this.props;
     const data = new FormData();
-    console.log(file1);
-    console.log(file2);
     data.append('file1', file1, file1.name);
     data.append('file2', file2, file2.name);
     axios
@@ -45,7 +46,9 @@ class HomeUpload extends Component {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then(res => {
-        console.log(res.statusText);
+        this.state.statusCode = res.statusText;
+        const { statusCode, loaded } = this.state;
+        stateChange(statusCode, loaded);
       });
   };
 
@@ -55,39 +58,30 @@ class HomeUpload extends Component {
       <div>
         <br />
         <br />
-        <Container>
+        <div className="markdown-body body-upload">
+          <hr />
           <div className="center-grid">
             <Row>
               <Col>
-                <div className="font-home">1.&nbsp;&nbsp;Proposal</div>
-                <br />
+                <div className="font-home">Your current submission:</div>
                 <FileUpload handleStateChange={this.setFileOne} />
                 {file1 ? <div className="file-name">{file1.name}</div> : ''}
               </Col>
             </Row>
           </div>
-          <br />
-          <br />
           <div className="center-grid">
             <Row>
               <Col>
-                <div className="font-home">2.&nbsp;&nbsp;Standard</div>
-                <br />
+                <div className="font-home">The standard: </div>
                 <FileUpload handleStateChange={this.setFileTwo} />
                 {file2 ? <div className="file-name">{file2.name}</div> : ''}
               </Col>
             </Row>
           </div>
+          <hr />
           <br />
-          <div className="go-pos">
-            <Row>
-              <Col>
-                {loaded !== 0 ? (
-                  <div className="progress">{Math.round(loaded)} %</div>
-                ) : (
-                  ''
-                )}
-              </Col>
+          <Row>
+            <div className="go-pos">
               <Col>
                 <Button
                   type="button"
@@ -96,13 +90,20 @@ class HomeUpload extends Component {
                 >
                   GO
                 </Button>
+                {loaded !== 0 ? (
+                  <div className="progress">{Math.round(loaded)} %</div>
+                ) : null}
               </Col>
-            </Row>
-          </div>
-        </Container>
+            </div>
+          </Row>
+        </div>
       </div>
     );
   }
 }
 
-export default HomeUpload;
+DataUpload.propTypes = {
+  stateChange: PropTypes.func,
+};
+
+export default DataUpload;
