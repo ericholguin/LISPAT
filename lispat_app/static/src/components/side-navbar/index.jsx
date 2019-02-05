@@ -19,14 +19,16 @@ class SideNavClass extends Component {
           onSelect={selected => {
             this.handleSelect(selected);
           }}
-          className="root-nav">
+          className="root-nav"
+        >
           <SideNav.Toggle />
           <SideNav.Nav defaultSelected="home">
             <NavItem eventKey="Home">
               <NavIcon>
                 <i
                   className="fa fa-fw fa-home"
-                  style={{ fontSize: '1.75em' }}/>
+                  style={{ fontSize: '1.75em' }}
+                />
               </NavIcon>
               <NavText>Home</NavText>
             </NavItem>
@@ -34,7 +36,8 @@ class SideNavClass extends Component {
               <NavIcon>
                 <i
                   className="fa fa-fw fa-cubes"
-                  style={{ fontSize: '1.75em' }}/>
+                  style={{ fontSize: '1.75em' }}
+                />
               </NavIcon>
               <NavText>Data</NavText>
             </NavItem>
@@ -43,7 +46,8 @@ class SideNavClass extends Component {
                 <NavIcon>
                   <i
                     className="fa fa-fw fa-cogs"
-                    style={{ fontSize: '1.75em' }}/>
+                    style={{ fontSize: '1.75em' }}
+                  />
                 </NavIcon>
                 <NavText>Config</NavText>
               </NavItem>
@@ -53,7 +57,8 @@ class SideNavClass extends Component {
                 <NavIcon>
                   <i
                     className="fa fa-fw fa-book-open"
-                    style={{ fontSize: '1.75em' }}/>
+                    style={{ fontSize: '1.75em' }}
+                  />
                 </NavIcon>
                 <NavText>Source</NavText>
               </NavItem>
