@@ -5,6 +5,9 @@
   border-top: #4a90e2 solid 8px;
   width: 50px;
 }
+.hide {
+  display: none;
+}
 
 @media screen and (max-width: 1000px) {
   .root-nav {

@@ -6,20 +6,13 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import Config from '../config';
 
 class SideNavClass extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      config: false,
-    };
-  }
-
   handleSelect = eventKey => {
     const { handleStateChange } = this.props;
     handleStateChange(eventKey);
   };
 
   render() {
-    const { config } = this.props;
+    const { config, lispat } = this.props;
     return (
       <div>
         <SideNav
@@ -48,6 +41,28 @@ class SideNavClass extends Component {
               </NavIcon>
               <NavText>Data</NavText>
             </NavItem>
+            {config ? (
+              <NavItem eventKey="Config">
+                <NavIcon>
+                  <i
+                    className="fa fa-fw fa-cogs"
+                    style={{ fontSize: '1.75em' }}
+                  />
+                </NavIcon>
+                <NavText>Config</NavText>
+              </NavItem>
+            ) : null}
+            {lispat ? (
+              <NavItem eventKey="Lispat">
+                <NavIcon>
+                  <i
+                    className="fa fa-fw fa-book-open"
+                    style={{ fontSize: '1.75em' }}
+                  />
+                </NavIcon>
+                <NavText>Source</NavText>
+              </NavItem>
+            ) : null}
           </SideNav.Nav>
         </SideNav>
       </div>
@@ -57,7 +72,8 @@ class SideNavClass extends Component {
 
 SideNavClass.propTypes = {
   handleStateChange: propTypes.func,
-  showConfig: propTypes.func,
+  config: propTypes.bool,
+  lispat: propTypes.bool,
 };
 
 export default SideNavClass;
