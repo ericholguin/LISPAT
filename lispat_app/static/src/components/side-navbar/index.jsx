@@ -46,7 +46,6 @@ class SideNavClass extends Component {
               </NavIcon>
               <NavText>Data</NavText>
             </NavItem>
-            {this.props.config ? }
           </SideNav.Nav>
         </SideNav>
       </div>
