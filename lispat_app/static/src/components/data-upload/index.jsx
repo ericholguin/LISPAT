@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import FileUpload from './upload';
 import './home-upload.css';
 
-const endpoint = 'http://localhost:5000/data-upload';
+const endpoint = 'http://localhost:5000/upload';
 
 class DataUpload extends Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class DataUpload extends Component {
   };
 
   handleUpload = () => {
-    const { file1, file2 } = this.state;
+    const { file1, file2, statusCode } = this.state;
     const { stateChange } = this.props;
     const data = new FormData();
     data.append('file1', file1, file1.name);
@@ -46,9 +46,10 @@ class DataUpload extends Component {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then(res => {
-        this.state.statusCode = res.statusText;
-        const { statusCode, loaded } = this.state;
-        stateChange(statusCode, loaded);
+        this.setState({
+          statusCode: res.status,
+        });
+        stateChange(statusCode);
       });
   };
 
@@ -90,11 +91,11 @@ class DataUpload extends Component {
                 >
                   GO
                 </Button>
-                {loaded !== 0 ? (
-                  <div className="progress">{Math.round(loaded)} %</div>
-                ) : null}
               </Col>
             </div>
+            {loaded !== 0 ? (
+              <div className="progress">{Math.round(loaded)} %</div>
+            ) : null}
           </Row>
         </div>
       </div>

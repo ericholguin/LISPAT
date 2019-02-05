@@ -1,4 +1,5 @@
 # Lost in Space and Time
+
 ## When Plagiarism is a Good Thing
 
 Sr. Design Project – Medical Device Requirements
@@ -12,11 +13,12 @@ accessibility and usefulness.
 ## How to Run
 
 ### LOCALLY
+
 ##### Requirements
 
-* brew cask install xquartz
-* brew install poppler antiword unrtf tesseract swig
-* pip install textract
+- brew cask install xquartz
+- brew install poppler antiword unrtf tesseract swig
+- pip install textract
 
 ##### NLTK
 
@@ -33,7 +35,7 @@ nlkt downloader will show up. Download all.
 
 ## PDF DECRYPTION
 
-Due to some pdfs having restrictions to their content ```qpdf``` was used in
+Due to some pdfs having restrictions to their content `qpdf` was used in
 order to remove these restrictions.
 
 Link: https://github.com/qpdf/qpdf
@@ -42,33 +44,35 @@ clone the repo and run.
 
 `pip install -e path/to/lispat`
 
-
 lispat should be now installed into the OS under your pip env.
-
 
 You can now run the following commands to both train data and compare submitted
 documents:
 
-* NOTE:
-* The path must be to a directory containing files of these formats:
-- .pdf
-- .docx
-- .doc
-- .txt
+- NOTE:
+- The path must be to a directory containing files of these formats:
+
+* .pdf
+* .docx
+* .doc
+* .txt
 
 `lispat -h`
-* help commands
+
+- help commands
 
 `lispat --path=path/to/docs --convert`
-* Coverts any .pdf, .doc, .docx file to .txt format for future analysis
-* Files are stored inside /usr/local/var/lispat/<format>\_data/
+
+- Coverts any .pdf, .doc, .docx file to .txt format for future analysis
+- Files are stored inside /usr/local/var/lispat/<format>\_data/
 
 `lispat --path=path/to/docs --train`
-* Upload data of previously submitted documents that are passed by the FDA
 
+- Upload data of previously submitted documents that are passed by the FDA
 
 `lispat --path=path/todocs --compare`
-* upload a submitted document to compare with documents that are already passed by the FDA
+
+- upload a submitted document to compare with documents that are already passed by the FDA
 
 Dependencies and package issues are possible with the requirements of the application.
 Should use the docker container above all else for easier application use.

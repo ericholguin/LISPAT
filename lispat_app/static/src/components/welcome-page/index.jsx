@@ -6,7 +6,6 @@ import README from './README.md';
 import './welcome-page.css';
 import 'github-markdown-css';
 
-
 class WelcomePage extends Component {
   constructor(props, context) {
     super(props, context);

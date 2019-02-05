@@ -6,6 +6,11 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import DataUpload from '../data-upload';
 
 class SideNavClass extends Component {
+  constructor(props) {
+    super(props);
+    this.props.config = false;
+  }
+
   handleSelect = eventKey => {
     const { handleStateChange } = this.props;
     handleStateChange(eventKey);
@@ -41,7 +46,7 @@ class SideNavClass extends Component {
               </NavIcon>
               <NavText>Data</NavText>
             </NavItem>
-
+            {this.props.config ? }
           </SideNav.Nav>
         </SideNav>
       </div>

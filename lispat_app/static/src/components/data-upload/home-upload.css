@@ -1,4 +1,4 @@
-.center-grid{
+.center-grid {
   padding: 15px;
   margin: auto;
 }
@@ -29,16 +29,17 @@
 
 .progress {
   font-family: Helvetica, serif;
-  font-size: 24px;
-  background-color: #4a4a4a;
-  color: white;
-  width: 90px;
+  font-size: 36px;
+  width: 300px;
   height: 60px;
-  margin-top: 10px;
-  margin-left: 50px;
+  margin-top: 0px;
+  margin-left: 30px;
+  background-color: #212121;
+  color: white;
+
 }
 
-.markdown-body{
+.markdown-body {
   color: azure;
   border-radius: 20px;
   border: 1px solid white;
@@ -46,7 +47,6 @@
   max-width: 980px;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
-
 
 .body-upload {
   width: 100% !important;

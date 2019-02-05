@@ -5,6 +5,7 @@ import DataUpload from './components/data-upload/index';
 import './components/side-navbar/side-navbar.css';
 import SideNavClass from './components/side-navbar/index';
 import WelcomePage from './components/welcome-page/index';
+import Lispat from './components/lispat';
 
 class App extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class App extends Component {
     this.state = {
       showHome: true,
       showData: false,
+      showLispat: false,
     };
   }
 
@@ -30,13 +32,24 @@ class App extends Component {
     }
   };
 
+  switchToLispat = statusCode => {
+    if (statusCode === 200) {
+      this.setState({
+        showLispat: true,
+        showData: false,
+        showHome: false,
+      });
+    }
+  };
+
   render() {
-    const { showHome, showData } = this.state;
+    const { showHome, showData, showLispat } = this.state;
     return (
       <div>
         <TopNav />
         {showHome ? <WelcomePage /> : null}
-        {showData ? <DataUpload /> : null}
+        {showData ? <DataUpload stateChange={this.switchToLispat} /> : null}
+        {showLispat ? <Lispat /> : null}
         <SideNavClass handleStateChange={this.switchView} />
       </div>
     );

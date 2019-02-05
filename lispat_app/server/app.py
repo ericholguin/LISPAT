@@ -36,24 +36,24 @@ def upload_file():
 
         std_path = UPLOAD_FOLDER + "/standard"
         sub_path = UPLOAD_FOLDER + "/submission"
-        _log.getLogger().debug(std_path)
-        args = {
-            "compare": True,
-            "--standard": std_path,
-            "--submission": False,
-            "analytics": False,
-            "--path": False,
-            "input": True,
-            "clean": False,
-            "--clean": False,
-            "--empath": False,
-            "--gitc": False,
-            "--character": False,
-            "--nn": False,
-            "--text": "shall include security"
-        }
-        _log.getLogger().debug("Running Main")
-        app_main(args)
+        # _log.getLogger().debug(std_path)
+        # args = {
+        #     "compare": True,
+        #     "--standard": std_path,
+        #     "--submission": False,
+        #     "analytics": False,
+        #     "--path": False,
+        #     "input": True,
+        #     "clean": False,
+        #     "--clean": False,
+        #     "--empath": False,
+        #     "--gitc": False,
+        #     "--character": False,
+        #     "--nn": False,
+        #     "--text": "shall include security"
+        # }
+        # _log.getLogger().debug("Running Main")
+        # app_main(args)
 
         return "success"
         # _log.getLogger().debug("Files")
