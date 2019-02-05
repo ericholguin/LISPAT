@@ -8,8 +8,7 @@ import ClickOutside from 'react-click-outside';
 import Config from '../config';
 
 class SideNavClass extends Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       expanded: true,
