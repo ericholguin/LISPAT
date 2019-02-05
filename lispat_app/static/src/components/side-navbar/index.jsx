@@ -3,7 +3,7 @@ import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import propTypes from 'prop-types';
 import './side-navbar.css';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-import DataUpload from '../data-upload';
+import Config from '../config';
 
 class SideNavClass extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class SideNavClass extends Component {
   };
 
   render() {
-    // const { showNav } = this.state;
+    const { config } = this.props;
     return (
       <div>
         <SideNav
@@ -46,6 +46,7 @@ class SideNavClass extends Component {
               </NavIcon>
               <NavText>Data</NavText>
             </NavItem>
+            {config ? <Config /> : null}
           </SideNav.Nav>
         </SideNav>
       </div>
@@ -55,6 +56,7 @@ class SideNavClass extends Component {
 
 SideNavClass.propTypes = {
   handleStateChange: propTypes.func,
+  config: propTypes.bool,
 };
 
 export default SideNavClass;

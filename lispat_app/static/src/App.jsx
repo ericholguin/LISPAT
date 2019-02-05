@@ -14,6 +14,7 @@ class App extends Component {
       showHome: true,
       showData: false,
       showLispat: false,
+      showConfig: false,
     };
   }
 
@@ -38,8 +39,14 @@ class App extends Component {
         showLispat: true,
         showData: false,
         showHome: false,
+        showConfig: true,
       });
     }
+  };
+
+  showConfig = () => {
+    const { showConfig, showLispat } = this.state;
+    return showConfig === true && showLispat === true;
   };
 
   render() {
@@ -50,7 +57,10 @@ class App extends Component {
         {showHome ? <WelcomePage /> : null}
         {showData ? <DataUpload stateChange={this.switchToLispat} /> : null}
         {showLispat ? <Lispat /> : null}
-        <SideNavClass handleStateChange={this.switchView} />
+        <SideNavClass
+          handleStateChange={this.switchView}
+          config={this.showConfig}
+        />
       </div>
     );
   }
