@@ -23,17 +23,20 @@ class App extends Component {
       this.setState({
         showHome: true,
         showData: false,
+        showLispat: false,
       });
     }
     if (view === 'Data') {
       this.setState({
         showHome: false,
         showData: true,
+        showLispat: false,
       });
     }
   };
 
   switchToLispat = statusCode => {
+    console.log(statusCode);
     if (statusCode === 200) {
       this.setState({
         showLispat: true,
@@ -44,9 +47,14 @@ class App extends Component {
     }
   };
 
-  showConfig = () => {
-    const { showConfig, showLispat } = this.state;
-    return showConfig === true && showLispat === true;
+  showConfigNav = () => {
+    const { showConfig } = this.state;
+    return showConfig === true;
+  };
+
+  showLispatNav = () => {
+    const { showLispat } = this.state;
+    return showLispat === true;
   };
 
   render() {
@@ -55,11 +63,12 @@ class App extends Component {
       <div>
         <TopNav />
         {showHome ? <WelcomePage /> : null}
-        {showData ? <DataUpload stateChange={this.switchToLispat} /> : null}
-        {showLispat ? <Lispat /> : null}
+        {showData ? <DataUpload stateChange={this.switchToLispat} /> : 'hide'}
+        {showLispat ? <Lispat /> : 'hide'}
         <SideNavClass
           handleStateChange={this.switchView}
-          config={this.showConfig}
+          config={this.showConfigNav()}
+          lispat={this.showLispatNav()}
         />
       </div>
     );

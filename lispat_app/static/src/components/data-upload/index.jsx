@@ -14,7 +14,6 @@ class DataUpload extends Component {
       file1: null,
       file2: null,
       loaded: 0,
-      statusCode: 0,
     };
   }
 
@@ -31,7 +30,7 @@ class DataUpload extends Component {
   };
 
   handleUpload = () => {
-    const { file1, file2, statusCode } = this.state;
+    const { file1, file2 } = this.state;
     const { stateChange } = this.props;
     const data = new FormData();
     data.append('file1', file1, file1.name);
@@ -46,10 +45,7 @@ class DataUpload extends Component {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then(res => {
-        this.setState({
-          statusCode: res.status,
-        });
-        stateChange(statusCode);
+        stateChange(res.status);
       });
   };
 
