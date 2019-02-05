@@ -8,7 +8,9 @@ import Config from '../config';
 class SideNavClass extends Component {
   constructor(props) {
     super(props);
-    this.props.config = false;
+    this.state = {
+      config: false,
+    };
   }
 
   handleSelect = eventKey => {
@@ -46,7 +48,6 @@ class SideNavClass extends Component {
               </NavIcon>
               <NavText>Data</NavText>
             </NavItem>
-            {config ? <Config /> : null}
           </SideNav.Nav>
         </SideNav>
       </div>
@@ -56,7 +57,7 @@ class SideNavClass extends Component {
 
 SideNavClass.propTypes = {
   handleStateChange: propTypes.func,
-  config: propTypes.bool,
+  showConfig: propTypes.func,
 };
 
 export default SideNavClass;

@@ -4,6 +4,6 @@ class Config extends Component {
   render() {
     return <div>yes</div>;
   }
-};
+}
 
 export default Config;
