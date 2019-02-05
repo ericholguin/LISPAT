@@ -61,7 +61,11 @@ table, th, td
 }
 """
 
+<<<<<<< HEAD
 LISPAT_DOCOPT="""Lost in Space and Time.
+=======
+LISPAT_DOCOPT = """Lost in Space and Time.
+>>>>>>> dccdb73ce53c49b2cf26a3ead319b24b96730116
 
 Usage:
     lispat analytics --path=<content-path>  [--train] [--compare] [--array] [--df] [--sp] [-A]
@@ -105,3 +109,7 @@ Options:
      --all                        remove all data in local storage.
 
 """
+<<<<<<< HEAD
+=======
+
+>>>>>>> dccdb73ce53c49b2cf26a3ead319b24b96730116

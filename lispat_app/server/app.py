@@ -7,15 +7,19 @@ from werkzeug.utils import secure_filename
 from flask import Flask, render_template, request, make_response, session
 
 
+<<<<<<< HEAD
 logger = Logger("LISPAT - Flask App")
 
+=======
+logger = Logger("LISPAT")
+>>>>>>> dccdb73ce53c49b2cf26a3ead319b24b96730116
 app = Flask(__name__, static_folder="../static/build/bundle",
             template_folder="../static/build")
 
 CORS(app, expose_headers='Authorization')
 
 UPLOAD_FOLDER = os.path.abspath("../static/uploads/")
-ALLOWED_EXTENSIONS = set(['pdf', 'doc', 'docx'])
+ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
@@ -37,8 +41,13 @@ def save_file(file, target):
         filename = secure_filename(file.filename)
         destination = "/".join([target, filename])
 
+<<<<<<< HEAD
         logger.getLogger().info("Accept incoming file: {}".format(filename))
         logger.getLogger().info("Save it to: {}".format(destination))
+=======
+        logger.getLogger().info("Accept incoming file: " + str(filename))
+        logger.getLogger().info("Save it to: " + str(destination))
+>>>>>>> dccdb73ce53c49b2cf26a3ead319b24b96730116
 
         file.save(destination)
         filenames.append(destination)

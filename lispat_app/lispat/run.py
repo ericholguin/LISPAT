@@ -4,7 +4,9 @@ import docopt
 from lispat.base.manager import CommandManager
 from lispat.utils.logger import Logger
 from lispat.utils.colors import bcolors
+from lispat.base.constants import LISPAT_DOCOPT
 
+DOCOPT = LISPAT_DOCOPT
 
 logger = Logger("Main")
 nltk.download('punkt')
@@ -21,6 +23,7 @@ def app_main(args):
             manager.create_path(doc1_path, doc2_path)
             manager.convert()
 
+<<<<<<< HEAD
         if args['analytics'] and args['--path']:
             user_path = args['--path']
             manager.create_path(user_path)
@@ -32,6 +35,8 @@ def app_main(args):
 
             manager.create_path(std_path, sub_path)
 
+=======
+>>>>>>> dccdb73ce53c49b2cf26a3ead319b24b96730116
             manager.run_sub_vs_std(args)
         if args['compare'] and args['input'] and args['--standard']:
             print(args['--text'])
