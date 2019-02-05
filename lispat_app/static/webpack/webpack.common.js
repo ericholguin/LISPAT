@@ -29,7 +29,8 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              outputPath: commonPaths.imagesFolder,
+              name: '[name].[ext]',
+              outputPath: commonPaths.jsFolder,
             },
           },
         ],
@@ -42,6 +43,15 @@ module.exports = {
             options: {
               outputPath: commonPaths.fontsFolder,
             },
+          },
+        ],
+      },
+      {
+        test: /\.(md)$/,
+        use: [
+          'html-loader',
+          {
+            loader: 'markdown-loader',
           },
         ],
       },

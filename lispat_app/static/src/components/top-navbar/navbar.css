@@ -1,0 +1,57 @@
+/* override bootstrap navbar colors */
+.background-color {
+  background-image: linear-gradient(
+    to bottom,
+    #000000 0,
+    #000000 100%
+  ) !important;
+  /* override background image gradient w/ flat color */
+  opacity: 0.9;
+  -moz-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.99);
+  -webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 1);
+  box-shadow: 0 5px 5px rgba(5, 5, 5, 0.75);
+}
+.logo {
+  left: 0;
+  position: fixed;
+  /*display: inline;*/
+}
+.font {
+  color: #4a90e2;
+  font-family: 'Avenir Next', sans-serif, serif;
+  font-weight: bolder;
+  /*border-bottom: #4a90e2 solid 8px;*/
+  padding-bottom: 17px;
+  padding-right: 50px;
+  padding-left: 20px;
+  /*opacity: 0.8;*/
+}
+.font-right {
+  color: #4a90e2;
+  font-family: 'Avenir Next', sans-serif, serif;
+  font-weight: bolder;
+  padding-left: 20px;
+  font-size: 23px;
+}
+body {
+  background-color: #434343;
+}
+@media screen and (max-width: 1000px) {
+  .logo {
+    display: none;
+  }
+  .background-color {
+  }
+}
+.icon-bar {
+  background-color: #4a90e2;
+  margin-left: -10px;
+}
+.image-github {
+  width: 30px;
+  height: 30px;
+}
+
+/*.links{*/
+/*float: right;*/
+/*}*/

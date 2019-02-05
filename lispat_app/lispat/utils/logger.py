@@ -4,6 +4,7 @@ import os
 from logging.handlers import TimedRotatingFileHandler
 from lispat.utils.colors import bcolors
 
+
 class Logger:
     def __init__(self, logger_name):
         self.FORMATTER = logging.Formatter(

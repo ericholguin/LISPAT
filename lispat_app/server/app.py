@@ -8,6 +8,8 @@ from flask import Flask, render_template, request, make_response, session
 
 logger = Logger("LISPAT")
 
+UPLOAD_FOLDER = os.path.dirname(os.path.abspath(__file__)) + "/storage"
+_log = Logger("Flask App")
 app = Flask(__name__, static_folder="../static/build/bundle",
             template_folder="../static/build")
 
@@ -17,11 +19,28 @@ ALLOWED_EXTENSIONS = set(['pdf', 'doc', 'docx'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
 
+# List for files
+filenames = []
+
 
 def allowed_file(filename):
     """Summary: For a given file, return whether it's an allowed type."""
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
+
+
+def save_file(file, target):
+    """Summary: For a given file save it to its target destination."""
+    if file and allowed_file(file.filename):
+        # Get file name and set and save to upload path
+        filename = secure_filename(file.filename)
+        destination = "/".join([target, filename])
+
+        logger.getLogger().info("Accept incoming file:", filename)
+        logger.getLogger().info("Save it to:", destination)
+
+        file.save(destination)
+        filenames.append(destination)
 
 
 @app.route("/")
@@ -47,8 +66,6 @@ def upload():
     """
     if request.method == 'POST':
         logger.getLogger().info("Uploading File")
-        # List for files
-        filenames = []
 
         # Create a unique "session ID" for this particular batch of uploads.
         upload_key = str(uuid4())
@@ -59,35 +76,19 @@ def upload():
         if not os.path.exists(target):
             os.mkdir(target)
 
-        for upload in request.files.getlist("file"):
-            if upload and allowed_file(upload.filename):
-                # Get file name and set and save to upload path
-                filename = secure_filename(upload.filename)
-                destination = "/".join([target, filename])
+        uploads = request.files
 
-                logger.getLogger().info("Accept incoming file:", filename)
-                logger.getLogger().info("Save it to:", destination)
+        file1 = uploads['file1']
+        file2 = uploads['file2']
 
-                upload.save(destination)
-                filenames.append(destination)
+        save_file(file1, target)
+        save_file(file2, target)
 
         session['uploadedFiles'] = filenames
 
         return make_response(('ok', 200))
 
-"""
-@app.route("/analyze", methods=['POST'])
-def analyze():"""
-    """
-    Summary: Uses uploaded documents and performs processing.
-
-    return: The two documents to compare in a side by side view.
-    rtype: html
-    """
-
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(24)
     app.run(debug=True)
-
-flask_cors.CORS(app, expose_headers='Authorization')
