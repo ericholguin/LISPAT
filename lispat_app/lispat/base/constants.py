@@ -60,3 +60,49 @@ table, th, td
   text-align: right;
 }
 """
+
+LISPAT_DOCOPT = """Lost in Space and Time.
+
+Usage:
+    lispat analytics --path=<content-path>  [--train] [--compare] [--array] [--df] [--sp] [-A]
+    lispat compare --standard=<content-path> --submission=<content-path> [--clean] [--empath] [--gitc] [--character] [--nn]
+    lispat compare input --standard=<content-path> --text=<text> --nn
+    lispat clean [--all]
+    lispat [-h | --help]
+    lispat --version
+
+Options:
+
+  -h --help                      Show this screen.
+  --version                      Show version.
+
+  Analytics:
+    analytics                    A look at the data given, whether its a single doc or directory of docs.
+
+    Args:
+    --convert                    Convert Documents to .txt format
+    --compare                    Submit a Document to be compared
+    --train                      Submit documents to be used for training data
+    --array                      Processing data as an array
+    --df                         Processing data as a dataframe
+    --sp                         Get semantic properties
+    -A                           Get all processed txt data.
+    --path=<content-path>        Process data from a single path. multiple docs or single docs
+
+                Example: lispat analytics --path=<content-path> --train --array --df
+
+  Comparisons:
+    compare                      Compare a standard with a submission
+
+    Args:
+    --standard=<content-path>    A standard document to use for comparing against a submission
+    --submission=<content-path>  A submission document to use for comparing against a standard.
+
+                Example: lispat compare --standard=<content-path> --submission=<content_path>
+
+  Utilities:
+     clean                        remove data in local storage.
+     --all                        remove all data in local storage.
+
+"""
+

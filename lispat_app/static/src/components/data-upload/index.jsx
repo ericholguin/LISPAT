@@ -60,7 +60,7 @@ class DataUpload extends Component {
           <div className="center-grid">
             <Row>
               <Col>
-                <div className="font-home">Your current submission:</div>
+                <div className="font-home">First Doc:</div>
                 <FileUpload handleStateChange={this.setFileOne} />
                 {file1 ? <div className="file-name">{file1.name}</div> : ''}
               </Col>
@@ -69,7 +69,7 @@ class DataUpload extends Component {
           <div className="center-grid">
             <Row>
               <Col>
-                <div className="font-home">The standard: </div>
+                <div className="font-home">Second Doc: </div>
                 <FileUpload handleStateChange={this.setFileTwo} />
                 {file2 ? <div className="file-name">{file2.name}</div> : ''}
               </Col>
@@ -80,13 +80,15 @@ class DataUpload extends Component {
           <Row>
             <div className="go-pos">
               <Col>
-                <Button
-                  type="button"
-                  className="go-button"
-                  onClick={this.handleUpload}
-                >
-                  GO
-                </Button>
+                {file1 !== null && file2 !== null ? (
+                  <Button
+                    type="button"
+                    className="go-button"
+                    onClick={this.handleUpload}
+                  >
+                    GO
+                  </Button>
+                ) : null}
               </Col>
             </div>
             {loaded !== 0 ? (

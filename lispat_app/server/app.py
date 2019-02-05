@@ -7,16 +7,13 @@ from flask import Flask, render_template, request, make_response, session
 
 
 logger = Logger("LISPAT")
-
-UPLOAD_FOLDER = os.path.dirname(os.path.abspath(__file__)) + "/storage"
-_log = Logger("Flask App")
 app = Flask(__name__, static_folder="../static/build/bundle",
             template_folder="../static/build")
 
 CORS(app, expose_headers='Authorization')
 
 UPLOAD_FOLDER = os.path.abspath("../static/uploads/")
-ALLOWED_EXTENSIONS = set(['pdf', 'doc', 'docx'])
+ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
@@ -38,8 +35,8 @@ def save_file(file, target):
         filename = secure_filename(file.filename)
         destination = "/".join([target, filename])
 
-        logger.getLogger().info("Accept incoming file:", filename)
-        logger.getLogger().info("Save it to:", destination)
+        logger.getLogger().info("Accept incoming file: " + str(filename))
+        logger.getLogger().info("Save it to: " + str(destination))
 
         file.save(destination)
         filenames.append(destination)

@@ -123,6 +123,7 @@
     "prettier": "1.15.3",
     "pretty-quick": "1.8.0",
     "react-bootstrap": "^1.0.0-beta.5",
+    "react-click-outside": "github:tj/react-click-outside",
     "react-markdown": "^4.0.6",
     "react-simple-sidenav": "^1.0.1",
     "redux": "^4.0.1",

@@ -23,14 +23,12 @@ class App extends Component {
       this.setState({
         showHome: true,
         showData: false,
-        showLispat: false,
       });
     }
     if (view === 'Data') {
       this.setState({
         showHome: false,
         showData: true,
-        showLispat: false,
       });
     }
   };
