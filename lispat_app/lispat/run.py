@@ -17,6 +17,7 @@ Options:
     analytics                    A look at the data given, whether its a single doc or directory of docs.
 
     Args:
+    --convert                    Convert Documents to .txt format
     --compare                    Submit a Document to be compared
     --train                      Submit documents to be used for training data
     --array                      Processing data as an array
