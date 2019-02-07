@@ -1,3 +1,5 @@
+@import "~@trendmicro/react-sidenav/dist/react-sidenav.css";
+
 .root-nav {
   margin-top: 66px;
   background-color: black !important;
@@ -7,6 +9,10 @@
 }
 .hide {
   display: none;
+}
+
+.sidenav{
+  width: 100px  !important;
 }
 
 @media screen and (max-width: 1000px) {
