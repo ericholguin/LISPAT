@@ -55,6 +55,14 @@ class App extends Component {
     return showLispat === true;
   };
 
+  switchLispat = () => {
+    const { showLispat } = this.state;
+    if (showLispat === true) {
+      return 'Lispat';
+    }
+    return null;
+  };
+
   render() {
     const { showHome, showData, showLispat } = this.state;
     return (
@@ -67,6 +75,7 @@ class App extends Component {
           handleStateChange={this.switchView}
           config={this.showConfigNav()}
           lispat={this.showLispatNav()}
+          eventKey={this.switchLispat()}
         />
       </div>
     );

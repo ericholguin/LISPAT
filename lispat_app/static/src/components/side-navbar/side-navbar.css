@@ -9,6 +9,10 @@
   display: none;
 }
 
+.sidenav {
+  width: 100px !important;
+}
+
 @media screen and (max-width: 1000px) {
   .root-nav {
     margin-top: 56px;

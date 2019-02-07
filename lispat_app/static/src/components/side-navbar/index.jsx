@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import propTypes from 'prop-types';
-import './side-navbar.css';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+import './side-navbar.css';
 import ClickOutside from 'react-click-outside';
 
 import Config from '../config';
@@ -11,7 +11,7 @@ class SideNavClass extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      expanded: true,
+      expanded: false,
     };
   }
 
@@ -22,7 +22,7 @@ class SideNavClass extends Component {
 
   render() {
     const { config, lispat } = this.props;
-    const { expanded } = this.state;
+    const { expanded, width } = this.state;
     return (
       <div>
         <ClickOutside
