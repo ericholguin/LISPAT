@@ -34,10 +34,13 @@
   font-size: 23px;
 }
 body {
-  background-color: #434343;
+  background-color: #404040;
 }
 @media screen and (max-width: 1000px) {
   .logo {
+    display: none;
+  }
+  .hide-hambuger{
     display: none;
   }
   .background-color {

@@ -5,8 +5,9 @@
 
 .font-home {
   font-family: Consolas, serif, sans-serif;
-  font-size: 24px;
+  font-size: 20px;
   color: #ffffff;
+  padding-bottom: 10px;
 }
 .file-name {
   /* EU GDPR 2016.5.4.pdf: */
@@ -49,4 +50,11 @@
 
 .body-upload {
   width: 100% !important;
+}
+
+.header-upload {
+  font-weight: bolder;
+  font-size: 36px;
+  font-family: Consolas, sans-serif, SansSerif;
+  color: #fff4f6;
 }

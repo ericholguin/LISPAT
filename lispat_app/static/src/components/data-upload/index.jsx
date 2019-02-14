@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import path from 'path';
 import axios from 'axios';
 import { Col, Container, Row, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
@@ -6,6 +7,7 @@ import FileUpload from './upload';
 import './home-upload.css';
 
 const endpoint = 'http://localhost:5000/upload';
+
 
 class DataUpload extends Component {
   constructor(props) {
@@ -31,7 +33,7 @@ class DataUpload extends Component {
 
   handleUpload = () => {
     const { file1, file2 } = this.state;
-    const { stateChange } = this.props;
+    const { stateChange, getData } = this.props;
     const data = new FormData();
     data.append('file1', file1, file1.name);
     data.append('file2', file2, file2.name);
@@ -46,6 +48,12 @@ class DataUpload extends Component {
       })
       .then(res => {
         stateChange(res.status);
+        const resp = res.data;
+        resp.submission_file_name =
+          file1.name.substring(0, file1.name.lastIndexOf('.')) || file1.name;
+        resp.standard_file_name =
+          file2.name.substring(0, file2.name.lastIndexOf('.')) || file2.name;
+        getData(resp);
       });
   };
 
@@ -56,26 +64,22 @@ class DataUpload extends Component {
         <br />
         <br />
         <div className="markdown-body body-upload">
+          <div className="header-upload"> Upload Documents </div>
           <hr />
           <div className="center-grid">
             <Row>
               <Col>
-                <div className="font-home">First Doc:</div>
+                <div className="font-home">First:</div>
                 <FileUpload handleStateChange={this.setFileOne} />
                 {file1 ? <div className="file-name">{file1.name}</div> : ''}
               </Col>
-            </Row>
-          </div>
-          <div className="center-grid">
-            <Row>
               <Col>
-                <div className="font-home">Second Doc: </div>
+                <div className="font-home">Second: </div>
                 <FileUpload handleStateChange={this.setFileTwo} />
                 {file2 ? <div className="file-name">{file2.name}</div> : ''}
               </Col>
             </Row>
           </div>
-          <hr />
           <br />
           <Row>
             <div className="go-pos">
@@ -103,6 +107,7 @@ class DataUpload extends Component {
 
 DataUpload.propTypes = {
   stateChange: PropTypes.func,
+  getData: PropTypes.func,
 };
 
 export default DataUpload;

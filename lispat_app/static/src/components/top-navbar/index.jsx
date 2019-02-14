@@ -10,10 +10,7 @@ class TopNav extends Component {
           <Navbar.Brand href="#home" className={style.logo}>
             <span className={style.font}>LISPAT</span>
           </Navbar.Brand>
-          <Navbar.Toggle
-            aria-controls="basic-navbar-nav"
-            className={style['icon-bar']}
-          />
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
               <Nav.Link href="#home">
@@ -22,7 +19,7 @@ class TopNav extends Component {
               <Nav.Link href="#link">
                 <span className={style['font-right']}>HELP</span>
               </Nav.Link>
-              <Nav.Link href="#link">
+              <Nav.Link href="https://github.com/brummetj/LISPAT">
                 <span className={style['font-right']}>
                   <i className="fab fa-github" />
                 </span>
