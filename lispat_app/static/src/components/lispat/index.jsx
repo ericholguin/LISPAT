@@ -38,9 +38,8 @@ class Lispat extends Component {
     }
   };
 
-  searchTerms = () => {
+  searchTerms = () => {};
 
-  }
   sanitize = () => {};
 
   render() {
@@ -69,7 +68,7 @@ class Lispat extends Component {
                   <Highlighter
                     highlightClassName={styles.highlight}
                     searchWords={keywords}
-                    autoEscape={true}
+                    autoEscape
                     textToHighlight={submission}
                   />
                 </div>
@@ -84,15 +83,14 @@ class Lispat extends Component {
                 <Highlighter
                   highlightClassName={styles.highlight}
                   searchWords={keywords}
-                  autoEscape={true}
+                  autoEscape
                   textToHighlight={standard}
                 />
               </div>
             </div>
           </Col>
         </Row>
-        <Row>
-        </Row>
+        <Row />
       </div>
     );
   }

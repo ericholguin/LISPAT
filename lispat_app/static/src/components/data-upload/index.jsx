@@ -8,7 +8,6 @@ import './home-upload.css';
 
 const endpoint = 'http://localhost:5000/upload';
 
-
 class DataUpload extends Component {
   constructor(props) {
     super(props);
