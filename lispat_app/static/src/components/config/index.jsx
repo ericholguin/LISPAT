@@ -27,26 +27,26 @@ class Config extends Component {
         <select>
           <option>Nearest Neighbor</option>
         </select>
-        <Form>
-          <Form.Check
-            className="font-color"
-            type="radio"
-            id="default-radio"
-            label="Keywords"
-            onChange={this.setState({
-              keywords: !keywords,
-            })}
-          />
-          <Form.Check
-            className="font-color"
-            type="radio"
-            id="default-radio"
-            label="Phrases"
-            onChange={this.setState({
-              phrases: !phrases,
-            })}
-          />
-        </Form>
+        // <Form>
+        //   <Form.Check
+        //     className="font-color"
+        //     type="radio"
+        //     id="default-radio"
+        //     label="Keywords"
+        //     onChange={this.setState({
+        //       keywords: !keywords,
+        //     })}
+        //   />
+        //   <Form.Check
+        //     className="font-color"
+        //     type="radio"
+        //     id="default-radio"
+        //     label="Phrases"
+        //     onChange={this.setState({
+        //       phrases: !phrases,
+        //     })}
+        //   />
+        // </Form>
       </div>
     );
   }
