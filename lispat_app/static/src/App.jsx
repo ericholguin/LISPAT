@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import propTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
 import TopNav from './components/top-navbar/index';
 import DataUpload from './components/data-upload/index';
@@ -15,6 +16,7 @@ class App extends Component {
       showData: false,
       showLispat: false,
       showConfig: false,
+      data: null,
     };
   }
 
@@ -23,12 +25,21 @@ class App extends Component {
       this.setState({
         showHome: true,
         showData: false,
+        showLispat: false,
       });
     }
     if (view === 'Data') {
       this.setState({
         showHome: false,
         showData: true,
+        showLispat: false,
+      });
+    }
+    if (view === 'Lispat') {
+      this.setState({
+        showHome: false,
+        showData: false,
+        showLispat: true,
       });
     }
   };
@@ -51,8 +62,8 @@ class App extends Component {
   };
 
   showLispatNav = () => {
-    const { showLispat } = this.state;
-    return showLispat === true;
+    const { showLispat, data } = this.state;
+    return showLispat === true || data !== null;
   };
 
   switchLispat = () => {
@@ -64,22 +75,37 @@ class App extends Component {
   };
 
   render() {
-    const { showHome, showData, showLispat } = this.state;
+    const { showHome, showData, showLispat, data } = this.state;
     return (
       <div>
         <TopNav />
-        {showHome ? <WelcomePage /> : null}
-        {showData ? <DataUpload stateChange={this.switchToLispat} /> : 'hide'}
-        {showLispat ? <Lispat /> : 'hide'}
+        <div className={showHome ? 'show' : 'hide'}>
+          <WelcomePage />
+        </div>
+        {showData ? (
+          <DataUpload
+            stateChange={this.switchToLispat}
+            getData={d => {
+              this.setState({ data: d });
+            }}
+          />
+        ) : null}
+        <div className={showLispat ? 'show' : 'hide'}>
+          <Lispat data={data} />
+        </div>
         <SideNavClass
           handleStateChange={this.switchView}
           config={this.showConfigNav()}
           lispat={this.showLispatNav()}
-          eventKey={this.switchLispat()}
+          onChange={showLispat}
         />
       </div>
     );
   }
 }
+
+App.propTypes = {
+  data: propTypes.instanceOf(Object),
+};
 
 export default hot(module)(App);

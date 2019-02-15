@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import propTypes from 'prop-types';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
@@ -7,22 +8,58 @@ import ClickOutside from 'react-click-outside';
 
 import Config from '../config';
 
+const mouseClickEvents = ['mousedown', 'click', 'mouseup'];
+
 class SideNavClass extends Component {
   constructor(props) {
     super(props);
     this.state = {
       expanded: false,
+      activeLispat: false,
+      activeData: false,
+      activeHome: true,
     };
+  }
+
+  componentWillReceiveProps(props) {
+    if (props.onChange) {
+      this.setState({
+        activeLispat: true,
+        activeData: false,
+        activeHome: false,
+      });
+    }
   }
 
   handleSelect = eventKey => {
     const { handleStateChange } = this.props;
+    if (eventKey === 'Data') {
+      this.setState({
+        activeLispat: false,
+        activeData: true,
+        activeHome: false,
+      });
+    }
+    if (eventKey === 'Home') {
+      this.setState({
+        activeLispat: false,
+        activeData: false,
+        activeHome: true,
+      });
+    }
+    if (eventKey === 'Lispat') {
+      this.setState({
+        activeLispat: true,
+        activeData: false,
+        activeHome: false,
+      });
+    }
     handleStateChange(eventKey);
   };
 
   render() {
     const { config, lispat } = this.props;
-    const { expanded, width } = this.state;
+    const { expanded, activeLispat, activeData, activeHome } = this.state;
     return (
       <div>
         <ClickOutside
@@ -38,11 +75,12 @@ class SideNavClass extends Component {
             onSelect={selected => {
               this.handleSelect(selected);
             }}
+            selected="Lispat"
             className="root-nav"
           >
             <SideNav.Toggle />
-            <SideNav.Nav defaultSelected="home">
-              <NavItem eventKey="Home">
+            <SideNav.Nav>
+              <NavItem eventKey="Home" active={activeHome}>
                 <NavIcon>
                   <i
                     className="fa fa-fw fa-home"
@@ -51,7 +89,7 @@ class SideNavClass extends Component {
                 </NavIcon>
                 <NavText>Home</NavText>
               </NavItem>
-              <NavItem eventKey="Data">
+              <NavItem eventKey="Data" active={activeData}>
                 <NavIcon>
                   <i
                     className="fa fa-fw fa-cubes"
@@ -69,7 +107,7 @@ class SideNavClass extends Component {
                     />
                   </NavIcon>
                   <NavText>Config</NavText>
-                  <NavItem eventKey="Config/Settings">
+                  <NavItem eventKey="Settings">
                     <NavText>
                       <Config />
                     </NavText>
@@ -77,7 +115,7 @@ class SideNavClass extends Component {
                 </NavItem>
               ) : null}
               {lispat ? (
-                <NavItem eventKey="Lispat">
+                <NavItem eventKey="Lispat" active={activeLispat}>
                   <NavIcon>
                     <i
                       className="fa fa-fw fa-book-open"
@@ -99,6 +137,9 @@ SideNavClass.propTypes = {
   handleStateChange: propTypes.func,
   config: propTypes.bool,
   lispat: propTypes.bool,
+  activeLispat: propTypes.bool,
+  activeData: propTypes.bool,
+  onChange: propTypes.bool,
 };
 
 export default SideNavClass;

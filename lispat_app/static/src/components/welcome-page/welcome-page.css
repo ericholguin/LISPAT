@@ -6,7 +6,6 @@
 
 .welcome-page-container {
   height: 80vh;
-  /*font:16px/26px Georgia, Garamond, Serif;*/
   overflow: auto;
   margin-top: 15px !important;
   border-radius: 20px;
