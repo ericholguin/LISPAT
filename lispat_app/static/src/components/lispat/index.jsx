@@ -21,7 +21,7 @@ class Lispat extends Component {
 
   componentWillReceiveProps(props) {
     this.setData(props.data);
-    this.searchTerms(props.search);
+    // this.searchTerms(props.search);
   }
 
   setData = object => {

@@ -11,14 +11,14 @@ class Config extends Component {
     };
   }
 
-  changeKeyword = () => {
-    const { keywords } = this.state;
-    const { keyword } = this.props;
-    this.setState({
-      keywords: !keywords,
-    });
-    keyword(keywords);
-  };
+  // changeKeyword = () => {
+  //   const { keywords } = this.state;
+  //   const { keyword } = this.props;
+  //   this.setState({
+  //     keywords: !keywords,
+  //   });
+  //   keyword(keywords);
+  // };
 
   render() {
     const { keywords, phrases } = this.state;
@@ -27,26 +27,26 @@ class Config extends Component {
         <select>
           <option>Nearest Neighbor</option>
         </select>
-        <Form>
-          <Form.Check
-            className="font-color"
-            type="radio"
-            id="default-radio"
-            label="Keywords"
-            onChange={this.setState({
-              keywords: !keywords,
-            })}
-          />
-          <Form.Check
-            className="font-color"
-            type="radio"
-            id="default-radio"
-            label="Phrases"
-            onChange={this.setState({
-              phrases: !phrases,
-            })}
-          />
-        </Form>
+        {/*<Form>*/}
+          {/*<Form.Check*/}
+            {/*className="font-color"*/}
+            {/*type="radio"*/}
+            {/*id="default-radio"*/}
+            {/*label="Keywords"*/}
+            {/*onChange={this.setState({*/}
+              {/*keywords: !keywords,*/}
+            {/*})}*/}
+          {/*/>*/}
+          {/*<Form.Check*/}
+            {/*className="font-color"*/}
+            {/*type="radio"*/}
+            {/*id="default-radio"*/}
+            {/*label="Phrases"*/}
+            {/*onChange={this.setState({*/}
+              {/*phrases: !phrases,*/}
+            {/*})}*/}
+          {/*/>*/}
+        {/*</Form>*/}
       </div>
     );
   }
