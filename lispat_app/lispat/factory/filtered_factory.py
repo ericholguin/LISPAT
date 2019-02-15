@@ -35,10 +35,12 @@ class FilteredFactory:
         return stripped
 
     def punctuation(self, val):
+        logger.getLogger().debug("Removing punctuation")
         punct = [w for w in val if w.isalnum()]
         return punct
 
     def remove_names(self, val):
+        logger.getLogger().debug("Removing names")
         remove_list = ['pope', 'benjamin', 'ben']
         words = [w for w in val if w not in remove_list]
         return words
@@ -50,19 +52,23 @@ class FilteredFactory:
         return words
 
     def integers(self, val):
+        logger.getLogger().debug("Removing integers")
         words = [w for w in val if not any(c.isdigit() for c in w)]
         return words
 
     def long_words(self, val):
+        logger.getLogger().debug("Removing long words")
         words = [w for w in val if not len(w) > 50]
         return words
 
     def lemmatize(self, val):
+        logger.getLogger().debug("Lemmatizing words")
         wnl = nltk.WordNetLemmatizer()
         lemmed = [wnl.lemmatize(i) for i in val]
         return lemmed
 
     def stemmer(self, val):
+        logger.getLogger().debug("Stemming words")
         port = nltk.PorterStemmer()
         words = [port.stem(i) for i in val]
         return words

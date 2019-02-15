@@ -61,14 +61,11 @@ table, th, td
 }
 """
 
-<<<<<<< HEAD
-LISPAT_DOCOPT="""Lost in Space and Time.
-=======
 LISPAT_DOCOPT = """Lost in Space and Time.
->>>>>>> dccdb73ce53c49b2cf26a3ead319b24b96730116
 
 Usage:
     lispat analytics --path=<content-path>  [--train] [--compare] [--array] [--df] [--sp] [-A]
+    lispat convert --docA=<content-path> --docB=<content-path>
     lispat compare --standard=<content-path> --submission=<content-path> [--clean] [--empath] [--gitc] [--character] [--nn]
     lispat compare input --standard=<content-path> --text=<text> --nn
     lispat clean [--all]
@@ -109,7 +106,95 @@ Options:
      --all                        remove all data in local storage.
 
 """
-<<<<<<< HEAD
-=======
 
->>>>>>> dccdb73ce53c49b2cf26a3ead319b24b96730116
+def args_convert(filenames):
+    args = {
+        "convert": True,
+        "--docA": filenames[0],
+        "--docB": filenames[1],
+        "filter": False,
+        "data": False,
+        "compare": False,
+        "--standard": False,
+        "--submission": False,
+        "analytics": False,
+        "--path": False,
+        "input": False,
+        "clean": False,
+        "--clean": False,
+        "--empath": False,
+        "--gitc": False,
+        "--character": False,
+        "--nn": False,
+        "--text": False
+    }
+    return args
+
+def args_filter():
+    args = {
+        "convert": False,
+        "--docA": False,
+        "--docB": False,
+        "filter": True,
+        "data": False,
+        "compare": False,
+        "--standard": False,
+        "--submission": False,
+        "analytics": False,
+        "--path": False,
+        "input": False,
+        "clean": False,
+        "--clean": False,
+        "--empath": False,
+        "--gitc": False,
+        "--character": False,
+        "--nn": False,
+        "--text": False
+    }
+    return args
+
+def args_json():
+    args = {
+        "convert": False,
+        "--docA": False,
+        "--docB": False,
+        "filter": False,
+        "data": True,
+        "compare": False,
+        "--standard": False,
+        "--submission": False,
+        "analytics": False,
+        "--path": False,
+        "input": False,
+        "clean": False,
+        "--clean": False,
+        "--empath": False,
+        "--gitc": False,
+        "--character": False,
+        "--nn": False,
+        "--text": False
+    }
+    return args
+
+def args_clean():
+    args = {
+        "convert": False,
+        "--docA": False,
+        "--docB": False,
+        "filter": False,
+        "data": False,
+        "compare": False,
+        "--standard": False,
+        "--submission": False,
+        "analytics": False,
+        "--path": False,
+        "input": False,
+        "clean": True,
+        "--clean": False,
+        "--empath": False,
+        "--gitc": False,
+        "--character": False,
+        "--nn": False,
+        "--text": False
+    }
+    return args

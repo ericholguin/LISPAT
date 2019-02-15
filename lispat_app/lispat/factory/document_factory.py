@@ -1,8 +1,7 @@
 """
 DocumentFactory.
 
-This script recieves user defined path containing files that are to be
-converted into text files.
+This script recieves user defined path containing the file to be converted into text files.
 """
 
 import os
@@ -11,7 +10,9 @@ from pathlib import Path
 from joblib import Parallel, delayed
 from lispat.utils.logger import Logger
 from lispat.utils.colors import bcolors
+import lispat.factory.argument_factory as arg_fac
 from lispat.factory.argument_factory import ArgumentFactory
+
 
 logger = Logger("DocumentFactory")
 
@@ -20,22 +21,21 @@ class DocumentFactory:
     """
     Handles file conversion, using the user defined path.
 
-    This class should break up the directory path by file types and
-    returns file types that can be aggregated together into their own function
-    that handles those certain file types.
+    This class uses the passed in file path and checks if the file is either a pdf
+    or docx file and applies the proper function to convert to text.
+
     """
 
-    def __init__(self, path, submitted, standard):
-
+    def __init__(self, path):
         logger.getLogger().info("DocumentFactory Created")
 
-        self.docs = []
-        self.pdfs = []
+        self.isPdf = False
+        self.isDoc = False
         self.path = path
-        self.standard = standard
-        self.submitted = submitted
+        # Extracts the session name from the path, might be changed if session not used
+        self.session = os.path.split(os.path.split(path)[0])[1]
 
-        self.args_ = ArgumentFactory()
+        self.args_ = ArgumentFactory(self.session)
 
         try:
             file = Path(path)
@@ -44,39 +44,19 @@ class DocumentFactory:
                     logger.getLogger().debug(bcolors.OKGREEN + "File Found: "
                                              + bcolors.ENDC + " {}"
                                              .format(os.path.basename(path)))
-                    self.docs.append(path)
+                    self.isDoc = True
 
                 if file.suffix == ".docx":
                     logger.getLogger().debug(bcolors.OKGREEN + "File Found: "
                                              + bcolors.ENDC + " {}"
                                              .format(os.path.basename(path)))
-                    self.docs.append(path)
+                    self.isDoc = True
 
                 if file.suffix == '.pdf':
                     logger.getLogger().debug(bcolors.OKGREEN + "File Found: "
                                              + bcolors.ENDC + " {}"
                                              .format(os.path.basename(path)))
-                    self.pdfs.append(path)
-
-            elif file.is_dir():
-                for file in os.listdir(path):
-                    if file.endswith(".doc"):
-                        logger.getLogger().debug(bcolors.OKGREEN +
-                                                 "File Found: " + bcolors.ENDC
-                                                 + " {} ".format(file))
-                        self.docs.append(path + "/" + file)
-
-                    if file.endswith(".docx"):
-                        logger.getLogger().debug(bcolors.OKGREEN +
-                                                 "File Found: " + bcolors.ENDC
-                                                 + " {}".format(file))
-                        self.docs.append(path + "/" + file)
-
-                    if file.endswith(".pdf"):
-                        logger.getLogger().debug(bcolors.OKGREEN +
-                                                 "File Found: " + bcolors.ENDC
-                                                 + " {}".format(file))
-                        self.pdfs.append(path + "/" + file)
+                    self.isPdf = True
 
         except FileNotFoundError as error:
             logger.getLogger().error("No required file types Found - Exiting")
@@ -91,32 +71,27 @@ class DocumentFactory:
         """
         try:
 
-            doc_data_txt = []
-            pdf_data_txt = []
-
-            n = self.args_.file_count(self.docs)
-
-            if self.docs:
+            if self.isDoc:
                 doc_data_txt = (
                     Parallel
-                    (n_jobs=n, backend="multiprocessing", verbose=10)
+                    (n_jobs=4, backend="multiprocessing", verbose=10)
                     (delayed
                      (self.args_.docx_handler)
-                     (path, self.submitted, self.standard)
-                        for path in self.docs))
+                     (self.path)
+                        for  i in range(1)))
 
-            n = self.args_.file_count(self.pdfs)
+                return doc_data_txt
 
-            if self.pdfs:
+            elif self.isPdf:
                 pdf_data_txt = (
                     Parallel
-                    (n_jobs=n, backend="multiprocessing", verbose=10)
+                    (n_jobs=4, backend="multiprocessing", verbose=10)
                     (delayed
                      (self.args_.pdfminer_handler)
-                     (path, self.submitted, self.standard)
-                        for path in self.pdfs))
+                     (self.path)
+                        for i in range(1)))
 
-            return doc_data_txt, pdf_data_txt
+                return pdf_data_txt
 
         except RuntimeError as error:
             logger.getLogger().error(error)

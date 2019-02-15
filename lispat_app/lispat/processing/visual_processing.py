@@ -24,11 +24,15 @@ class Visualization:
                str(now.day)
 
         # Creating a directory for each visual for each day.
+        #vis_dir = os.path.abspath("../server/templates")
+        #if not os.path.isdir(vis_dir):
+        #    os.mkdir(vis_dir)
         if not os.path.isdir('/usr/local/var/lispat/visuals/' + self.date):
             os.mkdir('/usr/local/var/lispat/visuals/' + self.date)
 
         random.seed()
         seed = random.randint(1, 100)
+        #self.std_file = os.path.abspath(vis_dir + "/Standard-Visual-" + str(seed) + ".html")
         self.std_file = "/usr/local/var/lispat/visuals/" + \
                         self.date + "/Standard-Visual-" + str(seed) + ".html"
         self.empath_file = "/usr/local/var/lispat/visuals/" + \
@@ -49,6 +53,7 @@ class Visualization:
 
         logger.getLogger().info("Opening Standard Visual")
         open(self.std_file, 'wb').write(html.encode('utf-8'))
+        #return self.std_file
         webbrowser.open("file://" + self.std_file)
 
     def empath(self, dataframe):
