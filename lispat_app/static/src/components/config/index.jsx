@@ -27,28 +27,6 @@ class Config extends Component {
         <select>
           <option>Nearest Neighbor</option>
         </select>
-<<<<<<< HEAD
-        // <Form>
-        //   <Form.Check
-        //     className="font-color"
-        //     type="radio"
-        //     id="default-radio"
-        //     label="Keywords"
-        //     onChange={this.setState({
-        //       keywords: !keywords,
-        //     })}
-        //   />
-        //   <Form.Check
-        //     className="font-color"
-        //     type="radio"
-        //     id="default-radio"
-        //     label="Phrases"
-        //     onChange={this.setState({
-        //       phrases: !phrases,
-        //     })}
-        //   />
-        // </Form>
-=======
         {/*<Form>*/}
           {/*<Form.Check*/}
             {/*className="font-color"*/}
@@ -69,7 +47,6 @@ class Config extends Component {
             {/*})}*/}
           {/*/>*/}
         {/*</Form>*/}
->>>>>>> 8a237f928ccca2352802cdc51adbb5534d3fd6ee
       </div>
     );
   }

@@ -65,12 +65,12 @@ class ArgumentFactory:
             pdf_saved = self.text_dir + file
             pdf_saved = os.path.splitext(pdf_saved)[0] + '.txt'
 
-            if os.path.exists(pdf_saved):
+            """if os.path.exists(pdf_saved):
                 logger.getLogger().debug(bcolors.OKBLUE + "Already Exits: "
                                          + bcolors.ENDC + file)
                 self.txt.append(pdf_saved) # DEPRECATED
                 self.txt_file_path = pdf_saved
-                return self.txt_file_path
+                return self.txt_file_path"""
 
             logger.getLogger().debug("Opening File: {}".format(file))
 
@@ -115,11 +115,11 @@ class ArgumentFactory:
             doc_saved = self.text_dir + file
             doc_saved = os.path.splitext(doc_saved)[0] + '.txt'
 
-            if os.path.exists(doc_saved):
+            """if os.path.exists(doc_saved):
                 logger.getLogger().debug("Already Exits: " + file)
                 self.txt.append(doc_saved)
                 self.txt_file_path = doc_saved
-                return self.txt_file_path
+                return self.txt_file_path"""
 
             doc = docx.Document(path)
 

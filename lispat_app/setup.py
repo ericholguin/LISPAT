@@ -39,7 +39,7 @@ setup(
     install_requires=install_requires,
     version='1.0.0',
     description='A natural language processing tool',
-    author='Joshua Brummet, Zeke Moreland, Eric Holguin',
+    author='Joshua Brummet, Eric Holguin',
     entry_points={
         'console_scripts': [
             'lispat = lispat.run:main',

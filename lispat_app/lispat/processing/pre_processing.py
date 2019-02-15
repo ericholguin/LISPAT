@@ -40,8 +40,9 @@ class Preproccessing:
 
     def read_textfile(self):
         filename = ''.join(self.txt_file)
-        with open(filename, 'rt') as text:
+        with open(filename, 'rt', newline='') as text:
             self.txt_data = text.read()
+
 
     #def filter_nlp(self, lc=None, p=None, n=None, sw=None, int=None, lw=None, lem=None, stm=None):
     def filter_nlp(self):
@@ -90,8 +91,8 @@ class Preproccessing:
                 raise ValueError("No words to reduce", self.clean_txt_array)
 
             words = Counter(self.clean_txt_array)
-            top = dict(words.most_common(20))
-            self.top_words = top
+            top_words = [word for word, word_count in words.most_common(20)]
+            self.top_words = top_words
 
         except ValueError as error:
             logger.getLogger().error(bcolors.FAIL + "Error, please check"
