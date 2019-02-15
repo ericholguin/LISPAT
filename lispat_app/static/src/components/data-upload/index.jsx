@@ -60,7 +60,7 @@ class DataUpload extends Component {
           <div className="center-grid">
             <Row>
               <Col>
-                <div className="font-home">First Doc:</div>
+                <div className="font-home">Document A:</div>
                 <FileUpload handleStateChange={this.setFileOne} />
                 {file1 ? <div className="file-name">{file1.name}</div> : ''}
               </Col>
@@ -69,7 +69,7 @@ class DataUpload extends Component {
           <div className="center-grid">
             <Row>
               <Col>
-                <div className="font-home">Second Doc: </div>
+                <div className="font-home">Document B: </div>
                 <FileUpload handleStateChange={this.setFileTwo} />
                 {file2 ? <div className="file-name">{file2.name}</div> : ''}
               </Col>

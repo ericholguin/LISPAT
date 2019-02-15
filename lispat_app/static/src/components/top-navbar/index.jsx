@@ -22,7 +22,7 @@ class TopNav extends Component {
               <Nav.Link href="#link">
                 <span className={style['font-right']}>HELP</span>
               </Nav.Link>
-              <Nav.Link href="#link">
+              <Nav.Link href="https://github.com/brummetj/LISPAT" target="_blank">
                 <span className={style['font-right']}>
                   <i className="fab fa-github" />
                 </span>
