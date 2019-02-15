@@ -1,4 +1,5 @@
 import os
+import lispat
 from uuid import uuid4
 from lispat.utils.logger import Logger
 from flask_cors import CORS, cross_origin
@@ -6,7 +7,12 @@ from werkzeug.utils import secure_filename
 from flask import Flask, render_template, request, make_response, session
 
 
+<<<<<<< HEAD
+logger = Logger("LISPAT - Flask App")
+
+=======
 logger = Logger("LISPAT")
+>>>>>>> dccdb73ce53c49b2cf26a3ead319b24b96730116
 app = Flask(__name__, static_folder="../static/build/bundle",
             template_folder="../static/build")
 
@@ -35,8 +41,13 @@ def save_file(file, target):
         filename = secure_filename(file.filename)
         destination = "/".join([target, filename])
 
+<<<<<<< HEAD
+        logger.getLogger().info("Accept incoming file: {}".format(filename))
+        logger.getLogger().info("Save it to: {}".format(destination))
+=======
         logger.getLogger().info("Accept incoming file: " + str(filename))
         logger.getLogger().info("Save it to: " + str(destination))
+>>>>>>> dccdb73ce53c49b2cf26a3ead319b24b96730116
 
         file.save(destination)
         filenames.append(destination)
@@ -65,13 +76,10 @@ def upload():
     """
     if request.method == 'POST':
         logger.getLogger().info("Uploading File")
-
         # Create a unique "session ID" for this particular batch of uploads.
         upload_key = str(uuid4())
-
         # Target folder for these uploads.
         target = os.path.join(UPLOAD_FOLDER, upload_key)
-
         if not os.path.exists(target):
             os.mkdir(target)
 
@@ -79,13 +87,24 @@ def upload():
 
         file1 = uploads['file1']
         file2 = uploads['file2']
-
         save_file(file1, target)
         save_file(file2, target)
 
         session['uploadedFiles'] = filenames
 
         return make_response(('ok', 200))
+
+
+@app.route("/analyze", methods=['GET', 'POST'])
+def analyze():
+    """
+    Summary: Uses uploaded documents and performs processing.
+
+    return: The two documents to compare in a side by side view.
+    rtype: html
+    """
+    if 'uploadedFiles' in session:
+        print(session['uploadedFiles'])
 
 
 if __name__ == "__main__":

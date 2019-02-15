@@ -1,8 +1,8 @@
-import logging
-import sys
 import os
-from logging.handlers import TimedRotatingFileHandler
+import sys
+import logging
 from lispat.utils.colors import bcolors
+from logging.handlers import TimedRotatingFileHandler
 
 
 class Logger:
