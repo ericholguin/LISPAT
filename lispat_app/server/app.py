@@ -1,18 +1,17 @@
 import os
-import lispat
+import sys
 from uuid import uuid4
+from flask_cors import CORS
+from lispat.run import app_main
 from lispat.utils.logger import Logger
-from flask_cors import CORS, cross_origin
 from werkzeug.utils import secure_filename
-from flask import Flask, render_template, request, make_response, session
+from lispat.base.manager import CommandManager
+from lispat.base.constants import args_convert, args_filter, args_json, args_clean
+from flask import Flask, render_template, request, make_response, session, json, Response
 
 
-<<<<<<< HEAD
 logger = Logger("LISPAT - Flask App")
 
-=======
-logger = Logger("LISPAT")
->>>>>>> dccdb73ce53c49b2cf26a3ead319b24b96730116
 app = Flask(__name__, static_folder="../static/build/bundle",
             template_folder="../static/build")
 
@@ -27,6 +26,8 @@ app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
 # List for files
 filenames = []
 
+# Command Manager
+manager = CommandManager()
 
 def allowed_file(filename):
     """Summary: For a given file, return whether it's an allowed type."""
@@ -41,13 +42,8 @@ def save_file(file, target):
         filename = secure_filename(file.filename)
         destination = "/".join([target, filename])
 
-<<<<<<< HEAD
         logger.getLogger().info("Accept incoming file: {}".format(filename))
         logger.getLogger().info("Save it to: {}".format(destination))
-=======
-        logger.getLogger().info("Accept incoming file: " + str(filename))
-        logger.getLogger().info("Save it to: " + str(destination))
->>>>>>> dccdb73ce53c49b2cf26a3ead319b24b96730116
 
         file.save(destination)
         filenames.append(destination)
@@ -91,8 +87,25 @@ def upload():
         save_file(file2, target)
 
         session['uploadedFiles'] = filenames
+        data = {}
+        if len(filenames) == 2:
+            args = args_convert(filenames)
+            app_main(args, manager)
 
-        return make_response(('ok', 200))
+            args2 = args_filter()
+            app_main(args2, manager)
+
+            args3 = args_json()
+            data = app_main(args3, manager)
+
+            args4 = args_clean()
+            app_main(args4, manager)
+
+            js = json.dumps(data)
+            resp = Response(js, status=200, mimetype="application/json")
+            return resp
+        else:
+            return(make_response(('Error')))
 
 
 @app.route("/analyze", methods=['GET', 'POST'])
