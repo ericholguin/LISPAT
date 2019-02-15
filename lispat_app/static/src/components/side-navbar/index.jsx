@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import propTypes from 'prop-types';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
@@ -7,8 +6,6 @@ import './side-navbar.css';
 import ClickOutside from 'react-click-outside';
 
 import Config from '../config';
-
-const mouseClickEvents = ['mousedown', 'click', 'mouseup'];
 
 class SideNavClass extends Component {
   constructor(props) {
@@ -107,7 +104,7 @@ class SideNavClass extends Component {
                     />
                   </NavIcon>
                   <NavText>Config</NavText>
-                  <NavItem eventKey="Settings">
+                  <NavItem eventKey="Config/Settings">
                     <NavText>
                       <Config />
                     </NavText>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { Col, Container, Row, Button } from 'react-bootstrap';
+import { Document, Page } from 'react-pdf/dist/entry.webpack';
 import Highlighter from 'react-highlight-words';
 import styles from './lispat-view.css';
 
@@ -16,12 +17,14 @@ class Lispat extends Component {
       submission_file_name: null,
       standard_file_name: null,
       activeIndex: -1,
+      numPages: null,
+      pageNumber: 1,
     };
   }
 
   componentWillReceiveProps(props) {
     this.setData(props.data);
-    this.searchTerms(props.search);
+    // this.searchTerms(props.search);
   }
 
   setData = object => {
@@ -42,6 +45,10 @@ class Lispat extends Component {
 
   sanitize = () => {};
 
+  onDocumentLoadSuccess = ({ numPages }) => {
+    this.setState({ numPages });
+  };
+
   render() {
     const {
       submission,
@@ -50,6 +57,8 @@ class Lispat extends Component {
       standardFileName,
       activeIndex,
       keywords,
+      pageNumber,
+      numPages,
     } = this.state;
     const margin = {
       position: 'fixed',
@@ -65,12 +74,22 @@ class Lispat extends Component {
                 <div className={styles['doc-header']}>{submissionFileName}</div>
                 <hr className={styles.bar} />
                 <div className={styles['doc-font']}>
-                  <Highlighter
-                    highlightClassName={styles.highlight}
-                    searchWords={keywords}
-                    autoEscape
-                    textToHighlight={submission}
-                  />
+                   <Highlighter
+                   highlightClassName={styles.highlight}
+                   searchWords={['data']}
+                   autoEscape
+                   textToHighlight={submission}
+                   />
+                  {/*<Document*/}
+                    {/*file="K102346.pdf"*/}
+                    {/*onLoadSuccess={this.onDocumentLoadSuccess}*/}
+                  {/*>*/}
+                    {/*<Page pageNumber={pageNumber} />*/}
+                  {/*</Document>*/}
+                  {/*<p>*/}
+                    {/*Page {pageNumber} of {numPages}*/}
+                  {/*</p>*/}
+                {/*</div>*/}
                 </div>
               </div>
             </Row>
@@ -82,7 +101,7 @@ class Lispat extends Component {
               <div className={styles['doc-font']}>
                 <Highlighter
                   highlightClassName={styles.highlight}
-                  searchWords={keywords}
+                  searchWords={['data']}
                   autoEscape
                   textToHighlight={standard}
                 />

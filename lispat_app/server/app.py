@@ -23,11 +23,9 @@ ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
 
-# List for files
-filenames = []
 
-# Command Manager
-manager = CommandManager()
+
+
 
 def allowed_file(filename):
     """Summary: For a given file, return whether it's an allowed type."""
@@ -35,7 +33,7 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
 
 
-def save_file(file, target):
+def save_file(file, target, filenames):
     """Summary: For a given file save it to its target destination."""
     if file and allowed_file(file.filename):
         # Get file name and set and save to upload path
@@ -72,6 +70,9 @@ def upload():
     """
     if request.method == 'POST':
         logger.getLogger().info("Uploading File")
+
+        # List for files
+        filenames = []
         # Create a unique "session ID" for this particular batch of uploads.
         upload_key = str(uuid4())
         # Target folder for these uploads.
@@ -83,11 +84,14 @@ def upload():
 
         file1 = uploads['file1']
         file2 = uploads['file2']
-        save_file(file1, target)
-        save_file(file2, target)
+        save_file(file1, target, filenames)
+        save_file(file2, target, filenames)
 
         session['uploadedFiles'] = filenames
         data = {}
+        # Command Manager
+        manager = CommandManager()
+        print(len(filenames))
         if len(filenames) == 2:
             args = args_convert(filenames)
             app_main(args, manager)
@@ -103,6 +107,7 @@ def upload():
 
             js = json.dumps(data)
             resp = Response(js, status=200, mimetype="application/json")
+
             return resp
         else:
             return(make_response(('Error')))
