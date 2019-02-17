@@ -14,7 +14,6 @@ class Logger:
         self.logger = logging.getLogger(logger_name)
         self.logger.setLevel(logging.DEBUG)  # better to have too much log than not enough
         self.logger.addHandler(self.get_console_handler())
-        self.logger.addHandler(self.get_file_handler())
         # with this pattern, it's rarely necessary to propagate the error up to parent
         self.logger.propagate = False
 
@@ -26,11 +25,3 @@ class Logger:
     def getLogger(self):
         return self.logger
 
-    def get_file_handler(self):
-        directory = "/usr/local/var/log/lispat/"
-        if not os.path.exists(directory):
-            os.makedirs(directory)
-
-        self.file_handler = TimedRotatingFileHandler(directory + self.LOG_FILE, when='midnight')
-        self.file_handler.setFormatter(self.FORMATTER)
-        return self.file_handler
