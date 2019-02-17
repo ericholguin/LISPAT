@@ -12,8 +12,8 @@ from flask import Flask, render_template, request, make_response, session, json,
 
 logger = Logger("LISPAT - Flask App")
 
-app = Flask(__name__, static_folder="./lispat_app/static/build/bundle",
-            template_folder="./lispat_app/static/build")
+app = Flask(__name__, static_folder="/lispat_app/static/build/bundle",
+            template_folder="/lispat_app/static/build")
 
 CORS(app, expose_headers='Authorization')
 
