@@ -3,7 +3,7 @@ import nltk
 import docopt
 from lispat_app.lispat.utils.logger import Logger
 from lispat_app.lispat.utils.colors import bcolors
-from lispat.base.manager import CommandManager
+from lispat_app.lispat.base.manager import CommandManager
 
 logger = Logger("Main")
 nltk.download('punkt')
