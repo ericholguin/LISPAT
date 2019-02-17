@@ -2,8 +2,8 @@ import os
 import sys
 from uuid import uuid4
 from flask_cors import CORS
-from lispat.run import app_main
-from lispat.utils.logger import Logger
+from lispat_app.lispat.run import app_main
+from lispat_app.lispat.utils.logger import Logger
 from werkzeug.utils import secure_filename
 from lispat.base.manager import CommandManager
 from lispat.base.constants import args_convert, args_filter, args_json, args_clean
