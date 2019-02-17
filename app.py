@@ -12,8 +12,8 @@ from flask import Flask, render_template, request, make_response, session, json,
 
 logger = Logger("LISPAT - Flask App")
 
-app = Flask(__name__, static_folder="/lispat_app/static/build/bundle",
-            template_folder="/lispat_app/static/build")
+app = Flask(__name__, static_folder="./lispat_app/static/build/bundle",
+            template_folder="./lispat_app/static/build")
 
 CORS(app, expose_headers='Authorization')
 
@@ -24,12 +24,10 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
 
 
-
-
 def allowed_file(filename):
     """Summary: For a given file, return whether it's an allowed type."""
     return '.' in filename and \
-           filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
+           filename.rsplit('.', 1)[1] in application.config['ALLOWED_EXTENSIONS']
 
 
 def save_file(file, target, filenames):
