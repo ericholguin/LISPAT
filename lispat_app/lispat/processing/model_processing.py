@@ -11,7 +11,6 @@ from textblob import TextBlob
 from lispat_app.lispat.utils.logger import Logger
 from lispat_app.lispat.factory.filtered_factory import FilteredFactory
 from lispat_app.lispat.base.constants import DESIRED_TERMS
-import mpld3
 import webbrowser
 from mpld3 import plugins, utils
 
