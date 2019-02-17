@@ -44,7 +44,7 @@ setup(
     author='Joshua Brummet, Eric Holguin',
     entry_points={
         'console_scripts': [
-            'lispat = lispat.run:app_main',
+            'lispat = lispaat_app.lispat.run:app_main',
         ],
     },
     packages=find_packages(),
