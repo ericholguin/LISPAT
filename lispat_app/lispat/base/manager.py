@@ -12,8 +12,9 @@ from lispat_app.lispat.factory.document_factory import DocumentFactory
 from lispat_app.lispat.factory.argument_factory import ArgumentFactory
 from lispat_app.lispat.processing.pre_processing import Preproccessing
 from lispat_app.lispat.processing.visual_processing import Visualization
+import en_core_web_sm
 
-nlp = spacy.load('en')
+nlp = en_core_web_sm.load()
 
 logger = Logger("CommandManager")
 
@@ -346,7 +347,7 @@ class CommandManager:
         input_txt = filter_std.get_sent_tokens(str(args['--text']))
         file1 = os.path.basename(self.docA_path)
         points_input, points_std = self.model.semantic_properties_model(sentences_sub, user_input=input_txt)
-        vis.nearest(points1=points_std, points2=points_input, file1=file1, file2="User Input")
+        # vis.nearest(points1=points_std, points2=points_input, file1=file1, file2="User Input")
 
     def clean(self):
         """

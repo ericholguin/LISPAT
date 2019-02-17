@@ -13,6 +13,7 @@ from lispat_app.lispat.factory.filtered_factory import FilteredFactory
 from lispat_app.lispat.base.constants import DESIRED_TERMS
 import webbrowser
 from mpld3 import plugins, utils
+import en_core_web_sm
 
 logger = Logger("Modeling")
 
@@ -20,7 +21,7 @@ logger = Logger("Modeling")
 class NLPModel:
     def __init__(self):
         self.sent_list = None
-        self.nlp = spacy.load('en_core_web_sm')
+        self.nlp = en_core_web_sm.load()
         self.filter = FilteredFactory()
 
     def data_frame(self, path):
