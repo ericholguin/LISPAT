@@ -1,7 +1,7 @@
 import os
 import sys
 import logging
-from lispat.utils.colors import bcolors
+from lispat_app.lispat.utils.colors import bcolors
 from logging.handlers import TimedRotatingFileHandler
 
 

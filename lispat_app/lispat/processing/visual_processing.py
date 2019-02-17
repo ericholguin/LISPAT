@@ -3,7 +3,7 @@ import spacy
 import scattertext as st
 import webbrowser
 import datetime
-from lispat.utils.logger import Logger
+from lispat_app.lispat.utils.logger import Logger
 import random
 import matplotlib.pyplot as plt
 import mpld3

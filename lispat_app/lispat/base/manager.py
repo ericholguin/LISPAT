@@ -5,13 +5,13 @@ import pickle
 import shutil
 import datetime
 import pandas as pd
-from lispat.utils.logger import Logger
-from lispat.utils.colors import bcolors
-from lispat.processing.model_processing import NLPModel
-from lispat.factory.document_factory import DocumentFactory
-from lispat.factory.argument_factory import ArgumentFactory
-from lispat.processing.pre_processing import Preproccessing
-from lispat.processing.visual_processing import Visualization
+from lispat_app.lispat.utils.logger import Logger
+from lispat_app.lispat.utils.colors import bcolors
+from lispat_app.lispat.processing.model_processing import NLPModel
+from lispat_app.lispat.factory.document_factory import DocumentFactory
+from lispat_app.lispat.factory.argument_factory import ArgumentFactory
+from lispat_app.lispat.processing.pre_processing import Preproccessing
+from lispat_app.lispat.processing.visual_processing import Visualization
 
 nlp = spacy.load('en')
 

@@ -5,8 +5,8 @@ import docx
 from io import StringIO
 from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
-from lispat.utils.logger import Logger
-from lispat.utils.colors import bcolors
+from lispat_app.lispat.utils.logger import Logger
+from lispat_app.lispat.utils.colors import bcolors
 from pdfminer.converter import TextConverter
 from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 

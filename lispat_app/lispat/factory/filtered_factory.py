@@ -1,9 +1,9 @@
 import nltk
 import string
-from lispat.utils.logger import Logger
+from lispat_app.lispat.utils.logger import Logger
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
-from lispat.base.constants import DESIRED_TERMS, DESIRED_PHRASE
+from lispat_app.lispat.base.constants import DESIRED_TERMS, DESIRED_PHRASE
 
 logger = Logger("Filter Factory")
 

@@ -1,8 +1,8 @@
 import sys
 import nltk
 import docopt
-from lispat.utils.logger import Logger
-from lispat.utils.colors import bcolors
+from lispat_app.lispat.utils.logger import Logger
+from lispat_app.lispat.utils.colors import bcolors
 from lispat.base.manager import CommandManager
 
 logger = Logger("Main")

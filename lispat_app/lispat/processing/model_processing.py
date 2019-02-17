@@ -8,9 +8,9 @@ import gensim.models.word2vec as w2v
 import sklearn.manifold
 import multiprocessing
 from textblob import TextBlob
-from lispat.utils.logger import Logger
-from lispat.factory.filtered_factory import FilteredFactory
-from lispat.base.constants import DESIRED_TERMS
+from lispat_app.lispat.utils.logger import Logger
+from lispat_app.lispat.factory.filtered_factory import FilteredFactory
+from lispat_app.lispat.base.constants import DESIRED_TERMS
 import mpld3
 import webbrowser
 from mpld3 import plugins, utils

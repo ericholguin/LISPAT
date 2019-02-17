@@ -8,9 +8,9 @@ import operator
 import numpy as np
 from collections import Counter
 import matplotlib.pyplot as plt
-from lispat.utils.logger import Logger
-from lispat.utils.colors import bcolors
-from lispat.factory.filtered_factory import FilteredFactory
+from lispat_app.lispat.utils.logger import Logger
+from lispat_app.lispat.utils.colors import bcolors
+from lispat_app.lispat.factory.filtered_factory import FilteredFactory
 
 
 logger = Logger("Noise Filter")
