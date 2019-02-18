@@ -17,7 +17,7 @@ app = Flask(__name__, static_folder="static/build/bundle",
 
 CORS(app, expose_headers='Authorization')
 
-UPLOAD_FOLDER = os.path.abspath("static/uploads/")
+UPLOAD_FOLDER = os.path.abspath("./static/uploads/")
 ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
