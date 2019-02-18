@@ -31,9 +31,7 @@ install_requires = [
     'scattertext',
     'empath',
     'mpld3',
-    'jinja2',
-    'Flask',
-    'flask_cors'
+    'jinja2'
 ]
 
 setup(
@@ -44,7 +42,7 @@ setup(
     author='Joshua Brummet, Eric Holguin',
     entry_points={
         'console_scripts': [
-            'lispat = lispaat_app.lispat.run:app_main',
+            'lispat = lispat.run:main',
         ],
     },
     packages=find_packages(),

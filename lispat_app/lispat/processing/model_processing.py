@@ -8,12 +8,21 @@ import gensim.models.word2vec as w2v
 import sklearn.manifold
 import multiprocessing
 from textblob import TextBlob
+<<<<<<< HEAD
 from lispat_app.lispat.utils.logger import Logger
 from lispat_app.lispat.factory.filtered_factory import FilteredFactory
 from lispat_app.lispat.base.constants import DESIRED_TERMS
 import webbrowser
 from mpld3 import plugins, utils
 import en_core_web_sm
+=======
+from lispat.utils.logger import Logger
+from lispat.factory.filtered_factory import FilteredFactory
+from lispat.base.constants import DESIRED_TERMS
+import mpld3
+import webbrowser
+from mpld3 import plugins, utils
+>>>>>>> e1e91cc8d3c6d4463c545c1278913072b19d4464
 
 logger = Logger("Modeling")
 
@@ -21,7 +30,11 @@ logger = Logger("Modeling")
 class NLPModel:
     def __init__(self):
         self.sent_list = None
+<<<<<<< HEAD
         self.nlp = en_core_web_sm.load()
+=======
+        self.nlp = spacy.load('en_core_web_sm')
+>>>>>>> e1e91cc8d3c6d4463c545c1278913072b19d4464
         self.filter = FilteredFactory()
 
     def data_frame(self, path):

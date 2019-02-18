@@ -8,10 +8,17 @@ import os
 import sys
 from pathlib import Path
 from joblib import Parallel, delayed
+<<<<<<< HEAD
 from lispat_app.lispat.utils.logger import Logger
 from lispat_app.lispat.utils.colors import bcolors
 import lispat_app.lispat.factory.argument_factory as arg_fac
 from lispat_app.lispat.factory.argument_factory import ArgumentFactory
+=======
+from lispat.utils.logger import Logger
+from lispat.utils.colors import bcolors
+import lispat.factory.argument_factory as arg_fac
+from lispat.factory.argument_factory import ArgumentFactory
+>>>>>>> e1e91cc8d3c6d4463c545c1278913072b19d4464
 
 
 logger = Logger("DocumentFactory")

@@ -12,12 +12,12 @@ from flask import Flask, render_template, request, make_response, session, json,
 
 logger = Logger("LISPAT - Flask App")
 
-app = Flask(__name__, static_folder="static/build/bundle",
-            template_folder="static/build")
+app = Flask(__name__, static_folder="lispat_app/static/build/bundle",
+            template_folder="lispat_app/static/build")
 
 CORS(app, expose_headers='Authorization')
 
-UPLOAD_FOLDER = os.path.abspath("static/uploads/")
+UPLOAD_FOLDER = os.path.abspath("lispat_app/static/uploads/")
 ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
