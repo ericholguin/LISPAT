@@ -8,21 +8,13 @@ import gensim.models.word2vec as w2v
 import sklearn.manifold
 import multiprocessing
 from textblob import TextBlob
-<<<<<<< HEAD
 from lispat_app.lispat.utils.logger import Logger
 from lispat_app.lispat.factory.filtered_factory import FilteredFactory
 from lispat_app.lispat.base.constants import DESIRED_TERMS
 import webbrowser
 from mpld3 import plugins, utils
 import en_core_web_sm
-=======
-from lispat.utils.logger import Logger
-from lispat.factory.filtered_factory import FilteredFactory
-from lispat.base.constants import DESIRED_TERMS
-import mpld3
-import webbrowser
-from mpld3 import plugins, utils
->>>>>>> e1e91cc8d3c6d4463c545c1278913072b19d4464
+
 
 logger = Logger("Modeling")
 
@@ -224,11 +216,11 @@ class NLPModel:
         sim_dic = {}
         if input_txt is True:
             """
-            This algorithm takes in a use input of txt. 
+            This algorithm takes in a use input of txt.
             It will lower and append the most similar values from the algorithm,
             to a list. From there we need to convert the values from the dataframe
-            into a hash table to be able to quickly access values and return 
-            rows needed that hold the same coordinates as the value 
+            into a hash table to be able to quickly access values and return
+            rows needed that hold the same coordinates as the value
             """
             for i in user_input:
                 try:
@@ -314,11 +306,11 @@ class ClickInfo(plugins.PluginBase):
     function ClickInfo(fig, props){
         mpld3.Plugin.call(this, fig, props);
     };
-    
+
     ClickInfo.prototype.draw = function(){
         var obj = mpld3.get_element(this.props.id);
         obj.elements().on("mouseover",
-                          function(d, i){alert("clicked on points[" + i + "]");});    
+                          function(d, i){alert("clicked on points[" + i + "]");});
     }
     """
 

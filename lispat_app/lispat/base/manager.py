@@ -5,7 +5,6 @@ import pickle
 import shutil
 import datetime
 import pandas as pd
-<<<<<<< HEAD
 from lispat_app.lispat.utils.logger import Logger
 from lispat_app.lispat.utils.colors import bcolors
 from lispat_app.lispat.processing.model_processing import NLPModel
@@ -16,17 +15,10 @@ from lispat_app.lispat.processing.visual_processing import Visualization
 import en_core_web_sm
 
 nlp = en_core_web_sm.load()
-=======
-from lispat.utils.logger import Logger
-from lispat.utils.colors import bcolors
-from lispat.processing.model_processing import NLPModel
-from lispat.factory.document_factory import DocumentFactory
-from lispat.factory.argument_factory import ArgumentFactory
-from lispat.processing.pre_processing import Preproccessing
-from lispat.processing.visual_processing import Visualization
 
+# NEEDED? ORIG.
 nlp = spacy.load('en')
->>>>>>> e1e91cc8d3c6d4463c545c1278913072b19d4464
+
 
 logger = Logger("CommandManager")
 
@@ -233,105 +225,36 @@ class CommandManager:
         """
         logger.getLogger().info("Command Manager - Graph Function")
 
-        cleanDocA = filter_DocA.get_clean_txt_list()
-        cleanDocB = filter_DocB.get_clean_txt_list()
-
-        DocA_size = len(cleanDocA)
-        DocB_size = len(cleanDocB)
-
-
-
-    def run_sub_vs_std(self, args):
-        """
-        This function is to handle the comparison of two submissions with the
-        command line.
-        :param args: command line arguments
-        :return: N/A
-        """
-
-        logger.getLogger().info("Command Manager - Run Submission vs Standard")
-
         try:
             args_ = ArgumentFactory()
 
-            doc_std = DocumentFactory(self.docA_path)
-            doc_sub = DocumentFactory(self.docB_path)
+            DocA = filter_DocA.get_raw_txt()
+            DocB = filter_DocB.get_raw_txt()
 
-            doc_std_converted = doc_std.convert_file()
-            doc_sub_converted = doc_sub.convert_file()
+            DocA_size = len(cleanDocA)
+            DocB_size = len(cleanDocB)
 
-            filter_std = Preproccessing(doc_std_converted[0],
-                                        doc_std_converted[1])
-            filter_sub = Preproccessing(doc_sub_converted[0],
-                                        doc_sub_converted[1])
-
-            std_data = filter_std.ret_doc()
-            sub_data = filter_sub.ret_doc()
-
-            std_size = len(std_data)
-            sub_size = len(sub_data)
-
-            if(std_size > sub_size):
-                nlp.max_length = std_size + 1
+            if(DocB_size > DocA_size):
+                nlp.max_length = DocB_size + 1
             else:
-                nlp.max_length = sub_size + 1
+                nlp.max_length = DocA_size + 1
 
-            std_path = ""
-            sub_path = ""
-            if doc_std_converted[0]:
-                std_path = doc_std_converted[0]
-            elif doc_std_converted[1]:
-                std_path = doc_std_converted[1]
 
-            if doc_sub_converted[0]:
-                sub_path = doc_sub_converted[0]
-
-            elif doc_sub_converted[1]:
-                sub_path = doc_sub_converted[1]
-
-            csv = args_.csv_with_headers(std_path, sub_path,
-                                         std_data, sub_data)
+            csv = args_.csv_with_headers(self.docB_txt_path, self.docA_txt_path,
+                                         DocB, DocA)
 
             dataframe = pd.read_csv(csv, names=["Document Type",
                                     "Document", "Text"])
 
             vis = Visualization(nlp)
 
-            if args['--empath']:
-                vis.empath(dataframe)
-            elif args['--gitc']:
-                vis.gitc(dataframe)
-            elif args['--character']:
-                vis.chrctrstc(dataframe)
-            elif args['--nn']:
-
-                sentences_sub = []
-                raw_sentences_sub = filter_sub.get_sentences()
-                for raw_sentence in raw_sentences_sub:
-                    if len(raw_sentence) > 0:
-                        sentences_sub.append(filter_sub.get_sent_tokens(raw_sentence))
-
-                sentences_std = []
-                raw_sentences_std = filter_std.get_sentences()
-                for raw_sentence in raw_sentences_std:
-                    if len(raw_sentence) > 0:
-                        sentences_std.append(filter_std.get_sent_tokens(raw_sentence))
-
-                file1 = os.path.basename(self.docA_path)
-                file2 = os.path.basename(self.docB_path)
-                points_sub = self.model.semantic_properties_model(sentences_sub)
-                points_std = self.model.semantic_properties_model(sentences_std)
-                vis.nearest(points1=points_std, points2=points_sub, file1=file1, file2=file2)
-
-            #if not args['--empath'] and not args['--gitc'] and not args['--character'] and not args['--nn']:
-            else:
-                html_file = vis.standard(dataframe)
-                #return html_file
+            html_file = vis.standard(dataframe)
 
         except RuntimeError as error:
             logger.getLogger().error("Error with run_sub_vs_std please "
                                      "check stack trace")
             exit(1)
+
 
     def run_sub_vs_txt(self, args):
         args_ = ArgumentFactory()
@@ -359,11 +282,8 @@ class CommandManager:
         input_txt = filter_std.get_sent_tokens(str(args['--text']))
         file1 = os.path.basename(self.docA_path)
         points_input, points_std = self.model.semantic_properties_model(sentences_sub, user_input=input_txt)
-<<<<<<< HEAD
         # vis.nearest(points1=points_std, points2=points_input, file1=file1, file2="User Input")
-=======
-        vis.nearest(points1=points_std, points2=points_input, file1=file1, file2="User Input")
->>>>>>> e1e91cc8d3c6d4463c545c1278913072b19d4464
+
 
     def clean(self):
         """

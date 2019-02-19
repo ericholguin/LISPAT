@@ -1,22 +1,10 @@
 import os
-<<<<<<< HEAD
 import scattertext as st
 import webbrowser
 import datetime
 from lispat_app.lispat.utils.logger import Logger
 import random
-=======
-import spacy
-import scattertext as st
-import webbrowser
-import datetime
-from lispat.utils.logger import Logger
-import random
-import matplotlib.pyplot as plt
-import mpld3
-from mpld3 import plugins, utils
-from lispat.base.constants import css
->>>>>>> e1e91cc8d3c6d4463c545c1278913072b19d4464
+
 
 logger = Logger("Visuals")
 
