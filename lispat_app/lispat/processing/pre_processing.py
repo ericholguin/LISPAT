@@ -1,26 +1,11 @@
-<<<<<<< HEAD
-=======
-import os
->>>>>>> e1e91cc8d3c6d4463c545c1278913072b19d4464
 import re
 import sys
 import nltk
 import spacy
-<<<<<<< HEAD
 from collections import Counter
 from lispat_app.lispat.utils.logger import Logger
 from lispat_app.lispat.utils.colors import bcolors
 from lispat_app.lispat.factory.filtered_factory import FilteredFactory
-=======
-import gensim
-import operator
-import numpy as np
-from collections import Counter
-import matplotlib.pyplot as plt
-from lispat.utils.logger import Logger
-from lispat.utils.colors import bcolors
-from lispat.factory.filtered_factory import FilteredFactory
->>>>>>> e1e91cc8d3c6d4463c545c1278913072b19d4464
 
 
 logger = Logger("Noise Filter")
@@ -71,8 +56,8 @@ class Preproccessing:
             words = self.filter.remove_names(words)
             words = self.filter.integers(words)
             words = self.filter.long_words(words)
-            words = self.filter.lemmatize(words)
-            words = self.filter.stemmer(words)
+            # words = self.filter.lemmatize(words)
+            # words = self.filter.stemmer(words)
 
             logger.getLogger().info("Finished cleaning!")
 

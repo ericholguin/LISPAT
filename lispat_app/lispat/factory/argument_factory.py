@@ -5,13 +5,8 @@ import docx
 from io import StringIO
 from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
-<<<<<<< HEAD
 from lispat_app.lispat.utils.logger import Logger
 from lispat_app.lispat.utils.colors import bcolors
-=======
-from lispat.utils.logger import Logger
-from lispat.utils.colors import bcolors
->>>>>>> e1e91cc8d3c6d4463c545c1278913072b19d4464
 from pdfminer.converter import TextConverter
 from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 

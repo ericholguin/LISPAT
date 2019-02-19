@@ -5,7 +5,6 @@ import pickle
 import shutil
 import datetime
 import pandas as pd
-<<<<<<< HEAD
 from lispat_app.lispat.utils.logger import Logger
 from lispat_app.lispat.utils.colors import bcolors
 from lispat_app.lispat.processing.model_processing import NLPModel
@@ -16,17 +15,6 @@ from lispat_app.lispat.processing.visual_processing import Visualization
 import en_core_web_sm
 
 nlp = en_core_web_sm.load()
-=======
-from lispat.utils.logger import Logger
-from lispat.utils.colors import bcolors
-from lispat.processing.model_processing import NLPModel
-from lispat.factory.document_factory import DocumentFactory
-from lispat.factory.argument_factory import ArgumentFactory
-from lispat.processing.pre_processing import Preproccessing
-from lispat.processing.visual_processing import Visualization
-
-nlp = spacy.load('en')
->>>>>>> e1e91cc8d3c6d4463c545c1278913072b19d4464
 
 logger = Logger("CommandManager")
 
@@ -359,11 +347,7 @@ class CommandManager:
         input_txt = filter_std.get_sent_tokens(str(args['--text']))
         file1 = os.path.basename(self.docA_path)
         points_input, points_std = self.model.semantic_properties_model(sentences_sub, user_input=input_txt)
-<<<<<<< HEAD
         # vis.nearest(points1=points_std, points2=points_input, file1=file1, file2="User Input")
-=======
-        vis.nearest(points1=points_std, points2=points_input, file1=file1, file2="User Input")
->>>>>>> e1e91cc8d3c6d4463c545c1278913072b19d4464
 
     def clean(self):
         """

@@ -1,15 +1,9 @@
 import sys
 import nltk
 import docopt
-<<<<<<< HEAD
 from lispat_app.lispat.utils.logger import Logger
 from lispat_app.lispat.utils.colors import bcolors
 from lispat_app.lispat.base.manager import CommandManager
-=======
-from lispat.utils.logger import Logger
-from lispat.utils.colors import bcolors
-from lispat.base.manager import CommandManager
->>>>>>> e1e91cc8d3c6d4463c545c1278913072b19d4464
 
 logger = Logger("Main")
 nltk.download('punkt')

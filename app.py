@@ -101,7 +101,6 @@ def upload():
 
             args4 = args_clean()
             app_main(args4, manager)
-            print(data)
             js = json.dumps(data)
             resp = Response(js, status=200, mimetype="application/json")
 

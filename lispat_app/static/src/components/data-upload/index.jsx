@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import path from 'path';
 import axios from 'axios';
 import { Col, Container, Row, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import FileUpload from './upload';
 import './home-upload.css';
+import LoadingSpinner from './spinner';
 
 const endpoint = 'http://localhost:5000/upload';
 
@@ -15,6 +15,7 @@ class DataUpload extends Component {
       file1: null,
       file2: null,
       loaded: 0,
+      loading: false,
     };
   }
 
@@ -31,21 +32,22 @@ class DataUpload extends Component {
   };
 
   handleUpload = () => {
-    const { file1, file2 } = this.state;
+    const { file1, file2} = this.state;
     const { stateChange, getData } = this.props;
     const data = new FormData();
     data.append('file1', file1, file1.name);
     data.append('file2', file2, file2.name);
+    this.setState({
+      loading: true,
+    });
     axios
       .post(endpoint, data, {
-        onUploadProgress: ProgressEvent => {
-          this.setState({
-            loaded: (ProgressEvent.loaded / ProgressEvent.total) * 100,
-          });
-        },
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then(res => {
+        this.setState({
+          loading: false,
+        });
         stateChange(res.status);
         const resp = res.data;
         resp.submission_file_name =
@@ -57,7 +59,7 @@ class DataUpload extends Component {
   };
 
   render() {
-    const { file1, file2, loaded } = this.state;
+    const { file1, file2, loading } = this.state;
     return (
       <div>
         <br />
@@ -94,9 +96,7 @@ class DataUpload extends Component {
                 ) : null}
               </Col>
             </div>
-            {loaded !== 0 ? (
-              <div className="progress">{Math.round(loaded)} %</div>
-            ) : null}
+            {loading ? <LoadingSpinner /> : null}
           </Row>
         </div>
       </div>
