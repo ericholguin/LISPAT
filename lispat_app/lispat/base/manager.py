@@ -283,7 +283,10 @@ class CommandManager:
         file1 = os.path.basename(self.docA_path)
         points_input, points_std = self.model.semantic_properties_model(sentences_sub, user_input=input_txt)
         # vis.nearest(points1=points_std, points2=points_input, file1=file1, file2="User Input")
+<<<<<<< HEAD
 
+=======
+>>>>>>> a4d196e0b0eecfe11e76d5e25fd51abe35bdcd99
 
     def clean(self):
         """

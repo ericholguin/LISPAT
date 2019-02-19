@@ -115,7 +115,6 @@ class Visualization:
         open(self.chr_file, 'wb').write(html.encode('utf-8'))
         webbrowser.open("file://" + self.chr_file)
 
-<<<<<<< HEAD
     #### DEPRECATED ###
     # def nearest(self, points1=None, points2=None, file1=None, file2=None):
     #     try:
@@ -198,86 +197,3 @@ class Visualization:
     #
     #     # print(doc2vec.most_similar("security"))
     #     pass
-=======
-    def nearest(self, points1=None, points2=None, file1=None, file2=None):
-        try:
-            if file1 is None:
-                    raise Exception("File now found")
-            if points1 is not None and points2 is None:
-                    fig, ax = plt.subplots(figsize=(15, 10))
-
-                    p = ax.scatter(points1['x'], points1['y'], s=15, color='b', marker='o',
-                                   alpha=.3)
-                    labels = []
-
-                    for i in range(points1.shape[0]):
-                        label = points1.ix[[i], :].T
-                        label.columns = ['Row {0}'.format(0)]
-                        labels.append(str(label.to_html()))
-
-                    # Setting axis label
-                    ax.set_xlabel('X')
-                    ax.set_ylabel('Y')
-                    ax.set_title('{} Nearest Neighbor'.format(file1), size=60)
-
-                    # for i, point in points1.iterrows():
-                    #     x = float(point.x + 0.050)
-                    #     y = float(point.y + 0.050)
-                    #     w = str(point.word)
-                    #
-                    #     ax.text(x, y, w, fontsize=11)
-                    # Plugins for tooltip
-                    tooltip = plugins.PointHTMLTooltip(p,
-                                                       labels, voffset=10,
-                                                       hoffset=10, css=css)
-
-                    plugins.connect(fig, tooltip)
-                    mpld3.show()
-
-            if points1 is not None and points2 is not None:
-                fig, ax = plt.subplots(figsize=(15, 10))
-
-                p1 = ax.scatter(points1['x'], points1['y'], s=15, color='b', marker='o',
-                                alpha=.3, label=file1)
-                p2 = ax.scatter(points2['x'], points2['y'], s=15, color='r', marker='o',
-                                alpha=.3, label=file2)
-
-                labels = []
-                for i in range(points1.shape[0]):
-                    label = points1.ix[[i], :].T
-                    label.columns = ['Row {0}'.format(0)]
-                    labels.append(str(label.to_html()))
-
-                labels2 = []
-                for i in range(points2.shape[0]):
-                    label = points2.ix[[i], :].T
-                    label.columns = ['Row {0}'.format(0)]
-                    labels2.append(str(label.to_html()))
-
-                ax.set_xlabel('X')
-                ax.set_ylabel('Y')
-                ax.set_title('{} vs {} - Nearest Neighbor'.format(file1, file2), size=15)
-
-                legend_labels = [file1, file2]
-                plot_collection = [p1, p2]
-                legend = plugins.InteractiveLegendPlugin(plot_collection, legend_labels)
-                tooltip = plugins.PointHTMLTooltip(p1,
-                                                   labels, voffset=10,
-                                                   hoffset=10, css=css)
-
-                tooltip2 = plugins.PointHTMLTooltip(p2,
-                                                       labels2, voffset=10,
-                                                       hoffset=10, css=css)
-
-                plugins.connect(fig, legend)
-                plugins.connect(fig, tooltip)
-                plugins.connect(fig, tooltip2)
-                mpld3.show()
-
-        except Exception as e:
-            logger.getLogger().error(e)
-            return
-
-        # print(doc2vec.most_similar("security"))
-        pass
->>>>>>> e1e91cc8d3c6d4463c545c1278913072b19d4464

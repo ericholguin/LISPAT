@@ -5,7 +5,6 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import './side-navbar.css';
 import ClickOutside from 'react-click-outside';
 
-import Config from '../config';
 
 class SideNavClass extends Component {
   constructor(props) {
@@ -95,22 +94,6 @@ class SideNavClass extends Component {
                 </NavIcon>
                 <NavText>Data</NavText>
               </NavItem>
-              {config ? (
-                <NavItem eventKey="Config">
-                  <NavIcon>
-                    <i
-                      className="fa fa-fw fa-cogs"
-                      style={{ fontSize: '1.75em' }}
-                    />
-                  </NavIcon>
-                  <NavText>Config</NavText>
-                  <NavItem eventKey="Config/Settings">
-                    <NavText>
-                      <Config />
-                    </NavText>
-                  </NavItem>
-                </NavItem>
-              ) : null}
               {lispat ? (
                 <NavItem eventKey="Lispat" active={activeLispat}>
                   <NavIcon>

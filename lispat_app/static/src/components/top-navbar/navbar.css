@@ -13,7 +13,6 @@
 }
 .logo {
   left: 0;
-  position: fixed;
   /*display: inline;*/
 }
 .font {
@@ -35,6 +34,7 @@
 }
 body {
   background-color: #404040;
+  height: 70%;
 }
 @media screen and (max-width: 1000px) {
   .logo {
