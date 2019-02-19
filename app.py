@@ -3,8 +3,8 @@ import sys
 from uuid import uuid4
 from flask_cors import CORS
 from lispat_app.lispat.run import app_main
-from lispat_app.lispat.utils.logger import Logger
 from werkzeug.utils import secure_filename
+from lispat_app.lispat.utils.logger import Logger
 from lispat_app.lispat.base.manager import CommandManager
 from lispat_app.lispat.base.constants import args_convert, args_filter, args_json, args_clean
 from flask import Flask, render_template, request, make_response, session, json, Response
@@ -19,6 +19,9 @@ CORS(app, expose_headers='Authorization')
 
 UPLOAD_FOLDER = os.path.abspath("lispat_app/static/uploads/")
 ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx'}
+
+if not os.path.exists(UPLOAD_FOLDER):
+    os.mkdir(UPLOAD_FOLDER)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
