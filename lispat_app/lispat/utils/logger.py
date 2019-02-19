@@ -14,10 +14,6 @@ class Logger:
         self.logger = logging.getLogger(logger_name)
         self.logger.setLevel(logging.DEBUG)  # better to have too much log than not enough
         self.logger.addHandler(self.get_console_handler())
-<<<<<<< HEAD
-=======
-
->>>>>>> a4d196e0b0eecfe11e76d5e25fd51abe35bdcd99
         # with this pattern, it's rarely necessary to propagate the error up to parent
         self.logger.propagate = False
 
