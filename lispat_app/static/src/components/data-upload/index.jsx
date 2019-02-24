@@ -32,7 +32,7 @@ class DataUpload extends Component {
   };
 
   handleUpload = () => {
-    const { file1, file2} = this.state;
+    const { file1, file2 } = this.state;
     const { stateChange, getData } = this.props;
     const data = new FormData();
     data.append('file1', file1, file1.name);

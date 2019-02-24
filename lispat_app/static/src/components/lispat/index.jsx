@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import chroma from 'chroma-js';
-import {
-  Col,
-  Container,
-  Row,
-} from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import Highlighter from 'react-highlight-words';
 import { invert, size } from 'lodash';
 import Select from 'react-select';
@@ -14,7 +10,6 @@ import styles from './lispat-view.css';
 import { colorStyles, colors } from './colors';
 
 const selectStyles = {
-
   multiValue: (provided, { data }) => {
     const color = chroma(data.color);
     return {
@@ -23,11 +18,11 @@ const selectStyles = {
       fontSize: '10px',
     };
   },
-  menu: ( provided ) => ({
+  menu: provided => ({
     ...provided,
     height: '200px',
   }),
-  menuList: ( provided ) => ({
+  menuList: provided => ({
     ...provided,
     height: '200px',
     backgroundColor: '#212121',
@@ -39,17 +34,17 @@ const selectStyles = {
       backgroundColor: isDisabled
         ? null
         : isSelected
-          ? data.color
-          : isFocused
-            ? color.alpha(0.1).css()
-            : null,
+        ? data.color
+        : isFocused
+        ? color.alpha(0.1).css()
+        : null,
       color: isDisabled
         ? '#ccc'
         : isSelected
-          ? chroma.contrast(color, 'white') > 2
-            ? 'white'
-            : 'black'
-          : data.color,
+        ? chroma.contrast(color, 'white') > 2
+          ? 'white'
+          : 'black'
+        : data.color,
       cursor: isDisabled ? 'not-allowed' : 'default',
     };
   },
@@ -327,7 +322,8 @@ class Lispat extends Component {
                     style={{
                       margin: '0 auto',
                       maxWidth: 800,
-                    }}/>
+                    }}
+                  />
                 </div>
               </Col>
               <Col className="col-sm-12">
@@ -369,7 +365,8 @@ class Lispat extends Component {
                     style={{
                       margin: '0 auto',
                       maxWidth: 800,
-                    }}/>
+                    }}
+                  />
                 </div>
               </Col>
             </Col>

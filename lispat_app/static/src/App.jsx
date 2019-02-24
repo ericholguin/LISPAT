@@ -102,8 +102,7 @@ class App extends Component {
         />
         <Container>
           <Row>
-            <Col className="pull-right">
-            </Col>
+            <Col className="pull-right" />
           </Row>
         </Container>
       </div>
