@@ -288,9 +288,6 @@ class NLPModel:
         webbrowser.open("file:///usr/local/var/lispat/similar.html")
 
 
-
-
-
 class ClickInfo(plugins.PluginBase):
 
     JAVASCRIPT = """

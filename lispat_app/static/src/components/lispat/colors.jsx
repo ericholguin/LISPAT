@@ -5,7 +5,7 @@ export const colorStyles = [
   '#512da8',
   '#304ffe',
   '#e65100',
-  '#f5f5f5',
+  '#9FA8DA',
   '#304ffe',
   '#1de9b6',
   '#6D4C41',
