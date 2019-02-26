@@ -71,7 +71,7 @@ class App extends Component {
 
   showGraphNav = () => {
     const { showGraph, data } = this.state;
-    return showGraph === true  || data !== null;
+    return showGraph === true || data !== null;
   };
 
   showConfigNav = () => {

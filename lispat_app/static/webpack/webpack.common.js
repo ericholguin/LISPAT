@@ -61,8 +61,8 @@ module.exports = {
           {
             loader: 'html-loader',
             options: {
-              attrs: [':data-src']
-            }            
+              attrs: [':data-src'],
+            },
           },
         ],
       },
