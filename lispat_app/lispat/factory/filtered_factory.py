@@ -42,7 +42,10 @@ class FilteredFactory:
 
     def remove_names(self, val):
         logger.getLogger().debug("Removing names")
-        remove_list = ['pope', 'benjamin', 'ben']
+        remove_list = ['pope', 'benjamin', 'ben', 'iso', 'iec', 'fda',
+                        'isoiec', 'bsi', 'nist', 'aami', 'nistir', 'ihs',
+                        'isoiecieee', 'matthew', 'vorhees', 'vorhe', 'ots',
+                        'cfr']
         words = [w for w in val if w not in remove_list]
         return words
 
@@ -73,6 +76,20 @@ class FilteredFactory:
         port = nltk.PorterStemmer()
         words = [port.stem(i) for i in val]
         return words
+
+    def get_stem(self, word):
+        for suffix in ['ing', 'ly', 'ed', 'ious', 'ies', 'ive', 'es', 's',
+                        'ment', 'y']:
+            if word.endswith(suffix):
+                return word[:-len(suffix)]
+        return word
+
+    def find_ngrams(self, data, n=3):
+        return zip(*[data[i:] for i in range(n)])
+
+    def pos_tagger(self):
+        """ Summary: Parts of speech tagger"""
+        
 
     def get_desired_terms(self, val):
         for w in val:

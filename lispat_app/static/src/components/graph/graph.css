@@ -1,0 +1,49 @@
+.center-grid {
+  padding: 15px;
+  margin: auto;
+}
+
+.font-home {
+  font-family: Consolas, serif, sans-serif;
+  font-size: 20px;
+  color: #ffffff;
+  padding-bottom: 10px;
+}
+
+.button {
+  background-color: rgba(255, 245, 250, 0.95);
+  font-size: 40px;
+  font-weight: bolder;
+  color: #4a4a4a;
+  border: none;
+  position: absolute;
+  top: 50%;
+  left: 30%;
+}
+
+.color {
+  color: white;
+  font-size: 21px;
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+.markdown-body {
+  color: azure;
+  border-radius: 20px;
+  border: 1px solid white;
+  margin: -33px auto 0 70px !important;
+  max-width: 980px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.body-graph {
+  width: 100% !important;
+}
+
+.header-graph {
+  font-weight: bolder;
+  font-size: 36px;
+  font-family: Consolas, sans-serif, SansSerif;
+  color: #fff4f6;
+}

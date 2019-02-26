@@ -1,12 +1,15 @@
 import os
 import sys
+import threading
+import webbrowser
 from uuid import uuid4
 from flask_cors import CORS
+from joblib import Parallel, delayed
 from lispat_app.lispat.run import app_main
 from werkzeug.utils import secure_filename
 from lispat_app.lispat.utils.logger import Logger
 from lispat_app.lispat.base.manager import CommandManager
-from lispat_app.lispat.base.constants import args_convert, args_filter, args_json, args_clean
+from lispat_app.lispat.base.constants import args_convert, args_filter, args_json, args_clean, args_all, args_graph
 from flask import Flask, render_template, request, make_response, session, json, Response
 
 
@@ -20,9 +23,6 @@ CORS(app, expose_headers='Authorization')
 UPLOAD_FOLDER = os.path.abspath("lispat_app/static/uploads/")
 ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx'}
 
-if not os.path.exists(UPLOAD_FOLDER):
-    os.mkdir(UPLOAD_FOLDER)
-
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
 
@@ -33,12 +33,12 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
 
 
-def save_file(file, target, filenames):
+def save_file(file, filenames):
     """Summary: For a given file save it to its target destination."""
     if file and allowed_file(file.filename):
         # Get file name and set and save to upload path
         filename = secure_filename(file.filename)
-        destination = "/".join([target, filename])
+        destination = os.path.join(UPLOAD_FOLDER, filename)
 
         logger.getLogger().info("Accept incoming file: {}".format(filename))
         logger.getLogger().info("Save it to: {}".format(destination))
@@ -46,6 +46,12 @@ def save_file(file, target, filenames):
         file.save(destination)
         filenames.append(destination)
 
+def delete_files():
+    """ Cleans the upload directory."""
+    try:
+        shutil.rmtree(os.path.abspath("lispat_app/static/uploads"))
+    except RuntimeError:
+        logger.getLogger().error("Error cleaning storage")
 
 @app.route("/")
 def index():
@@ -73,25 +79,26 @@ def upload():
 
         # List for files
         filenames = []
-        # Create a unique "session ID" for this particular batch of uploads.
-        upload_key = str(uuid4())
+        # Dictionary for JSON response
+        data = {}
+        # Command Manager
+        manager = CommandManager()
+        #Clean previous files
+        args5 = args_clean()
+        app_main(args5, manager)
         # Target folder for these uploads.
-        target = os.path.join(UPLOAD_FOLDER, upload_key)
-        if not os.path.exists(target):
-            os.mkdir(target)
+        if not os.path.exists(UPLOAD_FOLDER):
+            os.mkdir(UPLOAD_FOLDER)
 
         uploads = request.files
 
         file1 = uploads['file1']
         file2 = uploads['file2']
-        save_file(file1, target, filenames)
-        save_file(file2, target, filenames)
+        save_file(file1, filenames)
+        save_file(file2, filenames)
 
         session['uploadedFiles'] = filenames
-        data = {}
-        # Command Manager
-        manager = CommandManager()
-        print(len(filenames))
+
         if len(filenames) == 2:
             args = args_convert(filenames)
             app_main(args, manager)
@@ -99,11 +106,13 @@ def upload():
             args2 = args_filter()
             app_main(args2, manager)
 
-            args3 = args_json()
-            data = app_main(args3, manager)
+            args3 = args_graph()
+            thread = threading.Thread(target=app_main, args=[args3, manager])
+            thread.start()
 
-            args4 = args_clean()
-            app_main(args4, manager)
+            args4 = args_json()
+            data = app_main(args4, manager)
+
             js = json.dumps(data)
             resp = Response(js, status=200, mimetype="application/json")
 
@@ -112,16 +121,21 @@ def upload():
             return(make_response(('Error')))
 
 
-@app.route("/analyze", methods=['GET', 'POST'])
-def analyze():
+@app.route("/graph", methods=['GET', 'POST'])
+def graph():
     """
     Summary: Uses uploaded documents and performs processing.
 
     return: The two documents to compare in a side by side view.
     rtype: html
     """
-    if 'uploadedFiles' in session:
-        print(session['uploadedFiles'])
+    html_file = os.path.abspath("lispat_app/static/uploads/visuals/Similarity-Visual.html")
+
+    if os.path.isfile(html_file):
+        webbrowser.open("file://" + html_file)
+        resp = Response(status=200)
+        return resp
+
 
 
 if __name__ == "__main__":

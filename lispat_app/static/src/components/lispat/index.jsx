@@ -30,8 +30,20 @@ const selectStyles = {
     const color = chroma(data.color);
     return {
       ...provided,
-      backgroundColor: isDisabled ? null : isSelected ? data.color : isFocused ? color.alpha(0.1).css() : null,
-      color: isDisabled ? '#ccc' : isSelected ? chroma.contrast(color, 'white') > 2 ? 'white' : 'black' : data.color,
+      backgroundColor: isDisabled
+        ? null
+        : isSelected
+        ? data.color
+        : isFocused
+        ? color.alpha(0.1).css()
+        : null,
+      color: isDisabled
+        ? '#ccc'
+        : isSelected
+        ? chroma.contrast(color, 'white') > 2
+          ? 'white'
+          : 'black'
+        : data.color,
       cursor: isDisabled ? 'not-allowed' : 'default',
     };
   },

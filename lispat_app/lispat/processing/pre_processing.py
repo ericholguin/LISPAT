@@ -2,6 +2,7 @@ import re
 import sys
 import nltk
 import spacy
+from nltk.corpus import wordnet
 from collections import Counter
 from lispat_app.lispat.utils.logger import Logger
 from lispat_app.lispat.utils.colors import bcolors
@@ -24,6 +25,11 @@ class Preproccessing:
         self.txt_data = ""
 
         self.top_words = None
+        self.clean_top_words = []
+
+        self.top_ngrams = None
+        self.clean_top_ngrams = None
+
         self.clean_txt_data = None
         self.clean_txt_array = None
 
@@ -87,7 +93,7 @@ class Preproccessing:
                 raise ValueError("No words to reduce", self.clean_txt_array)
 
             words = Counter(self.clean_txt_array)
-            top_words = [word for word, word_count in words.most_common(20)]
+            top_words = [word for word, word_count in words.most_common(50)]
             self.top_words = top_words
 
         except ValueError as error:
@@ -95,7 +101,63 @@ class Preproccessing:
                                      " stack trace" + bcolors.ENDC)
             sys.exit(1)
 
-    def get_raw_text(self):
+    def clean_most_frequent(self):
+        """
+        Summary: Cleans the most frequent word count list, removing words with
+                 similar roots and words of length less than or equal to 2.
+        """
+        logger.getLogger().info("Cleaning most frequent word list")
+        try:
+
+            if len(self.top_words) > 0:
+                for word in self.top_words:
+                    stem = self.filter.get_stem(word)
+
+                    if len(stem) <= 2:
+                        self.clean_top_words.append(word)
+                    else:
+                        self.clean_top_words.append(stem)
+                    if len(word) <= 2:
+                        self.clean_top_words.remove(word)
+
+                self.clean_top_words = list(dict.fromkeys(self.clean_top_words))
+
+        except RuntimeError as error:
+            logger.getLogger().error("Error: ", error)
+
+    def find_synonyms(self):
+        """
+        Summary: Finds synonyms based on a user entry.
+        """
+
+        synonym_list = []
+
+        for word in self.clean_top_words[:20]:
+            synonyms = []
+            for syn in wordnet.synsets(word):
+                for l in syn.lemmas():
+                    synonyms.append(l.name())
+            synonyms = set(synonyms)
+            if word in synonyms:
+                synonyms.remove(word)
+            synonym_dict = {'word': word, 'all_syns': list(synonyms) }
+            synonym_list.append(synonym_dict)
+
+        #print(synonym_list)
+
+    def most_common_ngrams(self):
+    """
+    Summary: Finds most common ngrams.
+    """
+        ngram_counts = Counter(self.filter.find_ngrams(self.txt_data.split(), 3))
+        top_ngrams = [ngram for ngram, ngram_count in ngram_counts.most_common(15)]
+        self.top_ngrams = top_ngrams
+        print(self.top_ngrams)
+        return self.top_ngrams
+
+
+    #GETTER FUNCTIONS
+    def get_raw_txt(self):
         return self.txt_data
 
     def get_clean_txt_list(self):
@@ -106,6 +168,9 @@ class Preproccessing:
 
     def get_top_words(self):
         return self.top_words
+
+    def get_clean_top_words(self):
+        return self.clean_top_words[:20]
 
     def get_sentences(self):
         tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')

@@ -7,6 +7,7 @@ import './components/side-navbar/side-navbar.css';
 import SideNavClass from './components/side-navbar/index';
 import WelcomePage from './components/welcome-page/index';
 import Lispat from './components/lispat';
+import Graph from './components/graph';
 
 class App extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class App extends Component {
       showHome: true,
       showData: false,
       showLispat: false,
+      showGraph: false,
       showConfig: false,
       data: null,
     };
@@ -26,6 +28,7 @@ class App extends Component {
         showHome: true,
         showData: false,
         showLispat: false,
+        showGraph: false,
       });
     }
     if (view === 'Data') {
@@ -33,6 +36,7 @@ class App extends Component {
         showHome: false,
         showData: true,
         showLispat: false,
+        showGraph: false,
       });
     }
     if (view === 'Lispat') {
@@ -40,6 +44,15 @@ class App extends Component {
         showHome: false,
         showData: false,
         showLispat: true,
+        showGraph: false,
+      });
+    }
+    if (view === 'Graph') {
+      this.setState({
+        showHome: false,
+        showData: false,
+        showLispat: false,
+        showGraph: true,
       });
     }
   };
@@ -54,6 +67,11 @@ class App extends Component {
         showConfig: true,
       });
     }
+  };
+
+  showGraphNav = () => {
+    const { showGraph, data } = this.state;
+    return showGraph === true  || data !== null;
   };
 
   showConfigNav = () => {
@@ -75,7 +93,7 @@ class App extends Component {
   };
 
   render() {
-    const { showHome, showData, showLispat, data } = this.state;
+    const { showHome, showData, showLispat, showGraph, data } = this.state;
     return (
       <div>
         <TopNav />
@@ -93,8 +111,12 @@ class App extends Component {
         <div className={showLispat ? 'show' : 'hide'}>
           <Lispat data={data} />
         </div>
+        <div className={showGraph ? 'show' : 'hide'}>
+          <Graph />
+        </div>
         <SideNavClass
           handleStateChange={this.switchView}
+          graph={this.showGraphNav()}
           config={this.showConfigNav()}
           lispat={this.showLispatNav()}
           onChange={showLispat}

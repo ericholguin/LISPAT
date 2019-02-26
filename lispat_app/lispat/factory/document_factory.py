@@ -33,10 +33,8 @@ class DocumentFactory:
         self.isPdf = False
         self.isDoc = False
         self.path = path
-        # Extracts the session name from the path, might be changed if session not used
-        self.session = os.path.split(os.path.split(path)[0])[1]
 
-        self.args_ = ArgumentFactory(self.session)
+        self.args_ = ArgumentFactory()
 
         try:
             file = Path(path)
@@ -71,6 +69,7 @@ class DocumentFactory:
         functions to extract text.
         """
         try:
+
 
             if self.isDoc:
                 doc_data_txt = (

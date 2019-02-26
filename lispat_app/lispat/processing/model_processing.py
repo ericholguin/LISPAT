@@ -3,17 +3,17 @@ import sys
 import spacy
 import pickle
 import shutil
-import pandas as pd
-import gensim.models.word2vec as w2v
-import sklearn.manifold
-import multiprocessing
-from textblob import TextBlob
-from lispat_app.lispat.utils.logger import Logger
-from lispat_app.lispat.factory.filtered_factory import FilteredFactory
-from lispat_app.lispat.base.constants import DESIRED_TERMS
 import webbrowser
-from mpld3 import plugins, utils
+import pandas as pd
 import en_core_web_sm
+import multiprocessing
+import sklearn.manifold
+from textblob import TextBlob
+from mpld3 import plugins, utils
+import gensim.models.word2vec as w2v
+from lispat_app.lispat.utils.logger import Logger
+from lispat_app.lispat.base.constants import DESIRED_TERMS
+from lispat_app.lispat.factory.filtered_factory import FilteredFactory
 
 
 logger = Logger("Modeling")

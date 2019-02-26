@@ -5,12 +5,12 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import './side-navbar.css';
 import ClickOutside from 'react-click-outside';
 
-
 class SideNavClass extends Component {
   constructor(props) {
     super(props);
     this.state = {
       expanded: false,
+      activeGraph: false,
       activeLispat: false,
       activeData: false,
       activeHome: true,
@@ -20,6 +20,7 @@ class SideNavClass extends Component {
   componentWillReceiveProps(props) {
     if (props.onChange) {
       this.setState({
+        activeGraph: false,
         activeLispat: true,
         activeData: false,
         activeHome: false,
@@ -31,6 +32,7 @@ class SideNavClass extends Component {
     const { handleStateChange } = this.props;
     if (eventKey === 'Data') {
       this.setState({
+        activeGraph: false,
         activeLispat: false,
         activeData: true,
         activeHome: false,
@@ -38,6 +40,7 @@ class SideNavClass extends Component {
     }
     if (eventKey === 'Home') {
       this.setState({
+        activeGraph: false,
         activeLispat: false,
         activeData: false,
         activeHome: true,
@@ -45,7 +48,16 @@ class SideNavClass extends Component {
     }
     if (eventKey === 'Lispat') {
       this.setState({
+        activeGraph: false,
         activeLispat: true,
+        activeData: false,
+        activeHome: false,
+      });
+    }
+    if (eventKey === 'Graph') {
+      this.setState({
+        activeGraph: true,
+        activeLispat: false,
         activeData: false,
         activeHome: false,
       });
@@ -54,8 +66,8 @@ class SideNavClass extends Component {
   };
 
   render() {
-    const { config, lispat } = this.props;
-    const { expanded, activeLispat, activeData, activeHome } = this.state;
+    const { config, lispat, graph } = this.props;
+    const { expanded, activeLispat, activeData, activeHome, activeGraph } = this.state;
     return (
       <div>
         <ClickOutside
@@ -105,6 +117,17 @@ class SideNavClass extends Component {
                   <NavText>Source</NavText>
                 </NavItem>
               ) : null}
+              {graph ? (
+                <NavItem eventKey="Graph" active={activeGraph}>
+                  <NavIcon>
+                    <i
+                      className="fa fa-fw fa-chart-area"
+                      style={{ fontSize: '1.75em' }}
+                    />
+                  </NavIcon>
+                  <NavText>Graph</NavText>
+                </NavItem>
+              ) : null}
             </SideNav.Nav>
           </SideNav>
         </ClickOutside>
@@ -117,8 +140,10 @@ SideNavClass.propTypes = {
   handleStateChange: propTypes.func,
   config: propTypes.bool,
   lispat: propTypes.bool,
+  graph: propTypes.bool,
   activeLispat: propTypes.bool,
   activeData: propTypes.bool,
+  activeGraph: propTypes.bool,
   onChange: propTypes.bool,
 };
 

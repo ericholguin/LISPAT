@@ -1,9 +1,10 @@
 import os
-import scattertext as st
-import webbrowser
-import datetime
-from lispat_app.lispat.utils.logger import Logger
 import random
+import datetime
+import webbrowser
+import scattertext as st
+from scattertext import word_similarity_explorer
+from lispat_app.lispat.utils.logger import Logger
 
 
 logger = Logger("Visuals")
@@ -15,28 +16,14 @@ class Visualization:
 
         self.nlp = nlp
 
-        now = datetime.datetime.now()
-        self.date = str(now.year) + "-" + str(now.month) + "-" + \
-               str(now.day)
+        vis_dir = os.path.abspath("lispat_app/static/uploads/visuals")
 
-        # Creating a directory for each visual for each day.
-        #vis_dir = os.path.abspath("../server/templates")
-        #if not os.path.isdir(vis_dir):
-        #    os.mkdir(vis_dir)
-        if not os.path.isdir('/usr/local/var/lispat/visuals/' + self.date):
-            os.mkdir('/usr/local/var/lispat/visuals/' + self.date)
+        if not os.path.isdir(vis_dir):
+            os.mkdir(vis_dir)
 
-        random.seed()
-        seed = random.randint(1, 100)
-        #self.std_file = os.path.abspath(vis_dir + "/Standard-Visual-" + str(seed) + ".html")
-        self.std_file = "/usr/local/var/lispat/visuals/" + \
-                        self.date + "/Standard-Visual-" + str(seed) + ".html"
-        self.empath_file = "/usr/local/var/lispat/visuals/" + \
-                           self.date + "/Empath-Visual-" + str(seed) + ".html"
-        self.gitc_file = "/usr/local/var/lispat/visuals/" + \
-                         self.date + "/GITC-Visual-" + str(seed) + ".html"
-        self.chr_file = "/usr/local/var/lispat/visuals/" \
-                        + self.date + "/Characteristic-Visual-" + str(seed) + ".html"
+        self.std_file = os.path.abspath(vis_dir + "/Standard-Visual" + ".html")
+        self.term_file = os.path.abspath(vis_dir + "/Similarity-Visual" + ".html")
+
 
     def standard(self, dataframe):
         corpus = st.CorpusFromPandas(dataframe, category_col='Document Type',
@@ -49,72 +36,89 @@ class Visualization:
 
         logger.getLogger().info("Opening Standard Visual")
         open(self.std_file, 'wb').write(html.encode('utf-8'))
-        #return self.std_file
-        webbrowser.open("file://" + self.std_file)
 
-    def empath(self, dataframe):
-        feat_builder = st.FeatsFromOnlyEmpath()
-        empath_corpus = st.CorpusFromParsedDocuments(dataframe,
-                                                     category_col=
-                                                     'Document Type',
-                                                     feats_from_spacy_doc=
-                                                     feat_builder,
-                                                     parsed_col='Text').build()
 
-        html = st.produce_scattertext_explorer(empath_corpus,
-                                               category='submission',
-                                               category_name='Submission',
-                                               not_category_name='Standard',
-                                               width_in_pixels=1000,
-                                               use_non_text_features=True,
-                                               use_full_doc=True,
-                                               topic_model_term_lists=
-                                               feat_builder.
-                                               get_top_model_term_lists())
-
-        logger.getLogger().info("Opening Empath Visual")
-        open(self.empath_file, 'wb').write(html.encode('utf-8'))
-        webbrowser.open("file://" + self.empath_file)
-
-    def gitc(self, dataframe):
-        general_inquirer_feature_builder = st.FeatsFromGeneralInquirer()
-
+    def word_similarity_graph(self, dataframe, word):
         corpus = st.CorpusFromPandas(dataframe, category_col='Document Type',
-                                     text_col='Text',
-                                     nlp=st.whitespace_nlp_with_sentences,
-                                     feats_from_spacy_doc=
-                                     general_inquirer_feature_builder).build()
+                                     text_col='Text', nlp=self.nlp).build()
 
-        html = st.produce_frequency_explorer(corpus, category='submission',
-                                             category_name='Submission',
-                                             not_category_name='Standard',
-                                             use_non_text_features=True,
-                                             use_full_doc=True,
-                                             term_scorer=st.LogOddsRatioUninformativeDirichletPrior(),
-                                             grey_threshold=1.96,
-                                             width_in_pixels=1000,
-                                             topic_model_term_lists=general_inquirer_feature_builder.get_top_model_term_lists())
+        html = word_similarity_explorer(corpus,
+                                        category='submission',
+                                         category_name='Submission',
+                                         not_category_name='Standard',
+                                         target_term=word,
+                                         minimum_term_frequency=5,
+                                         pmi_threshold_coefficient=4,
+                                         width_in_pixels=1000,
+                                         alpha=0.01,
+                                         max_p_val=0.05,
+                                         save_svg_button=True)
+        logger.getLogger().info("Opening Word Similarity Visual")
+        open(self.term_file, 'wb').write(html.encode('utf-8'))
 
-        logger.getLogger().info("Opening GITC-Visual")
-        open(self.gitc_file, 'wb').write(html.encode('utf-8'))
-        webbrowser.open("file://" + self.gitc_file)
-
-    def chrctrstc(self, dataframe):
-        corpus = (st.CorpusFromPandas(dataframe, category_col='Document Type',
-                                      text_col='Text',
-                                      nlp=st.whitespace_nlp_with_sentences)
-            .build().get_unigram_corpus().compact(
-            st.ClassPercentageCompactor(term_count=5, term_ranker=
-            st.OncePerDocFrequencyRanker)))
-
-        html = st.produce_characteristic_explorer(corpus, category='submission',
-                                                  category_name='Submission',
-                                                  not_category_name='Standard', )
-
-        logger.getLogger().info("Opening Characteristic Visual")
-        open(self.chr_file, 'wb').write(html.encode('utf-8'))
-        webbrowser.open("file://" + self.chr_file)
-
+################# NOT USED ###### DEPRECATED ###################################
+#        self.empath_file = vis_dir + "/Empath-Visual-" + ".html"
+#        self.gitc_file = vis_dir + "/GITC-Visual-" + ".html"
+#        self.chr_file = vis_dir + "/Characteristic-Visual-" + ".html"
+#    def empath(self, dataframe):
+#        feat_builder = st.FeatsFromOnlyEmpath()
+#        empath_corpus = st.CorpusFromParsedDocuments(dataframe,
+#                                                     category_col=
+#                                                     feats_from_spacy_doc=
+#                                                     feat_builder,
+#                                                     parsed_col='Text').build()
+#
+#        html = st.produce_scattertext_explorer(empath_corpus,
+#                                               category='submission',
+#                                               category_name='Submission',
+#                                               not_category_name='Standard',
+#                                               width_in_pixels=1000,
+#                                               use_non_text_features=True,
+#                                               use_full_doc=True,
+#                                               topic_model_term_lists=
+#                                               feat_builder.
+#                                               get_top_model_term_lists())
+#
+#        logger.getLogger().info("Opening Empath Visual")
+#        open(self.empath_file, 'wb').write(html.encode('utf-8'))
+#
+#    def gitc(self, dataframe):
+#        general_inquirer_feature_builder = st.FeatsFromGeneralInquirer()
+#
+#        corpus = st.CorpusFromPandas(dataframe, category_col='Document Type',
+#                                     text_col='Text',
+#                                     nlp=st.whitespace_nlp_with_sentences,
+#                                     feats_from_spacy_doc=
+#                                     general_inquirer_feature_builder).build()
+#
+#        html = st.produce_frequency_explorer(corpus, category='submission',
+#                                             category_name='Submission',
+#                                             not_category_name='Standard',
+#                                             use_non_text_features=True,
+#                                             use_full_doc=True,
+#                                             term_scorer=st.LogOddsRatioUninformativeDirichletPrior(),
+#                                             grey_threshold=1.96,
+#                                             width_in_pixels=1000,
+#                                             topic_model_term_lists=general_inquirer_feature_builder.get_top_model_term_lists())
+#
+#        logger.getLogger().info("Opening GITC-Visual")
+#        open(self.gitc_file, 'wb').write(html.encode('utf-8'))
+#
+#    def chrctrstc(self, dataframe):
+#        corpus = (st.CorpusFromPandas(dataframe, category_col='Document Type',
+#                                      text_col='Text',
+#                                      nlp=st.whitespace_nlp_with_sentences)
+#            .build().get_unigram_corpus().compact(
+#            st.ClassPercentageCompactor(term_count=5, term_ranker=
+#            st.OncePerDocFrequencyRanker)))
+#
+#        html = st.produce_characteristic_explorer(corpus, category='submission',
+#                                                  category_name='Submission',
+#                                                  not_category_name='Standard', )
+#
+#        logger.getLogger().info("Opening Characteristic Visual")
+#        open(self.chr_file, 'wb').write(html.encode('utf-8'))
+#
     #### DEPRECATED ###
     # def nearest(self, points1=None, points2=None, file1=None, file2=None):
     #     try:

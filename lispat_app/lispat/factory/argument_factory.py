@@ -2,6 +2,7 @@ import os
 import sys
 import csv
 import docx
+import errno
 from io import StringIO
 from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
@@ -19,14 +20,13 @@ class ArgumentFactory:
     This class handles all the file conversion.
     """
 
-    def __init__(self, session):
+    def __init__(self):
 
         logger.getLogger().info("Argument factory init")
 
-        self.txt = [] # DEPRECATED
         self.txt_file_path = ""
 
-        storage = "../static/uploads/" + session
+        storage = "lispat_app/static/uploads/"
         directory_storage = os.path.abspath(storage)
         logger.getLogger().info(directory_storage)
 
@@ -36,15 +36,47 @@ class ArgumentFactory:
 
         self.csv_path = ""
 
-        if not os.path.exists(directory_storage):
+        """if not os.path.exists(directory_storage):
             os.makedirs(directory_storage)
         if not os.path.exists(self.text_dir):
             os.makedirs(self.text_dir)
         if not os.path.exists(self.csv_dir):
             os.makedirs(self.csv_dir)
         if not os.path.exists(self.visuals_dir):
-            os.makedirs(self.visuals_dir)
+            os.makedirs(self.visuals_dir)"""
 
+        try:
+            os.makedirs(directory_storage)
+        except OSError as e:
+            if e.errno == errno.EEXIST and os.path.isdir(directory_storage):
+                # File exists, and it's a directory,
+                # another process beat us to creating this dir, that's OK.
+                pass
+            else:
+                # Our target dir exists as a file, or different error,
+                # reraise the error!
+                raise
+        try:
+            os.makedirs(self.text_dir)
+        except OSError as e:
+            if e.errno == errno.EEXIST and os.path.isdir(self.text_dir):
+                pass
+            else:
+                raise
+        try:
+            os.makedirs(self.csv_dir)
+        except OSError as e:
+            if e.errno == errno.EEXIST and os.path.isdir(self.csv_dir):
+                pass
+            else:
+                raise
+        try:
+            os.makedirs(self.visuals_dir)
+        except OSError as e:
+            if e.errno == errno.EEXIST and os.path.isdir(self.visuals_dir):
+                pass
+            else:
+                raise
 
     def pdfminer_handler(self, path):
         """
@@ -211,8 +243,6 @@ class ArgumentFactory:
 
         logger.getLogger().debug("File opened for writing - {}"
                                  .format(txt_filename))
-        # NO LONGER USED, RETURNING STRING NOW
-        self.txt.append(txt_filename)
 
         self.txt_file_path = txt_filename
         return open(txt_filename, "w")

@@ -5,6 +5,7 @@ import pickle
 import shutil
 import datetime
 import pandas as pd
+from uuid import uuid4
 from lispat_app.lispat.utils.logger import Logger
 from lispat_app.lispat.utils.colors import bcolors
 from lispat_app.lispat.processing.model_processing import NLPModel
@@ -15,9 +16,6 @@ from lispat_app.lispat.processing.visual_processing import Visualization
 import en_core_web_sm
 
 nlp = en_core_web_sm.load()
-
-# NEEDED? ORIG.
-nlp = spacy.load('en')
 
 
 logger = Logger("CommandManager")
@@ -38,6 +36,13 @@ class CommandManager:
 
         self.docA_filter = None
         self.docB_filter = None
+
+        self.docA_txt = None
+        self.docB_txt = None
+        self.topDocA = None
+        self.topDocB = None
+        self.topNDocA = None
+        self.topNDocB = None
 
         self.doc_worker = None
 
@@ -67,8 +72,6 @@ class CommandManager:
                                             "Document B path: {}"
                                             .format(docB_full_path))
                     self.docB_path = docB_full_path
-            else:
-                raise RuntimeError
 
         except RuntimeError as error:
             logger.getLogger().error("Directory does not exist")
@@ -81,11 +84,13 @@ class CommandManager:
         """
         logger.getLogger().info("Command Manager - Convert")
         try:
-            docA = DocumentFactory(self.docA_path)
-            docB = DocumentFactory(self.docB_path)
+            if self.docA_path is not None:
+                docA = DocumentFactory(self.docA_path)
+                self.docA_txt_path = docA.convert_file()
 
-            self.docA_txt_path = docA.convert_file()
-            self.docB_txt_path = docB.convert_file()
+            if self.docB_path is not None:
+                docB = DocumentFactory(self.docB_path)
+                self.docB_txt_path = docB.convert_file()
 
         except RuntimeError as error:
             logger.getLogger().error(error)
@@ -99,40 +104,51 @@ class CommandManager:
         # Initialize with our docs.
         logger.getLogger().info("Command Manager - Filter")
         try:
-            self.docA_filter = Preproccessing(self.docA_txt_path)
-            self.docB_filter = Preproccessing(self.docB_txt_path)
+            if self.docA_txt_path is not None:
+                self.docA_filter = Preproccessing(self.docA_txt_path)
+                self.docA_filter.read_textfile()
+                self.docA_filter.filter_nlp()
 
-            self.docA_filter.read_textfile()
-            self.docB_filter.read_textfile()
-
-            self.docA_filter.filter_nlp()
-            self.docB_filter.filter_nlp()
+            if self.docB_txt_path is not None:
+                self.docB_filter = Preproccessing(self.docB_txt_path)
+                self.docB_filter.read_textfile()
+                self.docB_filter.filter_nlp()
 
         except RuntimeError as error:
             logger.getLogger().error(error)
             exit(1)
 
-    def model(self):
-        vis = Visualization()
-        vis = Visualization(nlp)
+    def set_json(self):
+        """
+        Summary: Sets the variables for the json response
+        :return: Exit code
+        """
+        if self.docA_filter is not None and self.docA_txt is None:
+            self.docA_txt = self.docA_filter.get_raw_txt()
+            self.docA_filter.most_frequent()
+            self.docA_filter.clean_most_frequent()
+            self.topDocA = self.docA_filter.get_clean_top_words()
+            self.topNDocA = self.docA_filter.most_common_ngrams()
+            self.docA_name = os.path.splitext(self.docA_path)[0]
+            #self.docA_filter.ngrams_on_top_words()
+        if self.docB_filter is None and self.docA_txt is not None:
+            self.docB_txt = self.docA_filter.get_raw_txt()
+            self.docA_filter.most_frequent()
+            self.docA_filter.clean_most_frequent()
+            self.topDocB = self.docA_filter.get_clean_top_words()
+            self.topNDocB = self.docA_filter.most_common_ngrams()
+            self.docB_name = os.path.splitext(self.docA_path)[0]
+            #self.docA_filter.ngrams_on_top_words()
+        if self.docB_filter is not None:
+            self.docB_txt = self.docB_filter.get_raw_txt()
+            self.docB_filter.most_frequent()
+            self.docB_filter.clean_most_frequent()
+            self.topDocB = self.docB_filter.get_clean_top_words()
+            self.topNDocB = self.docB_filter.most_common_ngrams()
+            self.docB_name = os.path.splitext(self.docB_path)[0]
+            #self.docB_filter.ngrams_on_top_words()
 
-        sentences = []
-        raw_sentences = self.docB_filter.get_sentences()
-
-        for raw_sentence in raw_sentences:
-            if len(raw_sentence) > 0:
-                sentences.append(self.docB_filter.get_sent_tokens(raw_sentence))
-
-        sentences_sub = []
-        raw_sentences_sub = filter_std.get_sentences()
-        for raw_sentence in raw_sentences_sub:
-            if len(raw_sentence) > 0:
-                sentences_sub.append(filter_std.get_sent_tokens(raw_sentence))
-
-        input_txt = filter_std.get_sent_tokens(str(args['--text']))
-        file1 = os.path.basename(self.docA_path)
-        points_input, points_std = self.model.semantic_properties_model(sentences_sub, user_input=input_txt)
-        vis.nearest(points1=points_std, points2=points_input, file1=file1, file2="User Input")
+        self.docA_filter.find_synonyms()
 
     def get_json(self):
         """
@@ -142,82 +158,23 @@ class CommandManager:
         # Initialize with our docs.
         logger.getLogger().info("Command Manager - MAKE JSON")
 
-        docA_txt = self.docA_filter.get_raw_text()
-        docB_txt = self.docB_filter.get_raw_text()
-
-        self.docA_filter.most_frequent()
-        self.docB_filter.most_frequent()
-
-        topDocA = self.docA_filter.get_top_words()
-        topDocB = self.docB_filter.get_top_words()
-
         data = {
-            "_id": os.path.split(os.path.split(self.docA_path)[0])[1],
-            "standard": docA_txt,
-            "submission": docB_txt,
-            "standard_file_name": os.path.splitext(self.docA_path)[0],
-            "submission_file_name": os.path.splitext(self.docB_path)[0],
-            "standard_keywords": topDocA,
-            "submission_keywords": topDocB,
-            "standard_phrases": [],
-            "submission_phrases": [],
+            #"_id": os.path.split(os.path.split(self.docA_path)[0])[1],
+            "_id": str(uuid4()),
+            "standard": self.docA_txt,
+            "submission": self.docB_txt,
+            "standard_file_name": self.docA_name,
+            "submission_file_name": self.docB_name,
+            "standard_keywords": self.topDocA,
+            "submission_keywords": self.topDocB,
+            "standard_phrases": self.topNDocA,
+            "submission_phrases": self.topNDocB,
             "date": datetime.datetime.now(),
         }
 
         return data
 
-
-
-    def run_analytics(self, args):
-        """
-        Main run function to handle learning
-        :return: Exit code
-        """
-        # Initialize with our docs.
-        logger.getLogger().info("Command Manager - Run")
-        try:
-            doc_worker = None
-            if args['--compare']:
-                doc_worker = DocumentFactory(self.docA_path)
-            elif args['--train']:
-                doc_worker = DocumentFactory(self.docA_path)
-            else:
-                raise RuntimeError("No arguments found, please try using "
-                                   "--compare or --train")
-
-            docs = doc_worker.convert_file()
-            filter = Preproccessing(docs[0], docs[1])
-
-
-            if args['--df']:
-                nlp_array_unfiltered = self.model.build_sents(filter.nlp.sents)
-                print(nlp_array_unfiltered[:5])
-                csv_success = self.doc_worker.args_.csv_handler(nlp_array_unfiltered)
-                if csv_success:
-                    self.model.data_frame(self.doc_worker.args_.csv_path)
-
-            if args['--sp']:
-                vis = Visualization()
-                sentences = []
-                raw_sentences = filter.get_sentences()
-                for raw_sentence in raw_sentences:
-                    if len(raw_sentence) > 0:
-                        sentences.append(filter.get_sent_tokens(raw_sentence))
-
-                file = os.path.basename(self.docA_path)
-                points = self.model.semantic_properties_model(sentences)
-                vis.nearest(points1=points, file1=file)
-
-            if args['--compare']:
-                self.model.compare_doc_similarity(self.docA_path)
-            if args['--train']:
-                self.model.save_trained(filter.word_array)
-
-        except RuntimeError as error:
-            logger.getLogger().error(error)
-            exit(1)
-
-    def graph(self):
+    def graph(self, word=None):
         """
         This function is to handle the comparison of two submissions using
         visuals.
@@ -226,19 +183,20 @@ class CommandManager:
         logger.getLogger().info("Command Manager - Graph Function")
 
         try:
+            #session = os.path.split(os.path.split(self.docA_path)[0])[1]
+            #args_ = ArgumentFactory(session)
             args_ = ArgumentFactory()
 
-            DocA = filter_DocA.get_raw_txt()
-            DocB = filter_DocB.get_raw_txt()
+            DocA = self.docA_filter.get_raw_txt()
+            DocB = self.docB_filter.get_raw_txt()
 
-            DocA_size = len(cleanDocA)
-            DocB_size = len(cleanDocB)
+            DocA_size = len(DocA)
+            DocB_size = len(DocB)
 
             if(DocB_size > DocA_size):
                 nlp.max_length = DocB_size + 1
             else:
                 nlp.max_length = DocA_size + 1
-
 
             csv = args_.csv_with_headers(self.docB_txt_path, self.docA_txt_path,
                                          DocB, DocA)
@@ -248,53 +206,108 @@ class CommandManager:
 
             vis = Visualization(nlp)
 
-            html_file = vis.standard(dataframe)
+            #vis.standard(dataframe)
+            word = "risk"
+            vis.word_similarity_graph(dataframe, word)
 
         except RuntimeError as error:
             logger.getLogger().error("Error with run_sub_vs_std please "
                                      "check stack trace")
             exit(1)
 
-
-    def run_sub_vs_txt(self, args):
-        args_ = ArgumentFactory()
-        vis = Visualization(nlp)
-        doc_std = DocumentFactory(self.docA_path)
-        doc_std_converted = doc_std.convert_file()
-        filter_std = Preproccessing(doc_std_converted[0],
-                                    doc_std_converted[1])
-        std_data = filter_std.ret_doc()
-        if args['--clean']:
-            filter_std.filter_nlp()
-
-        std_path = ""
-        if doc_std_converted[0]:
-            std_path = doc_std_converted[0]
-        elif doc_std_converted[1]:
-            std_path = doc_std_converted[1]
-
-        sentences_sub = []
-        raw_sentences_sub = filter_std.get_sentences()
-        for raw_sentence in raw_sentences_sub:
-            if len(raw_sentence) > 0:
-                sentences_sub.append(filter_std.get_sent_tokens(raw_sentence))
-
-        input_txt = filter_std.get_sent_tokens(str(args['--text']))
-        file1 = os.path.basename(self.docA_path)
-        points_input, points_std = self.model.semantic_properties_model(sentences_sub, user_input=input_txt)
-        # vis.nearest(points1=points_std, points2=points_input, file1=file1, file2="User Input")
-
-
     def clean(self):
         """
         :param args: Arguments for which dirs to delete
         :return: Deleted dirs for file system storage
         """
-        session = os.path.split(os.path.split(self.docA_path)[0])[1]
+        logger.getLogger().info("Purging local storage")
+        logger.getLogger().info(os.path.abspath("lispat_app/static/uploads/"))
 
-        try:
-            print("Purging local storage")
-            shutil.rmtree(os.path.abspath("../static/uploads/" + session))
-            print("Finished")
-        except RuntimeError:
-            logger.getLogger().error("Error cleaning storage")
+        folder = os.path.abspath("lispat_app/static/uploads")
+
+        for the_file in os.listdir(folder):
+            file_path = os.path.join(folder, the_file)
+            try:
+                if os.path.isfile(file_path):
+                    os.unlink(file_path)
+                elif os.path.isdir(file_path): shutil.rmtree(file_path)
+            except Exception as e:
+                print(e)
+
+#################### DEPRECATED #######################
+#    def run_analytics(self, args):
+#        """
+#        Main run function to handle learning
+#        :return: Exit code
+#        """
+#        # Initialize with our docs.
+#        logger.getLogger().info("Command Manager - Run")
+#        try:
+#            doc_worker = None
+#            if args['--compare']:
+#                doc_worker = DocumentFactory(self.docA_path)
+#            elif args['--train']:
+#                doc_worker = DocumentFactory(self.docA_path)
+#            else:
+#                raise RuntimeError("No arguments found, please try using "
+#                                   "--compare or --train")
+#
+#            docs = doc_worker.convert_file()
+#            filter = Preproccessing(docs[0], docs[1])
+#
+#
+#            if args['--df']:
+#                nlp_array_unfiltered = self.model.build_sents(filter.nlp.sents)
+#                print(nlp_array_unfiltered[:5])
+#                csv_success = self.doc_worker.args_.csv_handler(nlp_array_unfiltered)
+#                if csv_success:
+#                    self.model.data_frame(self.doc_worker.args_.csv_path)
+#
+#            if args['--sp']:
+#                vis = Visualization()
+#                sentences = []
+#                raw_sentences = filter.get_sentences()
+#                for raw_sentence in raw_sentences:
+#                    if len(raw_sentence) > 0:
+#                        sentences.append(filter.get_sent_tokens(raw_sentence))
+#
+#                file = os.path.basename(self.docA_path)
+#                points = self.model.semantic_properties_model(sentences)
+#                vis.nearest(points1=points, file1=file)
+#
+#            if args['--compare']:
+#                self.model.compare_doc_similarity(self.docA_path)
+#            if args['--train']:
+#                self.model.save_trained(filter.word_array)
+#
+#        except RuntimeError as error:
+#            logger.getLogger().error(error)
+#            exit(1)
+#
+#    def run_sub_vs_txt(self, args):
+#        args_ = ArgumentFactory()
+#        vis = Visualization(nlp)
+#        doc_std = DocumentFactory(self.docA_path)
+#        doc_std_converted = doc_std.convert_file()
+#        filter_std = Preproccessing(doc_std_converted[0],
+#                                    doc_std_converted[1])
+#        std_data = filter_std.ret_doc()
+#        if args['--clean']:
+#            filter_std.filter_nlp()
+#
+#        std_path = ""
+#        if doc_std_converted[0]:
+#            std_path = doc_std_converted[0]
+#        elif doc_std_converted[1]:
+#            std_path = doc_std_converted[1]
+#
+#        sentences_sub = []
+#        raw_sentences_sub = filter_std.get_sentences()
+#        for raw_sentence in raw_sentences_sub:
+#            if len(raw_sentence) > 0:
+#                sentences_sub.append(filter_std.get_sent_tokens(raw_sentence))
+#
+#        input_txt = filter_std.get_sent_tokens(str(args['--text']))
+#        file1 = os.path.basename(self.docA_path)
+#        points_input, points_std = self.model.semantic_properties_model(sentences_sub, user_input=input_txt)
+#        # vis.nearest(points1=points_std, points2=points_input, file1=file1, file2="User Input")
