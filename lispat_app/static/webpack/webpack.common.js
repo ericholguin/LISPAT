@@ -47,22 +47,11 @@ module.exports = {
         ],
       },
       {
-        test: /\.(md)$/,
+        test: /\.(md|html)$/,
         use: [
           'html-loader',
           {
             loader: 'markdown-loader',
-          },
-        ],
-      },
-      {
-        test: /\.(html)$/,
-        use: [
-          {
-            loader: 'html-loader',
-            options: {
-              attrs: [':data-src'],
-            },
           },
         ],
       },

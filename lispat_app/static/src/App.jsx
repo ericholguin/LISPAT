@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
+import { Container, Row, Col } from 'react-bootstrap';
 import TopNav from './components/top-navbar/index';
 import DataUpload from './components/data-upload/index';
 import './components/side-navbar/side-navbar.css';
@@ -121,6 +122,11 @@ class App extends Component {
           lispat={this.showLispatNav()}
           onChange={showLispat}
         />
+        <Container>
+          <Row>
+            <Col className="pull-right" />
+          </Row>
+        </Container>
       </div>
     );
   }

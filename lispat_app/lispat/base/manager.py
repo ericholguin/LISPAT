@@ -206,9 +206,9 @@ class CommandManager:
 
             vis = Visualization(nlp)
 
-            #vis.standard(dataframe)
-            word = "risk"
-            vis.word_similarity_graph(dataframe, word)
+            vis.standard(dataframe)
+            #word = "risk"
+            #vis.word_similarity_graph(dataframe, word)
 
         except RuntimeError as error:
             logger.getLogger().error("Error with run_sub_vs_std please "

@@ -26,7 +26,6 @@ ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
 
-
 def allowed_file(filename):
     """Summary: For a given file, return whether it's an allowed type."""
     return '.' in filename and \

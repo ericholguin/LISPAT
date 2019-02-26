@@ -67,7 +67,13 @@ class SideNavClass extends Component {
 
   render() {
     const { config, lispat, graph } = this.props;
-    const { expanded, activeLispat, activeData, activeHome, activeGraph } = this.state;
+    const {
+      expanded,
+      activeLispat,
+      activeData,
+      activeHome,
+      activeGraph,
+    } = this.state;
     return (
       <div>
         <ClickOutside

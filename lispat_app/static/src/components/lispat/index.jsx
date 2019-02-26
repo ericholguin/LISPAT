@@ -5,6 +5,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import Highlighter from 'react-highlight-words';
 import { invert, size } from 'lodash';
 import Select from 'react-select';
+import SearchBar from 'material-ui-search-bar';
 import styles from './lispat-view.css';
 import { colorStyles, colors } from './colors';
 
@@ -17,11 +18,11 @@ const selectStyles = {
       fontSize: '10px',
     };
   },
-  menu: (provided, state) => ({
+  menu: provided => ({
     ...provided,
     height: '200px',
   }),
-  menuList: (provided, state) => ({
+  menuList: provided => ({
     ...provided,
     height: '200px',
     backgroundColor: '#212121',
@@ -75,6 +76,9 @@ class Lispat extends Component {
       standardFileName: null,
       stdColors: {},
       subColors: {},
+      searchStandard: '',
+      searchSubmission: '',
+      ngrams: ['yup', 'allay', 'were', 'shall'],
     };
   }
 
@@ -164,6 +168,23 @@ class Lispat extends Component {
     });
   };
 
+  updateSearchStandard = search => {
+    const keys = [];
+    keys.push(search);
+    console.log(search);
+    this.setState({
+      selectedKeywordStandard: keys,
+    });
+  };
+
+  updateSearchSubmission = search => {
+    const keys = [];
+    keys.push(search);
+    this.setState({
+      selectedKeywordSubmission: keys,
+    });
+  };
+
   getSelectedTextSubmission = () => {
     const { selectedKeywordSubmission, submission } = this.state;
     if (selectedKeywordSubmission.length === 0) {
@@ -186,7 +207,10 @@ class Lispat extends Component {
 
   getSelectedTextStandard = () => {
     const { selectedKeywordStandard, standard } = this.state;
-    if (selectedKeywordStandard.length === 0) {
+    if (
+      selectedKeywordStandard.length === 0 ||
+      selectedKeywordStandard === null
+    ) {
       return standard;
     }
     const chunks = standard
@@ -204,6 +228,13 @@ class Lispat extends Component {
     return ret;
   };
 
+  suggestionRenderer = (suggestion, searchTerm) => (
+    <span>
+      <span>{searchTerm}</span>
+      <strong>{suggestion.substr(searchTerm.length)}</strong>
+    </span>
+  );
+
   render() {
     const {
       submissionFileName,
@@ -214,6 +245,10 @@ class Lispat extends Component {
       selectedKeywordStandard,
       stdColors,
       subColors,
+      searchStandard,
+      searchSubmission,
+      ngrams,
+      submission,
     } = this.state;
     return (
       <div>
@@ -272,6 +307,23 @@ class Lispat extends Component {
                     })}
                     styles={selectStyles}
                   />
+                  <SearchBar
+                    className="search-bar"
+                    onChange={change => {
+                      if (change === '' || change === null) {
+                        this.setState({
+                          selectedKeywordSubmission: [],
+                        });
+                      }
+                    }}
+                    onRequestSearch={search => {
+                      this.updateSearchSubmission(search);
+                    }}
+                    style={{
+                      margin: '0 auto',
+                      maxWidth: 800,
+                    }}
+                  />
                 </div>
               </Col>
               <Col className="col-sm-12">
@@ -298,6 +350,23 @@ class Lispat extends Component {
                     })}
                     styles={selectStyles}
                   />
+                  <SearchBar
+                    className="search-bar"
+                    onChange={change => {
+                      if (change === '' || change === null) {
+                        this.setState({
+                          selectedKeywordStandard: [],
+                        });
+                      }
+                    }}
+                    onRequestSearch={search => {
+                      this.updateSearchStandard(search);
+                    }}
+                    style={{
+                      margin: '0 auto',
+                      maxWidth: 800,
+                    }}
+                  />
                 </div>
               </Col>
             </Col>
@@ -309,15 +378,7 @@ class Lispat extends Component {
 }
 
 Lispat.propTypes = {
-  submission: propTypes.string,
-  standard: propTypes.string,
-  submissionFileName: propTypes.string,
-  standardFileName: propTypes.string,
-  date: propTypes.string,
-  keywords: propTypes.instanceOf(Array),
-  phrases: propTypes.instanceOf(Array),
   data: propTypes.instanceOf(Object),
-  search: propTypes.string,
 };
 
 export default Lispat;

@@ -146,9 +146,9 @@ class Preproccessing:
         #print(synonym_list)
 
     def most_common_ngrams(self):
-    """
-    Summary: Finds most common ngrams.
-    """
+        """
+        Summary: Finds most common ngrams.
+        """
         ngram_counts = Counter(self.filter.find_ngrams(self.txt_data.split(), 3))
         top_ngrams = [ngram for ngram, ngram_count in ngram_counts.most_common(15)]
         self.top_ngrams = top_ngrams

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Col, Container, Row, Button } from 'react-bootstrap';
+import { Col, Row, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import FileUpload from './upload';
 import './home-upload.css';
