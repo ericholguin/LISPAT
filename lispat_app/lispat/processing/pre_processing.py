@@ -149,12 +149,27 @@ class Preproccessing:
         """
         Summary: Finds most common ngrams.
         """
-        ngram_counts = Counter(self.filter.find_ngrams(self.txt_data.split(), 3))
-        top_ngrams = [ngram for ngram, ngram_count in ngram_counts.most_common(15)]
+        ngram_counts = Counter(self.filter.find_ngrams(self.txt_data.split(), 2))
+        top_ngrams = [ngram for ngram, ngram_count in ngram_counts.most_common(100)]
         self.top_ngrams = top_ngrams
         print(self.top_ngrams)
         return self.top_ngrams
 
+    def clean_ngrams(self):
+        """
+        Summary: cleans the most common ngrams
+        """
+        neighbors_list = []
+        for word in self.top_words[:20]:
+            new_tuple_list = []
+            for tuple_item in self.top_ngrams:
+                for tup in tuple_item:
+                     if word in tup:
+                         new_tuple_list.append(tuple_item)
+            neighbor_dict = {'word': word, 'top_neigbors': new_tuple_list}
+            neighbors_list.append(neighbor_dict)
+
+        print(neighbors_list)
 
     #GETTER FUNCTIONS
     def get_raw_txt(self):

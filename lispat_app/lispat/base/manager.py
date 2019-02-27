@@ -130,7 +130,7 @@ class CommandManager:
             self.topDocA = self.docA_filter.get_clean_top_words()
             self.topNDocA = self.docA_filter.most_common_ngrams()
             self.docA_name = os.path.splitext(self.docA_path)[0]
-            #self.docA_filter.ngrams_on_top_words()
+            self.docA_filter.clean_ngrams()
         if self.docB_filter is None and self.docA_txt is not None:
             self.docB_txt = self.docA_filter.get_raw_txt()
             self.docA_filter.most_frequent()
@@ -138,7 +138,7 @@ class CommandManager:
             self.topDocB = self.docA_filter.get_clean_top_words()
             self.topNDocB = self.docA_filter.most_common_ngrams()
             self.docB_name = os.path.splitext(self.docA_path)[0]
-            #self.docA_filter.ngrams_on_top_words()
+            self.docA_filter.clean_ngrams()
         if self.docB_filter is not None:
             self.docB_txt = self.docB_filter.get_raw_txt()
             self.docB_filter.most_frequent()
@@ -146,7 +146,7 @@ class CommandManager:
             self.topDocB = self.docB_filter.get_clean_top_words()
             self.topNDocB = self.docB_filter.most_common_ngrams()
             self.docB_name = os.path.splitext(self.docB_path)[0]
-            #self.docB_filter.ngrams_on_top_words()
+            self.docB_filter.clean_ngrams()
 
         self.docA_filter.find_synonyms()
 
@@ -207,7 +207,7 @@ class CommandManager:
             vis = Visualization(nlp)
 
             vis.standard(dataframe)
-            #word = "risk"
+            #word = "security"
             #vis.word_similarity_graph(dataframe, word)
 
         except RuntimeError as error:

@@ -1,78 +1,32 @@
-# Lost in Space and Time
+# LISPAT - Lost in Space and Time
 
-## When Plagiarism is a Good Thing
+## _When Plagiarism is a Good Thing_
 
-Sr. Design Project – Medical Device Requirements
+_Sr. Design Project – Medtronic_
 
-Lispat is built to convert documents from their common pdf/docx format to txt,
-processes the documents information, performs similarity checks, and builds
-a learning model for text classification and prediction all in order to capture
-the original information, in a manner that preserves and increases its value,
-accessibility and usefulness.
 
-## How to Run
+**LISPAT** _(Lost in Space and Time)_ is built to convert documents from their common pdf/docx format to txt, allowing for the use of Natural Language Processing on the provided data, with the goal of finding _semantic similarities_ between two documents. Using methods such as text cleaning, top keyword counts, top ngram counts, and leveraging python libraries to get the most out of the data. It extracts the most valuable information from each document all in order to capture the original information, in a manner that preserves and increases its value, accessibility and usefulness.
 
-### LOCALLY
 
-##### Requirements
+## 📒 Documentation
 
-- brew cask install xquartz
-- brew install poppler antiword unrtf tesseract swig
-- pip install textract
+[**Home**](https://lispat.herokuapp.com/) - LISPAT's Home Page
 
-##### NLTK
+[**API Reference**](https://lispat.herokuapp.com/api) - Detailed reference for LISPAT's API
 
-in terminal run `python`
+[**Usage Guides**](https://lispat.herokuapp.com/help) - How to use LISPAT and its features
 
-then run the following to download NLTK.
 
-```
- >>> import nltk`
- >>> nltk.download()
-```
+## 💪 Features
+* Converts 2 uploaded _pdf/docx/doc_ documents for comparison/analysis
+* Finds top keywords in both documents
+* Finds most common ngrams in both documents
+* Highlights selected top keywords
+* Search for a keyword in specific document
+* Visualize the document's term frequency on a graph
+* Visualize the way that 2 documents use a particular word
 
-nlkt downloader will show up. Download all.
 
-## PDF DECRYPTION
+### Using LISPAT
 
-Due to some pdfs having restrictions to their content `qpdf` was used in
-order to remove these restrictions.
-
-Link: https://github.com/qpdf/qpdf
-
-clone the repo and run.
-
-`pip install -e path/to/lispat`
-
-lispat should be now installed into the OS under your pip env.
-
-You can now run the following commands to both train data and compare submitted
-documents:
-
-- NOTE:
-- The path must be to a directory containing files of these formats:
-
-* .pdf
-* .docx
-* .doc
-* .txt
-
-`lispat -h`
-
-- help commands
-
-`lispat --path=path/to/docs --convert`
-
-- Coverts any .pdf, .doc, .docx file to .txt format for future analysis
-- Files are stored inside /usr/local/var/lispat/<format>\_data/
-
-`lispat --path=path/to/docs --train`
-
-- Upload data of previously submitted documents that are passed by the FDA
-
-`lispat --path=path/todocs --compare`
-
-- upload a submitted document to compare with documents that are already passed by the FDA
-
-Dependencies and package issues are possible with the requirements of the application.
-Should use the docker container above all else for easier application use.
+Follow the home page link above to access LISPAT.

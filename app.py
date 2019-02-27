@@ -128,7 +128,7 @@ def graph():
     return: The two documents to compare in a side by side view.
     rtype: html
     """
-    html_file = os.path.abspath("lispat_app/static/uploads/visuals/Similarity-Visual.html")
+    html_file = os.path.abspath("lispat_app/static/uploads/visuals/Standard-Visual.html")
 
     if os.path.isfile(html_file):
         webbrowser.open("file://" + html_file)
