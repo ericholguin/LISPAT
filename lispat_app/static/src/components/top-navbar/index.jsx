@@ -12,16 +12,17 @@ class TopNav extends Component {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ml-auto">
-              <Nav.Link href="#home">
+            <Nav className="ml-auto top">
+              <Nav.Link active={false} href="#home">
                 <span className={style['font-right']}>API</span>
               </Nav.Link>
-              <Nav.Link href="#link">
+              <Nav.Link active={false} href="#link">
                 <span className={style['font-right']}>HELP</span>
               </Nav.Link>
               <Nav.Link
                 href="https://github.com/brummetj/LISPAT"
                 target="_blank"
+                active={false}
               >
                 <span className={style['font-right']}>
                   <i className="fab fa-github" />

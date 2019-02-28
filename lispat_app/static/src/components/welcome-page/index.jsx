@@ -15,11 +15,13 @@ class WelcomePage extends Component {
   render() {
     return (
       <div>
-        <Col className="left-pull">
-          <div className="markdown-body welcome-page-container">
-            <Markdown escapeHtml={false} source={this.ContentMarkdown} />
-          </div>
-        </Col>
+        <Row>
+          <Col className="left-pull">
+            <div className="markdown-body welcome-page-container">
+              <Markdown escapeHtml={false} source={this.ContentMarkdown} />
+            </div>
+          </Col>
+        </Row>
       </div>
     );
   }

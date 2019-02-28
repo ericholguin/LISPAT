@@ -7,9 +7,6 @@ import { Col, Container, Row, Button } from 'react-bootstrap';
 const endpoint = 'http://localhost:5000/graph';
 
 class Graph extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   handleGraph = () => {
     axios.get(endpoint).then(res => {
