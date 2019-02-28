@@ -7,18 +7,25 @@
   font-family: Consolas, serif, sans-serif;
   font-size: 20px;
   color: #ffffff;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
 }
+
 
 .button {
   background-color: rgba(255, 245, 250, 0.95);
-  font-size: 40px;
+  padding: 0 40px 0 40px;
+  font-size: 20px;
   font-weight: bolder;
   color: #4a4a4a;
   border: none;
-  position: absolute;
-  top: 50%;
-  left: 30%;
+  margin-left: 5px;
+}
+
+.input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
 }
 
 .color {
@@ -34,6 +41,7 @@
   border: 1px solid white;
   margin: -33px auto 0 70px !important;
   max-width: 980px;
+  min-height: 500px;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 
@@ -46,4 +54,12 @@
   font-size: 36px;
   font-family: Consolas, sans-serif, SansSerif;
   color: #fff4f6;
+}
+
+.progress-1 {
+  color: white !important;
+  font-family: Helvetica, serif;
+  font-size: 21px;
+  margin-left: 10px;
+  margin-top: 15px;
 }
