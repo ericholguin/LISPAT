@@ -148,7 +148,7 @@ class CommandManager:
             self.docB_name = os.path.splitext(self.docB_path)[0]
             self.docB_filter.clean_ngrams()
 
-        self.docA_filter.find_synonyms()
+        #self.docA_filter.find_synonyms()
 
     def get_json(self):
         """

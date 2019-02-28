@@ -125,25 +125,7 @@ class Preproccessing:
         except RuntimeError as error:
             logger.getLogger().error("Error: ", error)
 
-    def find_synonyms(self):
-        """
-        Summary: Finds synonyms based on a user entry.
-        """
 
-        synonym_list = []
-
-        for word in self.clean_top_words[:20]:
-            synonyms = []
-            for syn in wordnet.synsets(word):
-                for l in syn.lemmas():
-                    synonyms.append(l.name())
-            synonyms = set(synonyms)
-            if word in synonyms:
-                synonyms.remove(word)
-            synonym_dict = {'word': word, 'all_syns': list(synonyms) }
-            synonym_list.append(synonym_dict)
-
-        #print(synonym_list)
 
     def most_common_ngrams(self):
         """
@@ -187,12 +169,34 @@ class Preproccessing:
     def get_clean_top_words(self):
         return self.clean_top_words[:20]
 
-    def get_sentences(self):
-        tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
-        raw_sentences = tokenizer.tokenize(self.txt_data)
-        return raw_sentences
+    #def get_sentences(self):
+    #    tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
+    #    raw_sentences = tokenizer.tokenize(self.txt_data)
+    #    return raw_sentences
 
-    def get_sent_tokens(self, raw):
-        clean = re.sub("[^a-zA-Z]", " ", raw).lower()
-        words = clean.split()
-        return words
+    #def get_sent_tokens(self, raw):
+    #    clean = re.sub("[^a-zA-Z]", " ", raw).lower()
+    #    words = clean.split()
+    #    return words
+
+    ### NOT USED ###
+    #""" Function for finding synonyms of the top words, synonyms provided from
+    #    nltk wordnet are not the best """
+    #def find_synonyms(self):
+    #    """
+    #    Summary: Finds synonyms based on a user entry.
+    #    """
+
+    #    synonym_list = []
+    #
+    #    for word in self.clean_top_words[:20]:
+    #        synonyms = []
+    #        for syn in wordnet.synsets(word):
+    #            for l in syn.lemmas():
+    #                synonyms.append(l.name())
+    #        synonyms = set(synonyms)
+    #        if word in synonyms:
+    ##        synonym_dict = {'word': word, 'all_syns': list(synonyms) }
+    #        synonym_list.append(synonym_dict)
+
+        #print(synonym_list)

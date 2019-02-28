@@ -7,9 +7,8 @@ from lispat_app.lispat.base.manager import CommandManager
 
 
 logger = Logger("Main")
-nltk.download('punkt')
+
 nltk.download('stopwords')
-nltk.download('wordnet')
 
 
 def app_main(args, manager, file=None):

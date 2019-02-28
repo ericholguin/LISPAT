@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import './side-navbar.css';
 import ClickOutside from 'react-click-outside';
-import axios from "axios/index";
+import axios from 'axios/index';
 
 const endpoint = 'http://localhost:5000/graph';
 
@@ -76,7 +76,7 @@ class SideNavClass extends Component {
   };
 
   render() {
-    const { config, lispat, graph } = this.props;
+    const { lispat, graph } = this.props;
     const {
       expanded,
       activeLispat,
@@ -144,6 +144,15 @@ class SideNavClass extends Component {
                   <NavText>Graph</NavText>
                 </NavItem>
               ) : null}
+              <NavItem eventKey="Download">
+                <NavIcon title="Download sample files">
+                  <i
+                    className="fa fa-fw fa-file-download"
+                    style={{ fontSize: '1.75em' }}
+                  />
+                </NavIcon>
+                <NavText>Graph</NavText>
+              </NavItem>
             </SideNav.Nav>
           </SideNav>
         </ClickOutside>
@@ -154,7 +163,6 @@ class SideNavClass extends Component {
 
 SideNavClass.propTypes = {
   handleStateChange: propTypes.func,
-  config: propTypes.bool,
   lispat: propTypes.bool,
   graph: propTypes.bool,
   activeLispat: propTypes.bool,

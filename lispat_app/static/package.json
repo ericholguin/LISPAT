@@ -137,6 +137,8 @@
     "react-autobind": "^1.0.6",
     "react-bootstrap": "^1.0.0-beta.5",
     "react-click-outside": "github:tj/react-click-outside",
+    "react-gif": "^0.1.0",
+    "react-gif-player": "^0.4.2",
     "react-highlight-words": "^0.16.0",
     "react-markdown": "^4.0.6",
     "react-native-vector-icons": "^6.3.0",

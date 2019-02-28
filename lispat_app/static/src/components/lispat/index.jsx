@@ -322,6 +322,7 @@ class Lispat extends Component {
                     style={{
                       margin: '0 auto',
                       maxWidth: 800,
+                      maxHeight: 40,
                     }}
                   />
                 </div>
@@ -363,7 +364,7 @@ class Lispat extends Component {
                       this.updateSearchStandard(search);
                     }}
                     style={{
-                      margin: '0 auto',
+                      margin: '10px 0 20px 0',
                       maxWidth: 800,
                     }}
                   />
