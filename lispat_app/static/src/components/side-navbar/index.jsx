@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import './side-navbar.css';
 import ClickOutside from 'react-click-outside';
-import axios from "axios/index";
+import axios from 'axios/index';
 
 const endpoint = 'http://localhost:5000/graph';
 
