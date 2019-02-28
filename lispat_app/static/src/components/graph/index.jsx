@@ -1,9 +1,9 @@
 import './graph.css';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import LoadingSpinner from './spinner';
 import React, { Component } from 'react';
 import { Col, Container, Row, Button } from 'react-bootstrap';
+import LoadingSpinner from './spinner';
 
 const endpoint = 'http://localhost:5000/graph';
 
@@ -19,7 +19,7 @@ class Graph extends Component {
 
   setKeyword = keyword => {
     this.setState({
-      keyword: keyword,
+      keyword,
     });
   };
 
@@ -31,7 +31,7 @@ class Graph extends Component {
 
   handleKeyword = () => {
     const { keyword } = this.state;
-    //const { stateChange, getData } = this.props;
+    // const { stateChange, getData } = this.props;
     const data = new FormData();
     data.append('keyword', keyword);
     this.setState({
@@ -74,14 +74,14 @@ class Graph extends Component {
                     className="button"
                     onClick={this.handleGraph}
                   >
-                  Open Graph
+                    Open Graph
                   </Button>
                 </Col>
                 <Col>
                   <form>
                     <label>
                       Keyword:
-                      <input type="text" name="keyword" className="input"/>
+                      <input type="text" name="keyword" className="input" />
                     </label>
                     <input type="submit" value="Submit" />
                   </form>
@@ -99,7 +99,7 @@ class Graph extends Component {
               {loading ? <LoadingSpinner /> : null}
             </Row>
           </div>
-      </div>
+        </div>
       </div>
     );
   }
