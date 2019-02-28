@@ -16,10 +16,6 @@ class HelpPage extends Component {
         gif="https://media.giphy.com/media/1i5Lj73Ff5IDtDaHfn/giphy.gif"
         autoplay
       />
-      <GifPlayer
-        gif="https://media.giphy.com/media/1wmc4WfK90DqlF4fni/giphy.gif"
-        autoplay
-      />
     );
   }
 }
