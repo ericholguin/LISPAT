@@ -3,7 +3,6 @@ import propTypes from 'prop-types';
 import { Navbar, Nav } from 'react-bootstrap';
 import style from './navbar.css';
 
-
 class TopNav extends Component {
   constructor(props) {
     super(props);
@@ -31,10 +30,7 @@ class TopNav extends Component {
   };
 
   render() {
-    const {
-      activeHelp,
-      activeApi,
-    } = this.state;
+    const { activeHelp, activeApi } = this.state;
     return (
       <div>
         <Navbar

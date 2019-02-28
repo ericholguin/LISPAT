@@ -120,12 +120,17 @@ class App extends Component {
   };
 
   render() {
-    const { showHome, showData, showLispat, showApi, showHelp, data } = this.state;
+    const {
+      showHome,
+      showData,
+      showLispat,
+      showApi,
+      showHelp,
+      data,
+    } = this.state;
     return (
       <div>
-        <TopNav
-          handleStateChange={this.switchView}
-        />
+        <TopNav handleStateChange={this.switchView} />
         <div className={showHome ? 'show' : 'hide'}>
           <WelcomePage />
         </div>
