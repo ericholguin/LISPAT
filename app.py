@@ -10,7 +10,7 @@ from werkzeug.utils import secure_filename
 from lispat_app.lispat.utils.logger import Logger
 from lispat_app.lispat.base.manager import CommandManager
 from lispat_app.lispat.base.constants import args_convert, args_filter, args_json, args_clean, args_all, args_graph
-from flask import Flask, render_template, request, make_response, session, json, Response
+from flask import Flask, render_template, request, make_response, session, json, Response, send_file
 
 
 logger = Logger("LISPAT - Flask App")
@@ -140,6 +140,20 @@ def graph():
         resp = Response(status=200)
         return resp
 
+@app.route("/assets/samples.zip")
+def download():
+    """
+    Summary: Uses uploaded documents and performs processing.
+
+    return: The two documents to compare in a side by side view.
+    rtype: html
+    """
+    try:
+
+        return send_file(os.path.abspath("lispat_app/static/samples.zip"), attachment_filename='samples.zip')
+
+    except Exception as e:
+        return str(e)
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(24)

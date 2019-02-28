@@ -144,15 +144,6 @@ class SideNavClass extends Component {
                   <NavText>Graph</NavText>
                 </NavItem>
               ) : null}
-              <NavItem eventKey="Download">
-                <NavIcon title="Download sample files">
-                  <i
-                    className="fa fa-fw fa-file-download"
-                    style={{ fontSize: '1.75em' }}
-                  />
-                </NavIcon>
-                <NavText>Graph</NavText>
-              </NavItem>
             </SideNav.Nav>
           </SideNav>
         </ClickOutside>

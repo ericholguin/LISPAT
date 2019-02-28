@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Col, Container, Row, Button } from 'react-bootstrap';
 import './help.css';
 
-var GifPlayer = require('react-gif-player');
+const GifPlayer = require('react-gif-player');
 
 class HelpPage extends Component {
   constructor(props, context) {

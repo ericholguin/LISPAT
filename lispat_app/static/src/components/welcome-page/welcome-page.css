@@ -29,3 +29,15 @@
     padding: 15px;
   }
 }
+
+
+.download-button {
+  background-color: rgba(255, 245, 250, 0.95);
+  padding: 5px 5px 5px 5px;
+  font-size: 20px;
+  font-weight: bolder;
+  color: #4a4a4a;
+  border: none;
+  margin-left: 415px;
+  margin-top: 20px;
+}
