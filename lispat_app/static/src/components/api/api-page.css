@@ -1,15 +1,10 @@
-.hello-world {
-  margin-top: 10rem;
-  font-size: 2rem;
-  text-align: center;
-}
-
-.welcome-page-container {
+.api-page-container {
   height: 80vh;
   overflow: auto;
   margin-top: 15px !important;
   border-radius: 20px;
   color: white !important;
+  border: 1px solid white;
 }
 
 .markdown-body {

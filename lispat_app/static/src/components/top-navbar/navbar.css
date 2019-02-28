@@ -27,11 +27,17 @@
 }
 .font-right {
   color: #4a90e2;
+  background-color: black;
   font-family: 'Avenir Next', sans-serif, serif;
   font-weight: bolder;
   padding-left: 20px;
   font-size: 23px;
 }
+
+.top {
+  background-color: black;
+}
+
 body {
   background-color: #404040;
   height: 70%;

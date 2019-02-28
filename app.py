@@ -26,6 +26,7 @@ ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
 
+
 def allowed_file(filename):
     """Summary: For a given file, return whether it's an allowed type."""
     return '.' in filename and \
@@ -45,12 +46,14 @@ def save_file(file, filenames):
         file.save(destination)
         filenames.append(destination)
 
+
 def delete_files():
     """ Cleans the upload directory."""
     try:
         shutil.rmtree(os.path.abspath("lispat_app/static/uploads"))
     except RuntimeError:
         logger.getLogger().error("Error cleaning storage")
+
 
 @app.route("/")
 def index():
@@ -82,12 +85,14 @@ def upload():
         data = {}
         # Command Manager
         manager = CommandManager()
-        #Clean previous files
-        args5 = args_clean()
-        app_main(args5, manager)
+
         # Target folder for these uploads.
         if not os.path.exists(UPLOAD_FOLDER):
             os.mkdir(UPLOAD_FOLDER)
+
+        #Clean previous files
+        args5 = args_clean()
+        app_main(args5, manager)
 
         uploads = request.files
 
@@ -134,7 +139,6 @@ def graph():
         webbrowser.open("file://" + html_file)
         resp = Response(status=200)
         return resp
-
 
 
 if __name__ == "__main__":

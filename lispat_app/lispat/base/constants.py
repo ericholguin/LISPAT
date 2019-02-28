@@ -107,6 +107,7 @@ Options:
 
 """
 
+
 def args_convert(filenames):
     args = {
         "convert": True,
@@ -131,6 +132,7 @@ def args_convert(filenames):
         "--text": False
     }
     return args
+
 
 def args_filter():
     args = {
@@ -157,6 +159,7 @@ def args_filter():
     }
     return args
 
+
 def args_json():
     args = {
         "convert": False,
@@ -164,7 +167,7 @@ def args_json():
         "--docB": False,
         "filter": False,
         "data": True,
-        "graph":False,
+        "graph": False,
         "all": False,
         "compare": False,
         "--standard": False,
@@ -181,6 +184,7 @@ def args_json():
         "--text": False
     }
     return args
+
 
 def args_clean():
     args = {
@@ -207,6 +211,7 @@ def args_clean():
     }
     return args
 
+
 def args_all():
     args = {
         "convert": False,
@@ -232,6 +237,7 @@ def args_all():
     }
     return args
 
+
 def args_graph():
     args = {
         "convert": False,
@@ -239,7 +245,7 @@ def args_graph():
         "--docB": False,
         "filter": False,
         "data": False,
-        "graph":True,
+        "graph": True,
         "all": False,
         "compare": False,
         "--standard": False,

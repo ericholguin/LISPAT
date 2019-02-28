@@ -14,25 +14,42 @@ class DataUpload extends Component {
     this.state = {
       file1: null,
       file2: null,
-      loaded: 0,
       loading: false,
+      error1: false,
+      error2: false,
     };
   }
 
   setFileOne = file => {
-    this.setState({
-      file1: file,
-    });
+    if (file === false) {
+      this.setState({
+        error1: true,
+        file1: null,
+      });
+    } else {
+      this.setState({
+        file1: file,
+        error1: false,
+      });
+    }
   };
 
   setFileTwo = file => {
-    this.setState({
-      file2: file,
-    });
+    if (file === false) {
+      this.setState({
+        error2: true,
+        file2: null,
+      });
+    } else {
+      this.setState({
+        file2: file,
+        error2: null,
+      });
+    }
   };
 
   handleUpload = () => {
-    const { file1, file2 } = this.state;
+    const { file1, file2, error1, error2, } = this.state;
     const { stateChange, getData } = this.props;
     const data = new FormData();
     data.append('file1', file1, file1.name);
@@ -59,7 +76,7 @@ class DataUpload extends Component {
   };
 
   render() {
-    const { file1, file2, loading } = this.state;
+    const { file1, file2, loading, error1, error2 } = this.state;
     return (
       <div>
         <br />
@@ -74,11 +91,17 @@ class DataUpload extends Component {
                 <div className="font-home">1st Document:</div>
                 <FileUpload handleStateChange={this.setFileOne} />
                 {file1 ? <div className="file-name">{file1.name}</div> : ''}
+                {error1 ? (
+                  <div className="error">Error: Unacceptable file type</div>
+                ) : null}
               </Col>
               <Col>
                 <div className="font-home">2nd Document:</div>
                 <FileUpload handleStateChange={this.setFileTwo} />
                 {file2 ? <div className="file-name">{file2.name}</div> : ''}
+                {error2 ? (
+                  <div className="error">Error: Unacceptable file type</div>
+                ) : null}
               </Col>
             </Row>
           </div>

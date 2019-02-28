@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
-import { Container, Row, Col } from 'react-bootstrap';
 import TopNav from './components/top-navbar/index';
 import DataUpload from './components/data-upload/index';
 import './components/side-navbar/side-navbar.css';
 import SideNavClass from './components/side-navbar/index';
 import WelcomePage from './components/welcome-page/index';
 import Lispat from './components/lispat';
-import Graph from './components/graph';
 
 class App extends Component {
   constructor(props) {
@@ -52,8 +50,8 @@ class App extends Component {
       this.setState({
         showHome: false,
         showData: false,
-        showLispat: false,
-        showGraph: true,
+        showLispat: true,
+        showGraph: false,
       });
     }
   };
@@ -94,7 +92,7 @@ class App extends Component {
   };
 
   render() {
-    const { showHome, showData, showLispat, showGraph, data } = this.state;
+    const { showHome, showData, showLispat, data } = this.state;
     return (
       <div>
         <TopNav />
@@ -112,9 +110,6 @@ class App extends Component {
         <div className={showLispat ? 'show' : 'hide'}>
           <Lispat data={data} />
         </div>
-        <div className={showGraph ? 'show' : 'hide'}>
-          <Graph />
-        </div>
         <SideNavClass
           handleStateChange={this.switchView}
           graph={this.showGraphNav()}
@@ -122,11 +117,6 @@ class App extends Component {
           lispat={this.showLispatNav()}
           onChange={showLispat}
         />
-        <Container>
-          <Row>
-            <Col className="pull-right" />
-          </Row>
-        </Container>
       </div>
     );
   }

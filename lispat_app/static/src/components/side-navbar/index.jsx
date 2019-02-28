@@ -4,6 +4,9 @@ import propTypes from 'prop-types';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import './side-navbar.css';
 import ClickOutside from 'react-click-outside';
+import axios from "axios/index";
+
+const endpoint = 'http://localhost:5000/graph';
 
 class SideNavClass extends Component {
   constructor(props) {
@@ -27,6 +30,13 @@ class SideNavClass extends Component {
       });
     }
   }
+
+  handleGraph = () => {
+    axios.get(endpoint).then(res => {
+      const resp = res.data;
+      console.log(resp);
+    });
+  };
 
   handleSelect = eventKey => {
     const { handleStateChange } = this.props;
@@ -124,8 +134,8 @@ class SideNavClass extends Component {
                 </NavItem>
               ) : null}
               {graph ? (
-                <NavItem eventKey="Graph" active={activeGraph}>
-                  <NavIcon>
+                <NavItem eventKey="Graph">
+                  <NavIcon onClick={this.handleGraph}>
                     <i
                       className="fa fa-fw fa-chart-area"
                       style={{ fontSize: '1.75em' }}
