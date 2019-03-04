@@ -9,7 +9,7 @@ from lispat_app.lispat.base.manager import CommandManager
 logger = Logger("Main")
 
 nltk.download('stopwords')
-
+nltk.download('punkt')
 
 def app_main(args, manager, file=None):
     """
