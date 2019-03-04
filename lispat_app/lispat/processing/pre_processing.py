@@ -7,7 +7,7 @@ from collections import Counter
 from lispat_app.lispat.utils.logger import Logger
 from lispat_app.lispat.utils.colors import bcolors
 from lispat_app.lispat.factory.filtered_factory import FilteredFactory
-
+import en_core_web_sm
 
 
 logger = Logger("Noise Filter")
@@ -33,8 +33,8 @@ class Preproccessing:
         self.clean_txt_data = None
         self.clean_txt_array = None
 
-        self.nlp = spacy.load('en')
-        self.nlp_filtered = spacy.load('en')
+        self.nlp = en_core_web_sm.load()
+        self.nlp_filtered = en_core_web_sm.load()
 
         self.filter = FilteredFactory()
 
