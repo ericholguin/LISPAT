@@ -24,7 +24,7 @@
   background-color: #212121;
 }
 
-.assets{
+.assets {
   font-weight: bolder;
   font-size: larger;
   color: #4a90e2;
@@ -38,7 +38,7 @@
   }
 }
 
-.download-container{
+.download-container {
   position: fixed;
   left: 832px;
   margin-top: 20px;
