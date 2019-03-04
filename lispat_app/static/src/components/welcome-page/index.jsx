@@ -17,7 +17,7 @@ class WelcomePage extends Component {
       url: 'http://localhost:5000/assets/samples.zip',
       method: 'GET',
       responseType: 'blob', // important
-    }).then((response) => {
+    }).then(response => {
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
@@ -37,13 +37,13 @@ class WelcomePage extends Component {
             </div>
           </Col>
           <Col>
-              <Button
-                type="button"
-                className="download-button"
-                onClick={this.handleDownload}
-              >
-                Download Assets
-              </Button>
+            <Button
+              type="button"
+              className="download-button"
+              onClick={this.handleDownload}
+            >
+              Download Assets
+            </Button>
           </Col>
         </Row>
       </div>
