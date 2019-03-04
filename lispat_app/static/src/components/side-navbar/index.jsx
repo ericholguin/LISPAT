@@ -76,7 +76,7 @@ class SideNavClass extends Component {
   };
 
   render() {
-    const { config, lispat, graph } = this.props;
+    const { lispat, graph } = this.props;
     const {
       expanded,
       activeLispat,
@@ -154,7 +154,6 @@ class SideNavClass extends Component {
 
 SideNavClass.propTypes = {
   handleStateChange: propTypes.func,
-  config: propTypes.bool,
   lispat: propTypes.bool,
   graph: propTypes.bool,
   activeLispat: propTypes.bool,

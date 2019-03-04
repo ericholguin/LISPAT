@@ -216,3 +216,7 @@ chrome-user-data
 .vscode
 *.swp
 *.swo
+
+
+# Zip files
+*.zip

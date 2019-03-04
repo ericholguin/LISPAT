@@ -286,7 +286,7 @@ class Lispat extends Component {
               <Col className="col-sm-12">
                 <div className="doc-container keyword-class">
                   <div className="key-header">
-                    Submission
+                    1st Document
                     <br /> Top Keywords
                   </div>
                   <hr className={styles.bar} />
@@ -322,6 +322,7 @@ class Lispat extends Component {
                     style={{
                       margin: '0 auto',
                       maxWidth: 800,
+                      maxHeight: 45,
                     }}
                   />
                 </div>
@@ -329,7 +330,7 @@ class Lispat extends Component {
               <Col className="col-sm-12">
                 <div className="doc-container keyword-class">
                   <div className="key-header">
-                    Standard
+                    2nd Document
                     <br /> Top Keywords
                   </div>
                   <hr className={styles.bar} />
@@ -363,8 +364,9 @@ class Lispat extends Component {
                       this.updateSearchStandard(search);
                     }}
                     style={{
-                      margin: '0 auto',
+                      margin: '10px 0 20px 0',
                       maxWidth: 800,
+                      maxHeight: 45,
                     }}
                   />
                 </div>

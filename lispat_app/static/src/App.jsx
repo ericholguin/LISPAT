@@ -6,6 +6,8 @@ import DataUpload from './components/data-upload/index';
 import './components/side-navbar/side-navbar.css';
 import SideNavClass from './components/side-navbar/index';
 import WelcomePage from './components/welcome-page/index';
+import HelpPage from './components/help/index';
+import ApiPage from './components/api/index';
 import Lispat from './components/lispat';
 
 class App extends Component {
@@ -16,7 +18,8 @@ class App extends Component {
       showData: false,
       showLispat: false,
       showGraph: false,
-      showConfig: false,
+      showHelp: false,
+      showApi: false,
       data: null,
     };
   }
@@ -28,6 +31,8 @@ class App extends Component {
         showData: false,
         showLispat: false,
         showGraph: false,
+        showHelp: false,
+        showApi: false,
       });
     }
     if (view === 'Data') {
@@ -36,6 +41,8 @@ class App extends Component {
         showData: true,
         showLispat: false,
         showGraph: false,
+        showHelp: false,
+        showApi: false,
       });
     }
     if (view === 'Lispat') {
@@ -44,6 +51,8 @@ class App extends Component {
         showData: false,
         showLispat: true,
         showGraph: false,
+        showHelp: false,
+        showApi: false,
       });
     }
     if (view === 'Graph') {
@@ -52,6 +61,28 @@ class App extends Component {
         showData: false,
         showLispat: true,
         showGraph: false,
+        showHelp: false,
+        showApi: false,
+      });
+    }
+    if (view === 'Help') {
+      this.setState({
+        showHome: false,
+        showData: false,
+        showLispat: false,
+        showGraph: false,
+        showHelp: true,
+        showApi: false,
+      });
+    }
+    if (view === 'Api') {
+      this.setState({
+        showHome: false,
+        showData: false,
+        showLispat: false,
+        showGraph: false,
+        showHelp: false,
+        showApi: true,
       });
     }
   };
@@ -64,6 +95,8 @@ class App extends Component {
         showData: false,
         showHome: false,
         showConfig: true,
+        showData: false,
+        showHome: false,
       });
     }
   };
@@ -71,11 +104,6 @@ class App extends Component {
   showGraphNav = () => {
     const { showGraph, data } = this.state;
     return showGraph === true || data !== null;
-  };
-
-  showConfigNav = () => {
-    const { showConfig } = this.state;
-    return showConfig === true;
   };
 
   showLispatNav = () => {
@@ -92,12 +120,25 @@ class App extends Component {
   };
 
   render() {
-    const { showHome, showData, showLispat, data } = this.state;
+    const {
+      showHome,
+      showData,
+      showLispat,
+      showApi,
+      showHelp,
+      data,
+    } = this.state;
     return (
       <div>
-        <TopNav />
+        <TopNav handleStateChange={this.switchView} />
         <div className={showHome ? 'show' : 'hide'}>
           <WelcomePage />
+        </div>
+        <div className={showHelp ? 'show' : 'hide'}>
+          <HelpPage />
+        </div>
+        <div className={showApi ? 'show' : 'hide'}>
+          <ApiPage />
         </div>
         {showData ? (
           <DataUpload
@@ -113,7 +154,6 @@ class App extends Component {
         <SideNavClass
           handleStateChange={this.switchView}
           graph={this.showGraphNav()}
-          config={this.showConfigNav()}
           lispat={this.showLispatNav()}
           onChange={showLispat}
         />

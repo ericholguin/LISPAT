@@ -82,12 +82,13 @@ class DataUpload extends Component {
         <br />
         <br />
         <div className="markdown-body body-upload">
-          <div className="header-upload"> Upload Documents </div>
+          <div className="header-upload"> Upload Documents</div>
+          <div className="sub-header-upload">.pdf .docx or .doc</div>
           <hr />
           <div className="center-grid">
             <Row>
               <Col>
-                <div className="font-home">First:</div>
+                <div className="font-home">1st Document:</div>
                 <FileUpload handleStateChange={this.setFileOne} />
                 {file1 ? <div className="file-name">{file1.name}</div> : ''}
                 {error1 ? (
@@ -95,7 +96,7 @@ class DataUpload extends Component {
                 ) : null}
               </Col>
               <Col>
-                <div className="font-home">Second: </div>
+                <div className="font-home">2nd Document:</div>
                 <FileUpload handleStateChange={this.setFileTwo} />
                 {file2 ? <div className="file-name">{file2.name}</div> : ''}
                 {error2 ? (
