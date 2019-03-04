@@ -198,8 +198,8 @@ class CommandManager:
             else:
                 nlp.max_length = DocA_size + 1
 
-            csv = args_.csv_with_headers(self.docB_txt_path, self.docA_txt_path,
-                                         DocB, DocA)
+            csv = args_.csv_with_headers(self.docA_txt_path, self.docB_txt_path,
+                                         DocA, DocB)
 
             dataframe = pd.read_csv(csv, names=["Document Type",
                                     "Document", "Text"])

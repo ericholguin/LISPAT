@@ -16,6 +16,7 @@
   /*height: 35.5vh;*/
   height: 37vh;
   text-align: center;
+  overflow: visible;
 }
 
 .container-width {

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Markdown from 'react-markdown';
 import { Col, Row, Button } from 'react-bootstrap';
-import './welcome-page.css';
-import 'github-markdown-css';
 import axios from 'axios/index';
 import README from './README.md';
+import './welcome-page.css';
+import 'github-markdown-css';
 
 class WelcomePage extends Component {
   constructor(props, context) {
@@ -36,7 +36,7 @@ class WelcomePage extends Component {
               <Markdown escapeHtml={false} source={this.ContentMarkdown} />
             </div>
           </Col>
-          <Col className="col-sm-4 download-container">
+          <Col>
             <div className="download-container">
               <Button
                 type="button"

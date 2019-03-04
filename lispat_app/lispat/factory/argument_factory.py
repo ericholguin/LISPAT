@@ -224,10 +224,10 @@ class ArgumentFactory:
                 myFields = ['Document Type', 'Document', 'Text']
                 writer = csv.DictWriter(outputfile, fieldnames=myFields)
                 writer.writeheader()
-                writer.writerow({'Document Type': 'standard',
-                                'Document': docA_name, 'Text': docA_data})
-                writer.writerow({'Document Type': 'submission',
+                writer.writerow({'Document Type': '1st Document',
                                 'Document': docB_name, 'Text': docB_data})
+                writer.writerow({'Document Type': '2nd Document',
+                                'Document': docA_name, 'Text': docA_data})
 
                 return csv_filename
 

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { Navbar, Nav } from 'react-bootstrap';
-import style from './navbar.css';
 import axios from 'axios/index';
+import style from './navbar.css';
 
 class TopNav extends Component {
   constructor(props) {
