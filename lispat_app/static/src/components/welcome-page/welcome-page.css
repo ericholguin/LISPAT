@@ -18,10 +18,18 @@
   max-width: 980px;
   padding: 45px;
   color: azure;
-  position: fixed;
-  left: 0;
+  /*position: fixed;*/
+  /*left: 0;*/
   margin: 0 auto 0 70px;
   background-color: #212121;
+}
+
+.assets {
+  font-weight: bolder;
+  font-size: larger;
+  color: #4a90e2;
+  margin-left: 20px;
+  margin-top: 20px;
 }
 
 @media (max-width: 767px) {
@@ -30,6 +38,11 @@
   }
 }
 
+.download-container {
+  position: fixed;
+  left: 832px;
+  margin-top: 20px;
+}
 
 .download-button {
   background-color: rgba(255, 245, 250, 0.95);
@@ -38,6 +51,5 @@
   font-weight: bolder;
   color: #4a4a4a;
   border: none;
-  margin-left: 415px;
   margin-top: 20px;
 }

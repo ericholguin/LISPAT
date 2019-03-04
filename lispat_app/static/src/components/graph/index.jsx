@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { Col, Container, Row, Button } from 'react-bootstrap';
 import LoadingSpinner from './spinner';
 
-const endpoint = 'http://localhost:5000/graph';
+const endpoint = 'https://lispat.herokuapp.com/graph';
 
 class Graph extends Component {
   constructor(props) {
