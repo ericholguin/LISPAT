@@ -18,6 +18,9 @@ logger = Logger("LISPAT - Flask App")
 app = Flask(__name__, static_folder="lispat_app/static/build/bundle",
             template_folder="lispat_app/static/build")
 
+app.config['SESSION_TYPE'] = 'memcached'
+app.config['SECRET_KEY'] = os.urandom(24)
+
 CORS(app, expose_headers='Authorization')
 
 UPLOAD_FOLDER = os.path.abspath("lispat_app/static/uploads/")
@@ -156,5 +159,4 @@ def download():
         return str(e)
 
 if __name__ == "__main__":
-    app.secret_key = os.urandom(24)
     app.run(debug=True)

@@ -10,7 +10,6 @@ __pycache__/
 .Python
 <<<<<<< HEAD
 =======
-build/
 >>>>>>> e1e91cc8d3c6d4463c545c1278913072b19d4464
 develop-eggs/
 dist/
