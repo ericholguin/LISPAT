@@ -6,7 +6,7 @@ import FileUpload from './upload';
 import './home-upload.css';
 import LoadingSpinner from './spinner';
 
-const endpoint = 'http://localhost:5000/upload';
+const endpoint = 'https://lispat.herokuapp.com/upload';
 
 class DataUpload extends Component {
   constructor(props) {

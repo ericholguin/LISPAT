@@ -4,6 +4,8 @@ import { Navbar, Nav } from 'react-bootstrap';
 import axios from 'axios/index';
 import style from './navbar.css';
 
+const endpoint = 'https://lispat.herokuapp.com/assets/samples.zip';
+
 class TopNav extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +17,7 @@ class TopNav extends Component {
 
   handleDownload = () => {
     axios({
-      url: 'http://localhost:5000/assets/samples.zip',
+      url: endpoint,
       method: 'GET',
       responseType: 'blob', // important
     }).then(response => {
