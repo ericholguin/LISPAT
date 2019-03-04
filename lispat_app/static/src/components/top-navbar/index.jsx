@@ -14,20 +14,6 @@ class TopNav extends Component {
     };
   }
 
-  handleDownload = () => {
-    axios({
-      url: 'http://localhost:5000/assets/samples.zip',
-      method: 'GET',
-      responseType: 'blob', // important
-    }).then((response) => {
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', 'samples.zip');
-      document.body.appendChild(link);
-      link.click();
-    });
-  };
 
   handleSelect = eventKey => {
     const { handleStateChange } = this.props;
@@ -69,11 +55,6 @@ class TopNav extends Component {
               </Nav.Link>
               <Nav.Link eventKey="Help" active={false} href="#help">
                 <span className={style['font-right']}>Help</span>
-              </Nav.Link>
-              <Nav.Link title="Download samples" active={false} onClick={this.handleDownload}>
-                <span className={style['font-right']}>
-                  <i className="fas fa-file-download" />
-                </span>
               </Nav.Link>
               <Nav.Link
                 href="https://github.com/brummetj/LISPAT"

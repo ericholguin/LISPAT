@@ -42,7 +42,7 @@ class WelcomePage extends Component {
                 className="download-button"
                 onClick={this.handleDownload}
               >
-                Download Samples
+                Download Assets
               </Button>
           </Col>
         </Row>

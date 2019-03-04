@@ -29,9 +29,9 @@ class Visualization:
         corpus = st.CorpusFromPandas(dataframe, category_col='Document Type',
                                      text_col='Text', nlp=self.nlp).build()
 
-        html = st.produce_scattertext_explorer(corpus, category='submission',
-                                               category_name='Submission',
-                                               not_category_name='Standard',
+        html = st.produce_scattertext_explorer(corpus, category='1st Document',
+                                               category_name='1st Document',
+                                               not_category_name='2nd Document',
                                                width_in_pixels=1000)
 
         logger.getLogger().info("Opening Standard Visual")
@@ -43,9 +43,9 @@ class Visualization:
                                      text_col='Text', nlp=self.nlp).build()
 
         html = word_similarity_explorer(corpus,
-                                        category='submission',
-                                         category_name='Submission',
-                                         not_category_name='Standard',
+                                        category='1st Document',
+                                         category_name='1st Document',
+                                         not_category_name='2nd Document',
                                          target_term=word,
                                          minimum_term_frequency=5,
                                          pmi_threshold_coefficient=4,
