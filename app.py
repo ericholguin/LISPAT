@@ -113,9 +113,9 @@ def upload():
             args2 = args_filter()
             app_main(args2, manager)
 
-            args3 = args_graph()
-            thread = threading.Thread(target=app_main, args=[args3, manager])
-            thread.start()
+            # args3 = args_graph()
+            # thread = threading.Thread(target=app_main, args=[args3, manager])
+            # thread.start()
 
             args4 = args_json()
             data = app_main(args4, manager)
