@@ -14,7 +14,7 @@ class WelcomePage extends Component {
 
   handleDownload = () => {
     axios({
-      url: 'http://localhost:5000/assets/samples.zip',
+      url: 'https://lispat.herokuapp.com/assets/samples.zip',
       method: 'GET',
       responseType: 'blob', // important
     }).then(response => {
