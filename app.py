@@ -129,7 +129,7 @@ def upload():
             return(make_response(('Error')))
 
 
-@app.route("/graph", methods=['GET', 'POST'])
+@app.route("/Graph.html")
 def graph():
     """
     Summary: Uses uploaded documents and performs processing.
@@ -139,7 +139,7 @@ def graph():
     """
     try:
 
-        return send_file(os.path.abspath("lispat_app/static/Graph.html"), attachment_filename='Graph.html')
+        return send_static_file(os.path.abspath("lispat_app/static/Graph.html"), attachment_filename='Graph.html')
 
     except Exception as e:
         return str(e)
