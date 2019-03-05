@@ -1,5 +1,7 @@
 # LISPAT - Lost in Space and Time
 
+**_IMPORTANT_**: Please note due to limited resources for our application hosting large files will be difficult to process. We highly encourage the use of our samples provided.
+
 ## _When Plagiarism is a Good Thing_
 
 _Sr. Design Project – Medtronic_
