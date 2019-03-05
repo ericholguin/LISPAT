@@ -21,7 +21,7 @@ class Visualization:
         if not os.path.isdir(vis_dir):
             os.mkdir(vis_dir)
 
-        self.std_file = os.path.abspath(vis_dir + "/Graph" + ".html")
+        self.std_file = os.path.abspath(vis_dir + "/graph" + ".html")
         self.term_file = os.path.abspath(vis_dir + "/Similarity-Visual" + ".html")
 
 
@@ -35,7 +35,11 @@ class Visualization:
                                                width_in_pixels=1000)
 
         logger.getLogger().info("Opening Standard Visual")
+
         open(self.std_file, 'wb').write(html.encode('utf-8'))
+
+        if os.path.isfile(self.std_file):
+            logger.getLogger().info("Graph file created")
 
 
     def word_similarity_graph(self, dataframe, word):

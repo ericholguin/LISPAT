@@ -6,7 +6,7 @@ import './side-navbar.css';
 import ClickOutside from 'react-click-outside';
 import axios from 'axios/index';
 
-const endpoint = 'https://lispat.herokuapp.com/graph';
+const endpoint = 'https://lispat.herokuapp.com/graph.html';
 
 class SideNavClass extends Component {
   constructor(props) {
@@ -47,7 +47,7 @@ class SideNavClass extends Component {
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', 'Graph.html');
+      link.setAttribute('download', 'graph.html');
       document.body.appendChild(link);
       link.click();
     });

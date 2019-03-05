@@ -129,7 +129,7 @@ def upload():
             return(make_response(('Error')))
 
 
-@app.route("/graph")
+@app.route("/graph.html")
 def graph():
     """
     Summary: Uses uploaded documents and performs processing.
@@ -137,14 +137,8 @@ def graph():
     return: The two documents to compare in a side by side view.
     rtype: html
     """
-    try:
-
-        return app.send_static_file(os.path.abspath("lispat_app/static/Graph.html"))
-
-    except Exception as e:
-        return str(e)
-
-    #html_file = os.path.abspath("lispat_app/static/uploads/visuals/Standard-Visual.html")
+    html_file = os.path.abspath("lispat_app/static/graph.html")
+    return send_file(html_file, attachment_filename='graph.html')
     #return app.send_static_file(html_file)
 
     #if os.path.isfile(html_file):
