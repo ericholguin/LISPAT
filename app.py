@@ -138,13 +138,13 @@ def graph():
     rtype: html
     """
     html_file = os.path.abspath("lispat_app/static/graph.html")
-    return send_file(html_file, attachment_filename='graph.html')
+    #return send_file(html_file, attachment_filename='graph.html')
     #return app.send_static_file(html_file)
 
-    #if os.path.isfile(html_file):
-    #    webbrowser.open_new_tab("file://" + html_file)
-    #    resp = Response(status=200)
-    #    return resp
+    if os.path.isfile(html_file):
+        webbrowser.open_new_tab("file://" + html_file)
+        resp = Response(status=200)
+        return resp
 
 @app.route("/assets/samples.zip")
 def download():
