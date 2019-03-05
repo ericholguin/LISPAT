@@ -46,7 +46,7 @@ class CommandManager:
 
         self.doc_worker = None
 
-        self.model = NLPModel()
+        #self.model = NLPModel()
 
     def create_path(self, docA_path, docB_path=None):
         """
@@ -128,7 +128,7 @@ class CommandManager:
             self.docA_filter.most_frequent()
             self.docA_filter.clean_most_frequent()
             self.topDocA = self.docA_filter.get_clean_top_words()
-            self.topNDocA = self.docA_filter.most_common_ngrams()
+            #self.topNDocA = self.docA_filter.most_common_ngrams()
             self.docA_name = os.path.splitext(self.docA_path)[0]
             self.docA_filter.clean_ngrams()
         if self.docB_filter is None and self.docA_txt is not None:
@@ -136,7 +136,7 @@ class CommandManager:
             self.docA_filter.most_frequent()
             self.docA_filter.clean_most_frequent()
             self.topDocB = self.docA_filter.get_clean_top_words()
-            self.topNDocB = self.docA_filter.most_common_ngrams()
+            #self.topNDocB = self.docA_filter.most_common_ngrams()
             self.docB_name = os.path.splitext(self.docA_path)[0]
             self.docA_filter.clean_ngrams()
         if self.docB_filter is not None:
@@ -144,7 +144,7 @@ class CommandManager:
             self.docB_filter.most_frequent()
             self.docB_filter.clean_most_frequent()
             self.topDocB = self.docB_filter.get_clean_top_words()
-            self.topNDocB = self.docB_filter.most_common_ngrams()
+            #self.topNDocB = self.docB_filter.most_common_ngrams()
             self.docB_name = os.path.splitext(self.docB_path)[0]
             self.docB_filter.clean_ngrams()
 
@@ -167,8 +167,8 @@ class CommandManager:
             "submission_file_name": self.docB_name,
             "standard_keywords": self.topDocA,
             "submission_keywords": self.topDocB,
-            "standard_phrases": self.topNDocA,
-            "submission_phrases": self.topNDocB,
+            "standard_phrases": [],
+            "submission_phrases": [],
             "date": datetime.datetime.now(),
         }
 

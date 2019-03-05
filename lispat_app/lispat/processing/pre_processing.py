@@ -7,7 +7,7 @@ from collections import Counter
 from lispat_app.lispat.utils.logger import Logger
 from lispat_app.lispat.utils.colors import bcolors
 from lispat_app.lispat.factory.filtered_factory import FilteredFactory
-import en_core_web_sm
+#import en_core_web_sm
 
 
 logger = Logger("Noise Filter")
@@ -33,8 +33,8 @@ class Preproccessing:
         self.clean_txt_data = None
         self.clean_txt_array = None
 
-        self.nlp = en_core_web_sm.load()
-        self.nlp_filtered = en_core_web_sm.load()
+        #self.nlp = en_core_web_sm.load()
+        #self.nlp_filtered = en_core_web_sm.load()
 
         self.filter = FilteredFactory()
 
@@ -71,13 +71,13 @@ class Preproccessing:
             # Turn filtered words back to a spacy doc for better data handling.
             txt = " ".join(words)
             txt_len = len(txt)
-            self.nlp_filtered.max_length = txt_len + 1
-            nlp_filtered = self.nlp_filtered(txt)
+            #self.nlp_filtered.max_length = txt_len + 1
+            #nlp_filtered = self.nlp_filtered(txt)
 
             # Set the class variables
             self.clean_txt_array = words
             self.clean_txt_data = txt
-            self.nlp_filtered = nlp_filtered
+            #self.nlp_filtered = nlp_filtered
 
         except RuntimeError as error:
             logger.getLogger().error("Noise filter", error)
@@ -134,7 +134,7 @@ class Preproccessing:
         ngram_counts = Counter(self.filter.find_ngrams(self.txt_data.split(), 2))
         top_ngrams = [ngram for ngram, ngram_count in ngram_counts.most_common(100)]
         self.top_ngrams = top_ngrams
-        print(self.top_ngrams)
+        #print(self.top_ngrams)
         return self.top_ngrams
 
     def clean_ngrams(self):
@@ -151,7 +151,7 @@ class Preproccessing:
             neighbor_dict = {'word': word, 'top_neigbors': new_tuple_list}
             neighbors_list.append(neighbor_dict)
 
-        print(neighbors_list)
+        #print(neighbors_list)
 
     #GETTER FUNCTIONS
     def get_raw_txt(self):
