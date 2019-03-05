@@ -119,7 +119,7 @@ def upload():
 
             args4 = args_json()
             data = app_main(args4, manager)
-
+            logger.getLogger().debug("Responding")
             js = json.dumps(data)
             resp = Response(js, status=200, mimetype="application/json")
 
