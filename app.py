@@ -10,7 +10,7 @@ from werkzeug.utils import secure_filename
 from lispat_app.lispat.utils.logger import Logger
 from lispat_app.lispat.base.manager import CommandManager
 from lispat_app.lispat.base.constants import args_convert, args_filter, args_json, args_clean, args_all, args_graph
-from flask import Flask, render_template, request, make_response, session, json, Response, send_file, send_static_file
+from flask import Flask, render_template, request, make_response, session, json, Response, send_file
 
 
 logger = Logger("LISPAT - Flask App")
@@ -129,7 +129,7 @@ def upload():
             return(make_response(('Error')))
 
 
-@app.route("/Graph.html")
+@app.route("/graph")
 def graph():
     """
     Summary: Uses uploaded documents and performs processing.
@@ -139,7 +139,7 @@ def graph():
     """
     try:
 
-        return send_static_file(os.path.abspath("lispat_app/static/Graph.html"), attachment_filename='Graph.html')
+        return app.send_static_file(os.path.abspath("lispat_app/static/Graph.html"))
 
     except Exception as e:
         return str(e)
