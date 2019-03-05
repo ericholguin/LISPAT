@@ -113,7 +113,8 @@ def upload():
             args2 = args_filter()
             app_main(args2, manager)
 
-            # args3 = args_graph()
+            args3 = args_graph()
+            app_main(args3, manager)
             # thread = threading.Thread(target=app_main, args=[args3, manager])
             # thread.start()
 
@@ -137,9 +138,10 @@ def graph():
     rtype: html
     """
     html_file = os.path.abspath("lispat_app/static/uploads/visuals/Standard-Visual.html")
+    #return app.send_static_file(html_file)
 
     if os.path.isfile(html_file):
-        webbrowser.open("file://" + html_file)
+        webbrowser.open_new_tab("file://" + html_file)
         resp = Response(status=200)
         return resp
 
