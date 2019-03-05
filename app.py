@@ -113,7 +113,7 @@ def upload():
             args2 = args_filter()
             app_main(args2, manager)
 
-            # args3 = args_graph()
+            args3 = args_graph()
             # thread = threading.Thread(target=app_main, args=[args3, manager])
             # thread.start()
 
