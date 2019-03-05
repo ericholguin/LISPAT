@@ -12,9 +12,9 @@ _Sr. Design Project – Medtronic_
 
 [**Home**](https://lispat.herokuapp.com/) - LISPAT's Home Page
 
-[**API Reference**](https://lispat.herokuapp.com/api) - Detailed reference for LISPAT's API
+[**API Reference**](https://lispat.herokuapp.com/#api) - Detailed reference for LISPAT's API
 
-[**Usage Guides**](https://lispat.herokuapp.com/help) - How to use LISPAT and its features
+[**Usage Guides**](https://lispat.herokuapp.com/#help) - How to use LISPAT and its features
 
 ## 💪 Features
 
