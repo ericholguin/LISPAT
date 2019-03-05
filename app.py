@@ -10,7 +10,7 @@ from werkzeug.utils import secure_filename
 from lispat_app.lispat.utils.logger import Logger
 from lispat_app.lispat.base.manager import CommandManager
 from lispat_app.lispat.base.constants import args_convert, args_filter, args_json, args_clean, args_all, args_graph
-from flask import Flask, render_template, request, make_response, session, json, Response, send_file
+from flask import Flask, render_template, request, make_response, session, json, Response, send_file, send_static_file
 
 
 logger = Logger("LISPAT - Flask App")
