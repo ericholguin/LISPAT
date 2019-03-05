@@ -137,13 +137,20 @@ def graph():
     return: The two documents to compare in a side by side view.
     rtype: html
     """
-    html_file = os.path.abspath("lispat_app/static/uploads/visuals/Standard-Visual.html")
+    try:
+
+        return send_file(os.path.abspath("lispat_app/static/uploads/visuals/Standard-Visual.html"), attachment_filename='Standard-Visual.html')
+
+    except Exception as e:
+        return str(e)
+
+    #html_file = os.path.abspath("lispat_app/static/uploads/visuals/Standard-Visual.html")
     #return app.send_static_file(html_file)
 
-    if os.path.isfile(html_file):
-        webbrowser.open_new_tab("file://" + html_file)
-        resp = Response(status=200)
-        return resp
+    #if os.path.isfile(html_file):
+    #    webbrowser.open_new_tab("file://" + html_file)
+    #    resp = Response(status=200)
+    #    return resp
 
 @app.route("/assets/samples.zip")
 def download():

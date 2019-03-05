@@ -31,10 +31,25 @@ class SideNavClass extends Component {
     }
   }
 
+  //handleGraph = () => {
+  //  axios.get(endpoint).then(res => {
+  //    const resp = res.data;
+  //    console.log(resp);
+  //  });
+  //};
+
   handleGraph = () => {
-    axios.get(endpoint).then(res => {
-      const resp = res.data;
-      console.log(resp);
+    axios({
+      url: endpoint,
+      method: 'GET',
+      responseType: 'blob', // important
+    }).then(response => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'Standard-Visual.html');
+      document.body.appendChild(link);
+      link.click();
     });
   };
 
