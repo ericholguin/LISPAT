@@ -6,6 +6,8 @@ import README from './README.md';
 import './welcome-page.css';
 import 'github-markdown-css';
 
+const endpoint = 'https://lispat.herokuapp.com/assets/samples.zip';
+
 class WelcomePage extends Component {
   constructor(props, context) {
     super(props, context);
@@ -14,7 +16,7 @@ class WelcomePage extends Component {
 
   handleDownload = () => {
     axios({
-      url: 'https://lispat.herokuapp.com/assets/samples.zip',
+      url: endpoint,
       method: 'GET',
       responseType: 'blob', // important
     }).then(response => {
