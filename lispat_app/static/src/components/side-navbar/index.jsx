@@ -31,12 +31,12 @@ class SideNavClass extends Component {
     }
   }
 
-  //handleGraph = () => {
+  // handleGraph = () => {
   //  axios.get(endpoint).then(res => {
   //    const resp = res.data;
   //    console.log(resp);
   //  });
-  //};
+  // };
 
   handleGraph = () => {
     axios({
@@ -47,7 +47,7 @@ class SideNavClass extends Component {
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', 'Standard-Visual.html');
+      link.setAttribute('download', 'Graph.html');
       document.body.appendChild(link);
       link.click();
     });

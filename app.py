@@ -139,7 +139,7 @@ def graph():
     """
     try:
 
-        return send_file(os.path.abspath("lispat_app/static/uploads/visuals/Standard-Visual.html"), attachment_filename='Standard-Visual.html')
+        return send_file(os.path.abspath("lispat_app/static/Graph.html"), attachment_filename='Graph.html')
 
     except Exception as e:
         return str(e)

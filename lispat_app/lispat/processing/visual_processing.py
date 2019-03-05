@@ -16,12 +16,12 @@ class Visualization:
 
         self.nlp = nlp
 
-        vis_dir = os.path.abspath("lispat_app/static/uploads/visuals")
+        vis_dir = os.path.abspath("lispat_app/static")
 
         if not os.path.isdir(vis_dir):
             os.mkdir(vis_dir)
 
-        self.std_file = os.path.abspath(vis_dir + "/Standard-Visual" + ".html")
+        self.std_file = os.path.abspath(vis_dir + "/Graph" + ".html")
         self.term_file = os.path.abspath(vis_dir + "/Similarity-Visual" + ".html")
 
 
