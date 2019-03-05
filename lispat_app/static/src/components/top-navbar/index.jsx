@@ -4,7 +4,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 import axios from 'axios/index';
 import style from './navbar.css';
 
-const endpoint = 'https://lispat.herokuapp.com/assets/samples.zip';
+const endpoint = 'https://lispat.azurewebsites.net/assets/samples.zip';
 
 class TopNav extends Component {
   constructor(props) {

@@ -6,7 +6,7 @@ import './side-navbar.css';
 import ClickOutside from 'react-click-outside';
 import axios from 'axios/index';
 
-const endpoint = 'https://lispat.herokuapp.com/graph';
+const endpoint = 'https://lispat.azurewebsites.net/graph';
 
 class SideNavClass extends Component {
   constructor(props) {
