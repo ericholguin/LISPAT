@@ -59,7 +59,7 @@ class TopNav extends Component {
             this.handleSelect(selected);
           }}
         >
-          <Navbar.Brand href="#home" className={style.logo}>
+          <Navbar.Brand className={style.logo}>
             <span className={style.font}>LISPAT</span>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -70,15 +70,6 @@ class TopNav extends Component {
               </Nav.Link>
               <Nav.Link eventKey="Help" active={false} href="#help">
                 <span className={style['font-right']}>Help</span>
-              </Nav.Link>
-              <Nav.Link
-                title="Download samples"
-                active={false}
-                onClick={this.handleDownload}
-              >
-                <span className={style['font-right']}>
-                  <i className="fas fa-file-download" />
-                </span>
               </Nav.Link>
               <Nav.Link
                 href="https://github.com/brummetj/LISPAT"

@@ -29,3 +29,12 @@ _Sr. Design Project – Medtronic_
 ### Using LISPAT
 
 Follow the home page link above to access LISPAT.
+
+Some notes about LISPAT.
+
+1. To clear a search, click "enter", once you have removed your search words.
+    * Search words are case sensitive. 
+2. Selected keywords will contain any word that has the same character occurrences of the keyword.
+   For example: the word `words` is contained within `keywords`. So keywords will show up in the term search. 
+   If you want to contain the whole word, please the search bar. 
+   
