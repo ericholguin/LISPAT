@@ -10,6 +10,7 @@ class TopNav extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      activeHome: false,
       activeHelp: false,
       activeApi: false,
     };
@@ -32,14 +33,23 @@ class TopNav extends Component {
 
   handleSelect = eventKey => {
     const { handleStateChange } = this.props;
+    if (eventKey === 'Home') {
+      this.setState({
+        activeHome: true,
+        activeHelp: false,
+        activeApi: false,
+      });
+    }
     if (eventKey === 'Help') {
       this.setState({
+        activeHome: false,
         activeHelp: true,
         activeApi: false,
       });
     }
     if (eventKey === 'Api') {
       this.setState({
+        activeHome: false,
         activeHelp: false,
         activeApi: true,
       });
@@ -59,7 +69,7 @@ class TopNav extends Component {
             this.handleSelect(selected);
           }}
         >
-          <Navbar.Brand href="#home" className={style.logo}>
+          <Navbar.Brand eventKey="Home" active={false} href="#home" className={style.logo}>
             <span className={style.font}>LISPAT</span>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -71,15 +81,15 @@ class TopNav extends Component {
               <Nav.Link eventKey="Help" active={false} href="#help">
                 <span className={style['font-right']}>Help</span>
               </Nav.Link>
-              <Nav.Link
-                title="Download samples"
-                active={false}
-                onClick={this.handleDownload}
-              >
-                <span className={style['font-right']}>
-                  <i className="fas fa-file-download" />
-                </span>
-              </Nav.Link>
+              //<Nav.Link
+              //  title="Download samples"
+              //  active={false}
+              //  onClick={this.handleDownload}
+              //>
+              //  <span className={style['font-right']}>
+              //    <i className="fas fa-file-download" />
+              //  </span>
+              //</Nav.Link>
               <Nav.Link
                 href="https://github.com/brummetj/LISPAT"
                 target="_blank"
@@ -99,6 +109,7 @@ class TopNav extends Component {
 
 TopNav.propTypes = {
   handleStateChange: propTypes.func,
+  activeHome: propTypes.bool,
   activeHelp: propTypes.bool,
   activeApi: propTypes.bool,
 };
