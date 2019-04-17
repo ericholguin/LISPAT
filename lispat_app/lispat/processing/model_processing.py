@@ -9,7 +9,6 @@ import en_core_web_sm
 import multiprocessing
 import sklearn.manifold
 from textblob import TextBlob
-from mpld3 import plugins, utils
 import gensim.models.word2vec as w2v
 from lispat_app.lispat.utils.logger import Logger
 from lispat_app.lispat.base.constants import DESIRED_TERMS
@@ -287,26 +286,3 @@ class NLPModel:
             file.write('</body>')
             file.write('</html>')
         webbrowser.open("file:///usr/local/var/lispat/similar.html")
-
-
-class ClickInfo(plugins.PluginBase):
-
-    JAVASCRIPT = """
-    mpld3.register_plugin("clickinfo", ClickInfo);
-    ClickInfo.prototype = Object.create(mpld3.Plugin.prototype);
-    ClickInfo.prototype.constructor = ClickInfo;
-    ClickInfo.prototype.requiredProps = ["id"];
-    function ClickInfo(fig, props){
-        mpld3.Plugin.call(this, fig, props);
-    };
-
-    ClickInfo.prototype.draw = function(){
-        var obj = mpld3.get_element(this.props.id);
-        obj.elements().on("mouseover",
-                          function(d, i){alert("clicked on points[" + i + "]");});
-    }
-    """
-
-    def __init__(self, points):
-        self.dict_ = {"type": "clickinfo",
-                      "id": utils.get_id(points)}

@@ -162,8 +162,4 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
-  data: propTypes.instanceOf(Object),
-};
-
 export default hot(module)(App);

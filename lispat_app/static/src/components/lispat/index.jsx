@@ -263,7 +263,7 @@ class Lispat extends Component {
                     highlightClassName={subColors}
                     searchWords={selectedKeywordSubmission}
                     autoEscape
-                    textToHighlight={this.getSelectedTextSubmission()}
+                    textToHighlight={this.getSelectedTextStandard()}
                   />
                 </div>
               </div>
@@ -277,7 +277,7 @@ class Lispat extends Component {
                     highlightClassName={stdColors}
                     searchWords={selectedKeywordStandard}
                     autoEscape
-                    textToHighlight={this.getSelectedTextStandard()}
+                    textToHighlight={this.getSelectedTextSubmission()}
                   />
                 </div>
               </div>

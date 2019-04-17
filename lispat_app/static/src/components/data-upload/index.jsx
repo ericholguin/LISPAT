@@ -6,7 +6,7 @@ import FileUpload from './upload';
 import './home-upload.css';
 import LoadingSpinner from './spinner';
 
-const endpoint = 'https://lispat.herokuapp.com/upload';
+const endpoint = 'http://localhost:5000/upload';
 
 class DataUpload extends Component {
   constructor(props) {
@@ -17,6 +17,8 @@ class DataUpload extends Component {
       loading: false,
       error1: false,
       error2: false,
+      error3: false,
+      failedResponse: '',
     };
   }
 
@@ -72,11 +74,49 @@ class DataUpload extends Component {
         resp.standard_file_name =
           file2.name.substring(0, file2.name.lastIndexOf('.')) || file2.name;
         getData(resp);
+      })
+      .catch(error => {
+        // Error
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          // console.log(error.response.data);
+          // console.log(error.response.status);
+          // console.log(error.response.headers);
+          this.setState({
+            loading: false,
+            error3: true,
+            failedResponse: error.response,
+          });
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          this.setState({
+            loading: false,
+            error3: true,
+            failedResponse: error.request,
+          });
+        } else {
+          this.setState({
+            loading: false,
+            error3: true,
+            failedResponse: error.message,
+          });
+        }
       });
   };
 
   render() {
-    const { file1, file2, loading, error1, error2 } = this.state;
+    const {
+      file1,
+      file2,
+      loading,
+      error1,
+      error2,
+      error3,
+      failedResponse,
+    } = this.state;
     return (
       <div>
         <br />
@@ -121,6 +161,7 @@ class DataUpload extends Component {
               </Col>
             </div>
             {loading ? <LoadingSpinner /> : null}
+            {error3 ? failedResponse : null}
           </Row>
         </div>
       </div>

@@ -4,7 +4,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 import axios from 'axios/index';
 import style from './navbar.css';
 
-const endpoint = 'https://lispat.herokuapp.com/assets/samples.zip';
+const endpoint = 'https://lispat.azurewebsites.net/assets/samples.zip';
 
 class TopNav extends Component {
   constructor(props) {
@@ -69,7 +69,7 @@ class TopNav extends Component {
             this.handleSelect(selected);
           }}
         >
-          <Navbar.Brand eventKey="Home" active={false} href="#home" className={style.logo}>
+          <Navbar.Brand className={style.logo}>
             <span className={style.font}>LISPAT</span>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -81,15 +81,6 @@ class TopNav extends Component {
               <Nav.Link eventKey="Help" active={false} href="#help">
                 <span className={style['font-right']}>Help</span>
               </Nav.Link>
-              //<Nav.Link
-              //  title="Download samples"
-              //  active={false}
-              //  onClick={this.handleDownload}
-              //>
-              //  <span className={style['font-right']}>
-              //    <i className="fas fa-file-download" />
-              //  </span>
-              //</Nav.Link>
               <Nav.Link
                 href="https://github.com/brummetj/LISPAT"
                 target="_blank"

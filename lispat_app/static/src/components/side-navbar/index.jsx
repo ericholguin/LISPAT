@@ -135,7 +135,7 @@ class SideNavClass extends Component {
                     style={{ fontSize: '1.75em' }}
                   />
                 </NavIcon>
-                <NavText>Data</NavText>
+                <NavText>Upload</NavText>
               </NavItem>
               {lispat ? (
                 <NavItem eventKey="Lispat" active={activeLispat}>
