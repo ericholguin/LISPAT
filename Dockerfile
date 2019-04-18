@@ -1,8 +1,14 @@
 # Dockerfile for running lost in space and time
 
 # pull base image
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 FROM python:3.6
+
+#Set the working directory to LISPAT.
+WORKDIR /LISPAT
+
+# Copy the current directory contents into the container at /LISPAT
+COPY . /LISPAT
 
 # Install.
 RUN \
@@ -11,18 +17,20 @@ RUN \
   python3 \
   python3-pip \
   python3-all-dev \
-   gcc \
-   python-dev \
-   libpng-dev \
-   musl-dev \
+  gcc \
+  python-dev \
+  curl \
+  libpng-dev \
+  musl-dev \
   build-essential && \
   rm -rf /var/lib/apt/lists/*
+
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash
+RUN apt-get install -y nodejs
 
 #Update pip
 RUN \
   pip3 install --upgrade pip
-
-ADD . lispat
 
 
 #Set our spacy as a env variable
@@ -36,13 +44,16 @@ RUN \
   chardet\
   cffi\
   && pip3 install -U spacy==${SPACY_VERSION}\
-  && python3 -m spacy download en
+  && python3 -m spacy download en_core_web_sm
 
 
-RUN pip3 install -r lispat/requirements.txt
+RUN pip3 install -r requirements.txt
 
-#Set the working directory to root.
-WORKDIR /root/lispat
+ADD . LISPAT/lispat_app/static
+
+RUN cd lispat_app/static/
+RUN npm install
+RUN npm run build
 
 #Give the starting argument as lispat for the container.
 ENTRYPOINT ["python3"]
