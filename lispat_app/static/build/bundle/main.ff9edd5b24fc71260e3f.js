@@ -7,7 +7,8 @@
   /******/ var parentHotUpdateCallback = window['webpackHotUpdate'];
   /******/ window[
     'webpackHotUpdate'
-  ] = /******/ function webpackHotUpdateCallback(chunkId, moreModules) { // eslint-disable-next-line no-unused-vars
+  ] = /******/ function webpackHotUpdateCallback(chunkId, moreModules) {
+    // eslint-disable-next-line no-unused-vars
     /******/ hotAddUpdateChunk(chunkId, moreModules);
     /******/ if (parentHotUpdateCallback)
       parentHotUpdateCallback(chunkId, moreModules);

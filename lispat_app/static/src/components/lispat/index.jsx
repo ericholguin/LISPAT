@@ -261,7 +261,7 @@ class Lispat extends Component {
                 <div className={styles['doc-font']}>
                   <Highlighter
                     highlightClassName={subColors}
-                    searchWords={selectedKeywordSubmission}
+                    searchWords={selectedKeywordStandard}
                     autoEscape
                     textToHighlight={this.getSelectedTextStandard()}
                   />
@@ -275,7 +275,7 @@ class Lispat extends Component {
                 <div className={styles['doc-font']}>
                   <Highlighter
                     highlightClassName={stdColors}
-                    searchWords={selectedKeywordStandard}
+                    searchWords={selectedKeywordSubmission}
                     autoEscape
                     textToHighlight={this.getSelectedTextSubmission()}
                   />
@@ -287,51 +287,6 @@ class Lispat extends Component {
                 <div className="doc-container keyword-class">
                   <div className="key-header">
                     1st Document
-                    <br /> Top Keywords
-                  </div>
-                  <hr className={styles.bar} />
-                  <Select
-                    className="keywords"
-                    isMulti
-                    isClearable
-                    onChange={this.selectKeywordSubmission}
-                    options={submissionKeywords}
-                    theme={theme => ({
-                      ...theme,
-                      borderRadius: 0,
-                      colors: {
-                        ...theme.colors,
-                        primary25: '#4DB6AC',
-                        primary: '#1565C0',
-                      },
-                    })}
-                    styles={selectStyles}
-                  />
-                  <SearchBar
-                    title="Press Enter to clear terms on document"
-                    className="search-bar"
-                    onChange={change => {
-                      if (change === '' || change === null) {
-                        this.setState({
-                          selectedKeywordSubmission: [],
-                        });
-                      }
-                    }}
-                    onRequestSearch={search => {
-                      this.updateSearchSubmission(search);
-                    }}
-                    style={{
-                      margin: '0 auto',
-                      maxWidth: 800,
-                      maxHeight: 45,
-                    }}
-                  />
-                </div>
-              </Col>
-              <Col className="col-sm-12">
-                <div className="doc-container keyword-class">
-                  <div className="key-header">
-                    2nd Document
                     <br /> Top Keywords
                   </div>
                   <hr className={styles.bar} />
@@ -367,6 +322,51 @@ class Lispat extends Component {
                     }}
                     style={{
                       margin: '10px 0 20px 0',
+                      maxWidth: 800,
+                      maxHeight: 45,
+                    }}
+                  />
+                </div>
+              </Col>
+              <Col className="col-sm-12">
+                <div className="doc-container keyword-class">
+                  <div className="key-header">
+                    2nd Document
+                    <br /> Top Keywords
+                  </div>
+                  <hr className={styles.bar} />
+                  <Select
+                    className="keywords"
+                    isMulti
+                    isClearable
+                    onChange={this.selectKeywordSubmission}
+                    options={submissionKeywords}
+                    theme={theme => ({
+                      ...theme,
+                      borderRadius: 0,
+                      colors: {
+                        ...theme.colors,
+                        primary25: '#4DB6AC',
+                        primary: '#1565C0',
+                      },
+                    })}
+                    styles={selectStyles}
+                  />
+                  <SearchBar
+                    title="Press Enter to clear terms on document"
+                    className="search-bar"
+                    onChange={change => {
+                      if (change === '' || change === null) {
+                        this.setState({
+                          selectedKeywordSubmission: [],
+                        });
+                      }
+                    }}
+                    onRequestSearch={search => {
+                      this.updateSearchSubmission(search);
+                    }}
+                    style={{
+                      margin: '0 auto',
                       maxWidth: 800,
                       maxHeight: 45,
                     }}
