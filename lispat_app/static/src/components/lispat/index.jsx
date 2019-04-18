@@ -308,6 +308,7 @@ class Lispat extends Component {
                     styles={selectStyles}
                   />
                   <SearchBar
+                    title="Press Enter to clear terms on document"
                     className="search-bar"
                     onChange={change => {
                       if (change === '' || change === null) {
@@ -352,6 +353,7 @@ class Lispat extends Component {
                     styles={selectStyles}
                   />
                   <SearchBar
+                    title="Press Enter to clear terms on document"
                     className="search-bar"
                     onChange={change => {
                       if (change === '' || change === null) {
