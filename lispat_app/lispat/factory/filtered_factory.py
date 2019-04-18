@@ -87,10 +87,6 @@ class FilteredFactory:
     def find_ngrams(self, data, n=3):
         return zip(*[data[i:] for i in range(n)])
 
-    def pos_tagger(self):
-        """ Summary: Parts of speech tagger"""
-        
-
     def get_desired_terms(self, val):
         for w in val:
             if w in DESIRED_TERMS:

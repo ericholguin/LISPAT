@@ -4,18 +4,19 @@ import { Navbar, Nav } from 'react-bootstrap';
 import axios from 'axios/index';
 import style from './navbar.css';
 
-const endpoint = 'https://lispat.azurewebsites.net/assets/samples.zip';
+const endpoint = 'http://localhost:5000/assets/samples.zip';
 
 class TopNav extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      activeHome: false,
       activeHelp: false,
       activeApi: false,
     };
   }
 
-  handleDownload = () => {
+  /*handleDownload = () => {
     axios({
       url: endpoint,
       method: 'GET',
@@ -28,18 +29,27 @@ class TopNav extends Component {
       document.body.appendChild(link);
       link.click();
     });
-  };
+  };*/
 
   handleSelect = eventKey => {
     const { handleStateChange } = this.props;
+    if (eventKey === 'Home') {
+      this.setState({
+        activeHome: true,
+        activeHelp: false,
+        activeApi: false,
+      });
+    }
     if (eventKey === 'Help') {
       this.setState({
+        activeHome: false,
         activeHelp: true,
         activeApi: false,
       });
     }
     if (eventKey === 'Api') {
       this.setState({
+        activeHome: false,
         activeHelp: false,
         activeApi: true,
       });
@@ -72,11 +82,12 @@ class TopNav extends Component {
                 <span className={style['font-right']}>Help</span>
               </Nav.Link>
               <Nav.Link
+                class="tooltip"
                 href="https://github.com/brummetj/LISPAT"
                 target="_blank"
                 active={false}
               >
-                <span className={style['font-right']}>
+                <span title="GitHub Link" className={style['font-right']}>
                   <i className="fab fa-github" />
                 </span>
               </Nav.Link>
@@ -90,6 +101,7 @@ class TopNav extends Component {
 
 TopNav.propTypes = {
   handleStateChange: propTypes.func,
+  activeHome: propTypes.bool,
   activeHelp: propTypes.bool,
   activeApi: propTypes.bool,
 };

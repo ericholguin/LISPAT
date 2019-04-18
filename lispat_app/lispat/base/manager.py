@@ -46,7 +46,7 @@ class CommandManager:
 
         self.doc_worker = None
 
-        self.model = NLPModel()
+        #self.model = NLPModel()
 
     def create_path(self, docA_path, docB_path=None):
         """
@@ -106,11 +106,13 @@ class CommandManager:
         try:
             if self.docA_txt_path is not None:
                 self.docA_filter = Preproccessing(self.docA_txt_path)
+                self.docA_filter.remove_empty_lines()
                 self.docA_filter.read_textfile()
                 self.docA_filter.filter_nlp()
 
             if self.docB_txt_path is not None:
                 self.docB_filter = Preproccessing(self.docB_txt_path)
+                self.docB_filter.remove_empty_lines()
                 self.docB_filter.read_textfile()
                 self.docB_filter.filter_nlp()
 
@@ -126,27 +128,30 @@ class CommandManager:
         if self.docA_filter is not None and self.docA_txt is None:
             self.docA_txt = self.docA_filter.get_raw_txt()
             self.docA_filter.most_frequent()
-            self.docA_filter.clean_most_frequent()
-            self.topDocA = self.docA_filter.get_clean_top_words()
-            self.topNDocA = self.docA_filter.most_common_ngrams()
+            self.topDocA = self.docA_filter.get_top_words()
+            #self.docA_filter.clean_most_frequent()
+            #self.topDocA = self.docA_filter.get_clean_top_words()
+            #self.topNDocA = self.docA_filter.most_common_ngrams()
             self.docA_name = os.path.splitext(self.docA_path)[0]
-            self.docA_filter.clean_ngrams()
+            #self.docA_filter.clean_ngrams()
         if self.docB_filter is None and self.docA_txt is not None:
             self.docB_txt = self.docA_filter.get_raw_txt()
             self.docA_filter.most_frequent()
-            self.docA_filter.clean_most_frequent()
-            self.topDocB = self.docA_filter.get_clean_top_words()
-            self.topNDocB = self.docA_filter.most_common_ngrams()
+            self.topDocB = self.docA_filter.get_top_words()
+            #self.docA_filter.clean_most_frequent()
+            #self.topDocB = self.docA_filter.get_clean_top_words()
+            #self.topNDocB = self.docA_filter.most_common_ngrams()
             self.docB_name = os.path.splitext(self.docA_path)[0]
-            self.docA_filter.clean_ngrams()
+            #self.docA_filter.clean_ngrams()
         if self.docB_filter is not None:
             self.docB_txt = self.docB_filter.get_raw_txt()
             self.docB_filter.most_frequent()
-            self.docB_filter.clean_most_frequent()
-            self.topDocB = self.docB_filter.get_clean_top_words()
-            self.topNDocB = self.docB_filter.most_common_ngrams()
+            self.topDocB = self.docB_filter.get_top_words()
+            #self.docB_filter.clean_most_frequent()
+            #self.topDocB = self.docB_filter.get_clean_top_words()
+            #self.topNDocB = self.docB_filter.most_common_ngrams()
             self.docB_name = os.path.splitext(self.docB_path)[0]
-            self.docB_filter.clean_ngrams()
+            #self.docB_filter.clean_ngrams()
 
         #self.docA_filter.find_synonyms()
 
@@ -167,8 +172,8 @@ class CommandManager:
             "submission_file_name": self.docB_name,
             "standard_keywords": self.topDocA,
             "submission_keywords": self.topDocB,
-            "standard_phrases": self.topNDocA,
-            "submission_phrases": self.topNDocB,
+            "standard_phrases": [],
+            "submission_phrases": [],
             "date": datetime.datetime.now(),
         }
 

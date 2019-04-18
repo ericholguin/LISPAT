@@ -6,7 +6,7 @@ import './side-navbar.css';
 import ClickOutside from 'react-click-outside';
 import axios from 'axios/index';
 
-const endpoint = 'https://lispat.azurewebsites.net/graph';
+const endpoint = 'http://localhost:5000/graph.html';
 
 class SideNavClass extends Component {
   constructor(props) {
@@ -37,6 +37,21 @@ class SideNavClass extends Component {
       console.log(resp);
     });
   };
+
+  /*handleGraph = () => {
+    axios({
+      url: endpoint,
+      method: 'GET',
+      responseType: 'blob', // important
+    }).then(response => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'graph.html');
+      document.body.appendChild(link);
+      link.click();
+    });
+  };*/
 
   handleSelect = eventKey => {
     const { handleStateChange } = this.props;

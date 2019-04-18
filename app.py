@@ -73,7 +73,7 @@ def index():
 @app.route("/upload", methods=['GET', 'POST'])
 def upload():
     """
-    Summary: Recieves uploaded documents and stores into static folder.
+    Summary: Recieves uploaded documents and calls processing functions.
 
     return: status
     rtype: response code
@@ -93,14 +93,16 @@ def upload():
         if not os.path.exists(UPLOAD_FOLDER):
             os.mkdir(UPLOAD_FOLDER)
 
-        #Clean previous files
+        # Clean previous files
         args5 = args_clean()
         app_main(args5, manager)
 
+        # Get list of files uploaded by users
         uploads = request.files
-
+        # Separate files
         file1 = uploads['file1']
         file2 = uploads['file2']
+        # Save files locally
         save_file(file1, filenames)
         save_file(file2, filenames)
 
@@ -116,9 +118,12 @@ def upload():
             args3 = args_graph()
             thread = threading.Thread(target=app_main, args=[args3, manager])
             thread.start()
+
             args4 = args_json()
             data = app_main(args4, manager)
+
             logger.getLogger().debug("Responding")
+
             js = json.dumps(data)
             resp = Response(js, status=200, mimetype="application/json")
 
@@ -127,16 +132,15 @@ def upload():
             return(make_response(('Error')))
 
 
-@app.route("/graph", methods=['GET', 'POST'])
+@app.route("/graph.html")
 def graph():
     """
-    Summary: Uses uploaded documents and performs processing.
+    Summary: Route that opens graph html in new tab.
 
-    return: The two documents to compare in a side by side view.
-    rtype: html
+    return: Status of response
+    rtype: status
     """
-    html_file = os.path.abspath("lispat_app/static/uploads/visuals/Standard-Visual.html")
-    #return app.send_static_file(html_file)
+    html_file = os.path.abspath("lispat_app/static/graph.html")
 
     if os.path.isfile(html_file):
         webbrowser.open_new_tab("file://" + html_file)
@@ -146,10 +150,9 @@ def graph():
 @app.route("/assets/samples.zip")
 def download():
     """
-    Summary: Uses uploaded documents and performs processing.
+    Summary: Route that sends a zipped file containing samples for users.
 
-    return: The two documents to compare in a side by side view.
-    rtype: html
+    return: None
     """
     try:
 
