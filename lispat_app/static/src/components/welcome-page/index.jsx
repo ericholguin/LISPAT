@@ -16,7 +16,7 @@ class WelcomePage extends Component {
 
   handleDownload = () => {
     axios({
-      url: 'http://lispat.azurewebsites.net/assets/samples.zip',
+      url: endpoint,
       method: 'GET',
       responseType: 'blob', // important
     }).then(response => {

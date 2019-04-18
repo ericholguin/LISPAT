@@ -106,11 +106,13 @@ class CommandManager:
         try:
             if self.docA_txt_path is not None:
                 self.docA_filter = Preproccessing(self.docA_txt_path)
+                self.docA_filter.remove_empty_lines()
                 self.docA_filter.read_textfile()
                 self.docA_filter.filter_nlp()
 
             if self.docB_txt_path is not None:
                 self.docB_filter = Preproccessing(self.docB_txt_path)
+                self.docB_filter.remove_empty_lines()
                 self.docB_filter.read_textfile()
                 self.docB_filter.filter_nlp()
 
@@ -126,24 +128,27 @@ class CommandManager:
         if self.docA_filter is not None and self.docA_txt is None:
             self.docA_txt = self.docA_filter.get_raw_txt()
             self.docA_filter.most_frequent()
-            self.docA_filter.clean_most_frequent()
-            self.topDocA = self.docA_filter.get_clean_top_words()
+            self.topDocA = self.docA_filter.get_top_words()
+            #self.docA_filter.clean_most_frequent()
+            #self.topDocA = self.docA_filter.get_clean_top_words()
             #self.topNDocA = self.docA_filter.most_common_ngrams()
             self.docA_name = os.path.splitext(self.docA_path)[0]
             #self.docA_filter.clean_ngrams()
         if self.docB_filter is None and self.docA_txt is not None:
             self.docB_txt = self.docA_filter.get_raw_txt()
             self.docA_filter.most_frequent()
-            self.docA_filter.clean_most_frequent()
-            self.topDocB = self.docA_filter.get_clean_top_words()
+            self.topDocB = self.docA_filter.get_top_words()
+            #self.docA_filter.clean_most_frequent()
+            #self.topDocB = self.docA_filter.get_clean_top_words()
             #self.topNDocB = self.docA_filter.most_common_ngrams()
             self.docB_name = os.path.splitext(self.docA_path)[0]
             #self.docA_filter.clean_ngrams()
         if self.docB_filter is not None:
             self.docB_txt = self.docB_filter.get_raw_txt()
             self.docB_filter.most_frequent()
-            self.docB_filter.clean_most_frequent()
-            self.topDocB = self.docB_filter.get_clean_top_words()
+            self.topDocB = self.docB_filter.get_top_words()
+            #self.docB_filter.clean_most_frequent()
+            #self.topDocB = self.docB_filter.get_clean_top_words()
             #self.topNDocB = self.docB_filter.most_common_ngrams()
             self.docB_name = os.path.splitext(self.docB_path)[0]
             #self.docB_filter.clean_ngrams()

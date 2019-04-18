@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { includes } from 'lodash';
 import './file-upload.css';
 
-const extensions = ['docx', 'pdf'];
+const extensions = ['docx', 'pdf', 'doc'];
 
 const FileUpload = class extends Component {
   constructor(props) {

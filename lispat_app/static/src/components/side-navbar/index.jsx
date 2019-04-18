@@ -6,7 +6,7 @@ import './side-navbar.css';
 import ClickOutside from 'react-click-outside';
 import axios from 'axios/index';
 
-const endpoint = 'https://lispat.herokuapp.com/graph.html';
+const endpoint = 'http://localhost:5000/graph.html';
 
 class SideNavClass extends Component {
   constructor(props) {
@@ -31,14 +31,14 @@ class SideNavClass extends Component {
     }
   }
 
-  // handleGraph = () => {
-  //   axios.get(endpoint).then(res => {
-  //     const resp = res.data;
-  //     console.log(resp);
-  //   });
-  // };
-
   handleGraph = () => {
+    axios.get(endpoint).then(res => {
+      const resp = res.data;
+      console.log(resp);
+    });
+  };
+
+  /*handleGraph = () => {
     axios({
       url: endpoint,
       method: 'GET',
@@ -51,7 +51,7 @@ class SideNavClass extends Component {
       document.body.appendChild(link);
       link.click();
     });
-  };
+  };*/
 
   handleSelect = eventKey => {
     const { handleStateChange } = this.props;

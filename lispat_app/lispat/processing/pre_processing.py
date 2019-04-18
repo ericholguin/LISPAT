@@ -45,6 +45,15 @@ class Preproccessing:
         with open(filename, 'rt', newline='') as text:
             self.txt_data = text.read()
 
+    def remove_empty_lines(self):
+        filename = ''.join(self.txt_file)
+
+        with open(filename) as text:
+            lines = text.readlines()
+
+        with open(filename, 'w') as text:
+            lines = filter(lambda x: x.strip(), lines)
+            text.writelines(lines)
 
     #def filter_nlp(self, lc=None, p=None, n=None, sw=None, int=None, lw=None, lem=None, stm=None):
     def filter_nlp(self):
@@ -164,7 +173,7 @@ class Preproccessing:
         return self.clean_txt_data
 
     def get_top_words(self):
-        return self.top_words
+        return self.top_words[:20]
 
     def get_clean_top_words(self):
         return self.clean_top_words[:20]
