@@ -8,7 +8,7 @@ FROM python:3.6
 WORKDIR /LISPAT
 
 # Copy the current directory contents into the container at /LISPAT
-COPY . /LISPAT
+# COPY . /LISPAT
 
 # Install.
 RUN \
@@ -46,10 +46,10 @@ RUN \
   && pip3 install -U spacy==${SPACY_VERSION}\
   && python3 -m spacy download en_core_web_sm
 
+ADD . LISPAT
 
 RUN pip3 install -r requirements.txt
 
-ADD . LISPAT/lispat_app/static
 
 RUN cd lispat_app/static/
 RUN npm install
