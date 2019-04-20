@@ -6,14 +6,14 @@ import README from './README.md';
 import './welcome-page.css';
 import 'github-markdown-css';
 
-const endpoint = 'http://localhost:5000/assets/samples.zip';
+//const endpoint = 'http://localhost:5000/assets/samples.zip';
 
 class WelcomePage extends Component {
   constructor(props, context) {
     super(props, context);
     this.ContentMarkdown = README;
   }
-
+  /*
   handleDownload = () => {
     axios({
       url: endpoint,
@@ -28,7 +28,7 @@ class WelcomePage extends Component {
       link.click();
     });
   };
-
+*/
   render() {
     return (
       <div>
@@ -36,17 +36,6 @@ class WelcomePage extends Component {
           <Col className="left-pull">
             <div className="markdown-body welcome-page-container">
               <Markdown escapeHtml={false} source={this.ContentMarkdown} />
-            </div>
-          </Col>
-          <Col>
-            <div className="download-container">
-              <Button
-                type="button"
-                className="download-button"
-                onClick={this.handleDownload}
-              >
-                Download Assets
-              </Button>
             </div>
           </Col>
         </Row>

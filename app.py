@@ -10,7 +10,7 @@ from werkzeug.utils import secure_filename
 from lispat_app.lispat.utils.logger import Logger
 from lispat_app.lispat.base.manager import CommandManager
 from lispat_app.lispat.base.constants import args_convert, args_filter, args_json, args_clean, args_all, args_graph
-from flask import Flask, render_template, request, make_response, session, json, Response, send_file
+from flask import Flask, render_template, request, make_response, session, json, Response, send_file, url_for
 
 
 logger = Logger("LISPAT - Flask App")
@@ -132,7 +132,7 @@ def upload():
             return(make_response(('Error')))
 
 
-@app.route("/graph.html")
+@app.route("/graph")
 def graph():
     """
     Summary: Route that opens graph html in new tab.
@@ -140,12 +140,14 @@ def graph():
     return: Status of response
     rtype: status
     """
-    html_file = os.path.abspath("lispat_app/static/graph.html")
-
-    if os.path.isfile(html_file):
+    url_for('static', filename='graph.html')
+    html_file = os.path.abspath("lispat_app/static/build/graph.html")
+    #return render_template("graph.html")
+    return app.send_static_file("graph.html")
+    """if os.path.isfile(html_file):
         webbrowser.open_new_tab("file://" + html_file)
         resp = Response(status=200)
-        return resp
+        return resp"""
 
 @app.route("/assets/samples.zip")
 def download():

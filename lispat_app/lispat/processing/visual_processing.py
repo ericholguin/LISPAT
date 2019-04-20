@@ -16,7 +16,8 @@ class Visualization:
 
         self.nlp = nlp
 
-        vis_dir = os.path.abspath("lispat_app/static")
+        #vis_dir = os.path.abspath("lispat_app/static")
+        vis_dir = os.path.abspath("lispat_app/static/build/bundle")
 
         if not os.path.isdir(vis_dir):
             os.mkdir(vis_dir)
