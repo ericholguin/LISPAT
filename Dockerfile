@@ -3,6 +3,12 @@
 # pull base image
 FROM python:3.6
 
+#Set the working directory to LISPAT.
+WORKDIR /LISPAT
+
+# Copy the current directory contents into the container at /LISPAT
+COPY . /LISPAT
+
 # Install.
 RUN \
   apt-get update && \
@@ -10,12 +16,16 @@ RUN \
   python3 \
   python3-pip \
   python3-all-dev \
-   gcc \
-   python-dev \
-   libpng-dev \
-   musl-dev \
+  gcc \
+  python-dev \
+  curl \
+  libpng-dev \
+  musl-dev \
   build-essential && \
   rm -rf /var/lib/apt/lists/*
+
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash
+RUN apt-get install -y nodejs
 
 #Update pip
 RUN \
@@ -39,7 +49,8 @@ RUN \
   chardet\
   cffi\
   && pip3 install -U spacy==${SPACY_VERSION}\
-  && python3 -m spacy download en
+  && python3 -m spacy download en_core_web_sm
+
 
 RUN pip3 install -r lispat/requirements.txt
 
