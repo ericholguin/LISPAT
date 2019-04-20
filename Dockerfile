@@ -1,7 +1,6 @@
 # Dockerfile for running lost in space and time
 
 # pull base image
-FROM ubuntu:16.04
 FROM python:3.6
 
 # Install.
@@ -24,9 +23,13 @@ RUN \
 
 ADD . lispat
 
-
-#Set our spacy as a env variable
+# Set our spacy as a env variable
 ENV SPACY_VERSION 2.0.3
+
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash
+RUN apt-get install -y nodejs
+
+RUN cd lispat/lispat_app/static && npm install && npm rebuild node-sass --force && npm run build
 
 #Update the Image to include some program dependencies that are required for each other.
 RUN \
@@ -38,13 +41,8 @@ RUN \
   && pip3 install -U spacy==${SPACY_VERSION}\
   && python3 -m spacy download en
 
-
 RUN pip3 install -r lispat/requirements.txt
 
-#Set the working directory to root.
-WORKDIR /root/lispat
+WORKDIR /lispat
 
-#Give the starting argument as lispat for the container.
-ENTRYPOINT ["python3"]
-
-CMD ['app.py']
+CMD python3 app.py
