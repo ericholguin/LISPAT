@@ -29,3 +29,35 @@ _Sr. Design Project – Medtronic_
 ### Using LISPAT
 
 Follow the home page link above to access LISPAT.
+
+---
+
+## Packaging and Delivery
+
+Docker
+
+### Docker Hub
+
+Note: To install docker please reference https://docs.docker.com/install/
+
+```
+> docker pull jbrummet/lispat:2.0.0
+> docker tag jbrummet/lispat:2.0.0 lispat
+> docker run -it -p 5000:5000 lispat
+  open 0.0.0.0:5000 in the browser
+```
+
+### Docker locally
+
+```
+> cd path/to/{lispat}
+> docker build . -t lispat
+> docker run -it -p 5000:5000 lispat
+open 0.0.0.0:5000 in the browser
+```
+
+LISPAT does have a fairly large docker file. The installation process does take
+a minute since there are so many dependencies between both python and javascript.
+
+Cheers,
+Team LISPAT
