@@ -6,10 +6,10 @@
     #000000 100%
   ) !important;
   /* override background image gradient w/ flat color */
-  opacity: 0.9;
-  -moz-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.99);
-  -webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 1);
-  box-shadow: 0 5px 5px rgba(5, 5, 5, 0.75);
+  /*-moz-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.99);*/
+  /*-webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 1);*/
+  box-shadow: 0 5px 5px rgba(5, 5, 5, 0.50);
+  z-index: 9999;
 }
 .logo {
   left: 0;
@@ -62,6 +62,12 @@ body {
 }
 .show {
   display: block;
+}
+
+.hamburger {
+  background-color: white !important;
+  color: white !important;
+  z-index: 9999;
 }
 
 .link {

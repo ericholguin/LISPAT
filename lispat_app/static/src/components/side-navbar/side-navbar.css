@@ -5,6 +5,7 @@
   border-top: #4a90e2 solid 8px;
   width: 50px;
   box-shadow: inset -8px 0 10px -6px black !important;
+  z-index: -1;
 }
 .hide {
   display: none;
@@ -22,6 +23,6 @@
 
 @media screen and (max-width: 1000px) {
   .root-nav {
-    margin-top: 56px;
+    margin-top: 59px;
   }
 }

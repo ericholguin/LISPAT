@@ -32,7 +32,7 @@ class SideNavClass extends Component {
   }
 
   handleGraph = () => {
-    <a href="0.0.0.0/graph" target="_blank"></a>
+    <a href="0.0.0.0/graph" target="_blank" />;
   };
 
   /*handleGraph = () => {
@@ -148,15 +148,19 @@ class SideNavClass extends Component {
               {graph ? (
                 <NavItem eventKey="Graph">
                   <NavIcon>
-                    <a href="http://0.0.0.0:5000/graph"  target="_blank">
-                    <i
-                      className="fa fa-fw fa-chart-area"
-                      style={{ fontSize: '1.75em' }}
-                      href="http://0.0.0.0:5000/graph"
-                    />
+                    <a href="http://0.0.0.0:5000/graph" target="_blank">
+                      <i
+                        className="fa fa-fw fa-chart-area"
+                        style={{ fontSize: '1.75em' }}
+                        href="http://0.0.0.0:5000/graph"
+                      />
                     </a>
                   </NavIcon>
-                  <NavText><a href="http://0.0.0.0:5000/graph" target="_blank">Graph</a></NavText>
+                  <NavText>
+                    <a href="http://0.0.0.0:5000/graph" target="_blank">
+                      Graph
+                    </a>
+                  </NavText>
                 </NavItem>
               ) : null}
             </SideNav.Nav>
