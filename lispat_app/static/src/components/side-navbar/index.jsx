@@ -32,10 +32,7 @@ class SideNavClass extends Component {
   }
 
   handleGraph = () => {
-    axios.get(endpoint).then(res => {
-      const resp = res.data;
-      console.log(resp);
-    });
+    <a href="0.0.0.0/graph" target="_blank" />;
   };
 
   /*handleGraph = () => {
@@ -150,13 +147,20 @@ class SideNavClass extends Component {
               ) : null}
               {graph ? (
                 <NavItem eventKey="Graph">
-                  <NavIcon onClick={this.handleGraph}>
-                    <i
-                      className="fa fa-fw fa-chart-area"
-                      style={{ fontSize: '1.75em' }}
-                    />
+                  <NavIcon>
+                    <a href="http://0.0.0.0:5000/graph" target="_blank">
+                      <i
+                        className="fa fa-fw fa-chart-area"
+                        style={{ fontSize: '1.75em' }}
+                        href="http://0.0.0.0:5000/graph"
+                      />
+                    </a>
                   </NavIcon>
-                  <NavText>Graph</NavText>
+                  <NavText>
+                    <a href="http://0.0.0.0:5000/graph" target="_blank">
+                      Graph
+                    </a>
+                  </NavText>
                 </NavItem>
               ) : null}
             </SideNav.Nav>

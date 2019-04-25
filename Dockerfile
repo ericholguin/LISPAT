@@ -4,10 +4,8 @@
 FROM python:3.6
 
 #Set the working directory to LISPAT.
-WORKDIR /LISPAT
 
 # Copy the current directory contents into the container at /LISPAT
-# COPY . /LISPAT
 
 # Install.
 RUN \
@@ -39,7 +37,7 @@ ENV SPACY_VERSION 2.0.3
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash
 RUN apt-get install -y nodejs
 
-RUN cd lispat/lispat_app/static && npm install && npm rebuild node-sass --force && npm run build
+RUN cd ./lispat/lispat_app/static && npm install && npm rebuild node-sass --force && npm run build
 
 #Update the Image to include some program dependencies that are required for each other.
 RUN \
@@ -51,10 +49,8 @@ RUN \
   && pip3 install -U spacy==${SPACY_VERSION}\
   && python3 -m spacy download en_core_web_sm
 
-ADD . LISPAT
+RUN pip3 install -r ./lispat/requirements.txt
 
-RUN pip3 install -r lispat/requirements.txt
-
-WORKDIR /lispat
+WORKDIR ./lispat
 
 CMD python3 app.py

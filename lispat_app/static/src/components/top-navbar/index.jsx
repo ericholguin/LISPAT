@@ -16,7 +16,7 @@ class TopNav extends Component {
     };
   }
 
-  /*handleDownload = () => {
+  /* handleDownload = () => {
     axios({
       url: endpoint,
       method: 'GET',
@@ -29,7 +29,7 @@ class TopNav extends Component {
       document.body.appendChild(link);
       link.click();
     });
-  };*/
+  }; */
 
   handleSelect = eventKey => {
     const { handleStateChange } = this.props;
@@ -72,8 +72,11 @@ class TopNav extends Component {
           <Navbar.Brand className={style.logo}>
             <span className={style.font}>LISPAT</span>
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Toggle
+            aria-controls="basic-navbar-nav"
+            className="navbar-light hamburger"
+          />
+          <Navbar.Collapse id="basic-navbar-nav pull-right">
             <Nav className="ml-auto">
               <Nav.Link eventKey="Api" active={false} href="#api">
                 <span className={style['font-right']}>API</span>
@@ -82,7 +85,7 @@ class TopNav extends Component {
                 <span className={style['font-right']}>Help</span>
               </Nav.Link>
               <Nav.Link
-                class="tooltip"
+                className="tooltip"
                 href="https://github.com/brummetj/LISPAT"
                 target="_blank"
                 active={false}
