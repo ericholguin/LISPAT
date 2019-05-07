@@ -8,7 +8,7 @@
   /* override background image gradient w/ flat color */
   /*-moz-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.99);*/
   /*-webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 1);*/
-  box-shadow: 0 5px 5px rgba(5, 5, 5, 0.50);
+  box-shadow: 0 5px 5px rgba(5, 5, 5, 0.5);
   z-index: 9999;
 }
 .logo {

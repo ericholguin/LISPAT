@@ -260,7 +260,7 @@ class Lispat extends Component {
                 <hr className={styles.bar} />
                 <div className={styles['doc-font']}>
                   <Highlighter
-                    highlightClassName={subColors}
+                    highlightClassName={stdColors}
                     searchWords={selectedKeywordStandard}
                     autoEscape
                     textToHighlight={this.getSelectedTextStandard()}
@@ -274,7 +274,7 @@ class Lispat extends Component {
                 <hr className={styles.bar} />
                 <div className={styles['doc-font']}>
                   <Highlighter
-                    highlightClassName={stdColors}
+                    highlightClassName={subColors}
                     searchWords={selectedKeywordSubmission}
                     autoEscape
                     textToHighlight={this.getSelectedTextSubmission()}
