@@ -141,8 +141,8 @@ def graph():
     rtype: status
     """
     url_for('static', filename='graph.html')
-    html_file = os.path.abspath("lispat_app/static/build/graph.html")
-    #return render_template("graph.html")
+    html_file = os.path.abspath("lispat_app/static/build/bundle/graph.html")
+
     return app.send_static_file("graph.html")
     """if os.path.isfile(html_file):
         webbrowser.open_new_tab("file://" + html_file)

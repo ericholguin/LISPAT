@@ -85,7 +85,6 @@ class TopNav extends Component {
                 <span className={style['font-right']}>Help</span>
               </Nav.Link>
               <Nav.Link
-                className="tooltip"
                 href="https://github.com/brummetj/LISPAT"
                 target="_blank"
                 active={false}
