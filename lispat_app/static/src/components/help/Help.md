@@ -6,12 +6,6 @@
 
 The Home Page provides a simple description of the application which is scrollable.
 
-# SAMPLE DOWNLOAD
-
-![Alt Text](https://media.giphy.com/media/9xjTEL8ux5wHcNIPsv/giphy.gif)
-
-We provide a zip file containing 2 sample docx documents to use. Click the Download Assets button on the home page to get these samples.
-
 # UPLOAD DOCUMENTS
 
 ![Alt Text](https://media.giphy.com/media/1dMgqy5eYi1KrUHnFP/giphy.gif)

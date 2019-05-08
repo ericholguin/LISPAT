@@ -32,7 +32,7 @@ class ArgumentFactory:
 
         self.csv_dir = directory_storage + "/csv_data/"
         self.text_dir = directory_storage + "/txt_data/"
-        self.visuals_dir = directory_storage + "/visuals/"
+        #self.visuals_dir = directory_storage + "/visuals/"
 
         self.csv_path = ""
 
@@ -70,13 +70,13 @@ class ArgumentFactory:
                 pass
             else:
                 raise
-        try:
+        """try:
             os.makedirs(self.visuals_dir)
         except OSError as e:
             if e.errno == errno.EEXIST and os.path.isdir(self.visuals_dir):
                 pass
             else:
-                raise
+                raise"""
 
     def pdfminer_handler(self, path):
         """
