@@ -4,16 +4,16 @@ import propTypes from 'prop-types';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import './side-navbar.css';
 import ClickOutside from 'react-click-outside';
-import axios from 'axios/index';
+// import axios from 'axios/index';
 
-const endpoint = 'http://localhost:5000/graph';
+// const endpoint = 'http://localhost:5000/graph';
 
 class SideNavClass extends Component {
   constructor(props) {
     super(props);
     this.state = {
       expanded: false,
-      activeGraph: false,
+      // activeGraph: false,
       activeLispat: false,
       activeData: false,
       activeHome: true,
@@ -23,7 +23,7 @@ class SideNavClass extends Component {
   componentWillReceiveProps(props) {
     if (props.onChange) {
       this.setState({
-        activeGraph: false,
+        // activeGraph: false,
         activeLispat: true,
         activeData: false,
         activeHome: false,
@@ -35,7 +35,7 @@ class SideNavClass extends Component {
     <a href="0.0.0.0/graph" target="_blank" />;
   };
 
-  /*handleGraph = () => {
+  /* handleGraph = () => {
     axios({
       url: endpoint,
       method: 'GET',
@@ -54,7 +54,7 @@ class SideNavClass extends Component {
     const { handleStateChange } = this.props;
     if (eventKey === 'Data') {
       this.setState({
-        activeGraph: false,
+        // activeGraph: false,
         activeLispat: false,
         activeData: true,
         activeHome: false,
@@ -62,7 +62,7 @@ class SideNavClass extends Component {
     }
     if (eventKey === 'Home') {
       this.setState({
-        activeGraph: false,
+        // activeGraph: false,
         activeLispat: false,
         activeData: false,
         activeHome: true,
@@ -70,7 +70,7 @@ class SideNavClass extends Component {
     }
     if (eventKey === 'Lispat') {
       this.setState({
-        activeGraph: false,
+        // activeGraph: false,
         activeLispat: true,
         activeData: false,
         activeHome: false,
@@ -78,7 +78,7 @@ class SideNavClass extends Component {
     }
     if (eventKey === 'Graph') {
       this.setState({
-        activeGraph: true,
+        // activeGraph: true,
         activeLispat: false,
         activeData: false,
         activeHome: false,
@@ -94,7 +94,7 @@ class SideNavClass extends Component {
       activeLispat,
       activeData,
       activeHome,
-      activeGraph,
+      // activeGraph,
     } = this.state;
     return (
       <div>
@@ -177,7 +177,7 @@ SideNavClass.propTypes = {
   graph: propTypes.bool,
   activeLispat: propTypes.bool,
   activeData: propTypes.bool,
-  activeGraph: propTypes.bool,
+  // activeGraph: propTypes.bool,
   onChange: propTypes.bool,
 };
 

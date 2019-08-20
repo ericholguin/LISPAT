@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Markdown from 'react-markdown';
-import { Col, Row, Button } from 'react-bootstrap';
-import axios from 'axios/index';
+import { Col, Row } from 'react-bootstrap';
+// import axios from 'axios/index';
 import README from './README.md';
 import './welcome-page.css';
 import 'github-markdown-css';
 
-//const endpoint = 'http://localhost:5000/assets/samples.zip';
+// const endpoint = 'http://localhost:5000/assets/samples.zip';
 
 class WelcomePage extends Component {
   constructor(props, context) {
@@ -29,6 +29,7 @@ class WelcomePage extends Component {
     });
   };
 */
+
   render() {
     return (
       <div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import propTypes from 'prop-types';
+// import propTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
 import TopNav from './components/top-navbar/index';
 import DataUpload from './components/data-upload/index';
@@ -92,9 +92,6 @@ class App extends Component {
     if (statusCode === 200) {
       this.setState({
         showLispat: true,
-        showData: false,
-        showHome: false,
-        showConfig: true,
         showData: false,
         showHome: false,
       });

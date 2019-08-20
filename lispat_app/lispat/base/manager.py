@@ -98,7 +98,7 @@ class CommandManager:
 
     def filter(self):
         """
-        Summary: Cleans documents returns lists
+        Summary: Cleans documents and sets class variables.
         :return: Exit code
         """
         # Initialize with our docs.

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { Navbar, Nav } from 'react-bootstrap';
-import axios from 'axios/index';
+// import axios from 'axios/index';
 import style from './navbar.css';
 
-const endpoint = 'http://localhost:5000/assets/samples.zip';
+// const endpoint = 'http://localhost:5000/assets/samples.zip';
 
 class TopNav extends Component {
   constructor(props) {
